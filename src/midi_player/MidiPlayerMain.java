@@ -9,11 +9,17 @@ import midi_player.frame.MidiPlayerFrame;
 import midi_player.resources.ResourceUtils;
 
 /**
- *
+ * Utility class for main entry point.
  */
-public class MidiPlayerMain {
+public final class MidiPlayerMain {
 
     private static final Logger LOGGER = Logger.getLogger(MidiPlayerMain.class.getName());
+
+    /**
+     * Private constructor.
+     */
+    private MidiPlayerMain() {
+    }
 
     private static void setLookAndFeel(String lookAndFeelName) {
         if (lookAndFeelName == null) {
