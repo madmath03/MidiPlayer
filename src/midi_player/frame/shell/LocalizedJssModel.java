@@ -104,13 +104,20 @@ public class LocalizedJssModel extends JssSimpleModel implements Serializable {
         }
         // Maintain list of identifiers
         if (added && action != null) {
-            this.getActionIdentifiers().addAll(Arrays.asList(action.getCommandIdentifiers()));
+            final Collection<String> ids = getActionIdentifiers();
+            ids.addAll(Arrays.asList(action.getCommandIdentifiers()));
+            if (this.isSorted() && ids instanceof List) {
+                Collections.sort((List) ids);
+            }
         }
         return added;
     }
 
     @Override
     public boolean addAll(Collection<? extends IJssAction> actions) {
+        if (actions == null || actions.isEmpty()) {
+            return false;
+        }
         // If there already is an action with the same id, do not add!
         List<IJssAction> newActions = new ArrayList<>(actions.size());
         actions.parallelStream().filter((action) -> (action != null))
@@ -118,10 +125,6 @@ public class LocalizedJssModel extends JssSimpleModel implements Serializable {
                     for (String id : action.getCommandIdentifiers()) {
                         if (this.getActionForCommandIdentifier(id) == null) {
                             newActions.add(action);
-                            // Maintain list of identifiers
-                            if (newActions.add(action)) {
-                                this.getActionIdentifiers().addAll(Arrays.asList(action.getCommandIdentifiers()));
-                            }
                         }
                     }
                 });
@@ -130,7 +133,19 @@ public class LocalizedJssModel extends JssSimpleModel implements Serializable {
                 .filter((action) -> (action instanceof LocaleChangeListener))
                 .map((action) -> ResourceUtils.addLocaleChangeListener((LocaleChangeListener) action))
                 .reduce(added, (accumulator, item) -> accumulator | item);
-        return added | super.addAll(newActions);
+        added |= super.addAll(newActions);
+        if (added) {
+            // Maintain list of identifiers
+            final Collection<String> ids = getActionIdentifiers();
+            newActions.parallelStream()
+                    .forEach((action) -> {
+                        ids.addAll(Arrays.asList(action.getCommandIdentifiers()));
+                    });
+            if (this.isSorted() && ids instanceof List) {
+                Collections.sort((List) ids);
+            }
+        }
+        return added;
     }
 
     @Override
@@ -141,31 +156,56 @@ public class LocalizedJssModel extends JssSimpleModel implements Serializable {
         }
         // Maintain list of identifiers
         if (removed && action != null) {
-            this.getActionIdentifiers().removeAll(Arrays.asList(action.getCommandIdentifiers()));
+            final Collection<String> ids = getActionIdentifiers();
+            ids.removeAll(Arrays.asList(action.getCommandIdentifiers()));
+            if (this.isSorted() && ids instanceof List) {
+                Collections.sort((List) ids);
+            }
         }
         return removed;
     }
 
     @Override
     public boolean removeAll(Collection<? extends IJssAction> actions) {
+        if (actions == null || actions.isEmpty()) {
+            return false;
+        }
         boolean removed = false;
         removed = actions.parallelStream()
                 .filter((action) -> (action instanceof LocaleChangeListener))
                 .map((action) -> ResourceUtils.removeLocaleChangeListener((LocaleChangeListener) action))
                 .reduce(removed, (accumulator, item) -> accumulator | item);
-        this.identifiers = null;
-        return removed | super.removeAll(actions);
+        removed |= super.removeAll(actions);
+        if (removed) {
+            // Maintain list of identifiers
+            final Collection<String> ids = getActionIdentifiers();
+            actions.parallelStream()
+                    .forEach((action) -> {
+                        ids.removeAll(Arrays.asList(action.getCommandIdentifiers()));
+                    });
+            if (this.isSorted() && ids instanceof List) {
+                Collections.sort((List) ids);
+            }
+        }
+        return removed;
     }
 
     @Override
     public boolean retainAll(Collection<? extends IJssAction> actions) {
+        if (actions == null) {
+            return false;
+        }
         boolean retained = false;
         retained = super.getAvailableActions().parallelStream()
                 .filter((action) -> (action instanceof LocaleChangeListener && !getAvailableActions().contains(action)))
                 .map((action) -> ResourceUtils.removeLocaleChangeListener((LocaleChangeListener) action))
                 .reduce(retained, (accumulator, item) -> accumulator | item);
-        this.identifiers = null;
-        return retained | super.retainAll(actions);
+        retained |= super.retainAll(actions);
+        if (retained) {
+            // Maintain list of identifiers
+            updateActionIdentifiers();
+        }
+        return retained;
     }
 
     @Override
@@ -177,19 +217,31 @@ public class LocalizedJssModel extends JssSimpleModel implements Serializable {
         return Collections.unmodifiableSet(super.getAvailableActions());
     }
 
-    public List<String> getActionIdentifiers() {
+    public Collection<String> getActionIdentifiers() {
         if (identifiers == null) {
             Set<IJssAction> actions = super.getAvailableActions();
             if (actions != null && !actions.isEmpty()) {
                 identifiers = new ArrayList<>(actions.size());
-                actions.parallelStream().filter((action) -> (action != null)).forEach((action) -> {
-                    identifiers.addAll(Arrays.asList(action.getCommandIdentifiers()));
-                });
             } else {
-                identifiers = Collections.emptyList();
+                identifiers = new ArrayList<>();
             }
         }
         return identifiers;
+    }
+
+    public void updateActionIdentifiers() {
+        final Collection<String> ids = getActionIdentifiers();
+        ids.clear();
+        // Update from actions ids
+        Set<IJssAction> actions = super.getAvailableActions();
+        if (actions != null && !actions.isEmpty()) {
+            actions.parallelStream().filter((action) -> (action != null)).forEach((action) -> {
+                ids.addAll(Arrays.asList(action.getCommandIdentifiers()));
+            });
+            if (this.isSorted() && ids instanceof List) {
+                Collections.sort((List) ids);
+            }
+        }
     }
 
 }
