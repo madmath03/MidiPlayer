@@ -7,6 +7,8 @@ import java.awt.datatransfer.StringSelection;
 import java.awt.datatransfer.Transferable;
 import java.awt.datatransfer.UnsupportedFlavorException;
 import java.awt.dnd.DragSource;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.beans.PropertyChangeEvent;
@@ -88,6 +90,10 @@ import midi_player.frame.action.DisplayConsoleAction;
 public class ConsoleFrame extends javax.swing.JFrame implements LocaleChangeListener, AutoCloseable {
 
     private static final Logger LOGGER = Logger.getLogger(ConsoleFrame.class.getName());
+
+    private static final String NEXT_MATCH = "next_match";
+
+    private static final String PREVIOUS_MATCH = "previous_match";
 
     private static final String COMMIT_ACTION = "commit";
 
@@ -762,13 +768,30 @@ public class ConsoleFrame extends javax.swing.JFrame implements LocaleChangeList
         jssTextArea.setTransferHandler(transferHandler);
 
         // Handle auto-complete for commands
-        AutoCompleteDocumentListener autoCompleteEditorPane = new AutoCompleteDocumentListener(jssTextArea, shellController.getModel().getActionIdentifiers());
-        jssTextArea.getDocument().addDocumentListener(autoCompleteEditorPane);
+        AutoCompleteDocumentListener autoCompleteListener = new AutoCompleteDocumentListener(jssTextArea, shellController.getModel().getActionIdentifiers());
+        jssTextArea.getDocument().addDocumentListener(autoCompleteListener);
 
-        // Maps the tab key to the commit action, which finishes the autocomplete
-        // when given a suggestion
-        jssTextArea.getInputMap().put(KeyStroke.getKeyStroke("TAB"), COMMIT_ACTION);
-        jssTextArea.getActionMap().put(COMMIT_ACTION, autoCompleteEditorPane.new CommitAction());
+        /*
+         * Maps the tab key to the next action, which changes the
+         * autocomplete to the next suggestion (looping).
+         */
+        jssTextArea.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_TAB, 0), NEXT_MATCH);
+        jssTextArea.getActionMap().put(NEXT_MATCH, autoCompleteListener.new NextMatchAction());
+
+        /*
+         * Maps the tab key to the previous action, which changes the
+         * autocomplete to the previous suggestion (looping).
+         */
+        jssTextArea.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_TAB, InputEvent.SHIFT_DOWN_MASK), PREVIOUS_MATCH);
+        jssTextArea.getActionMap().put(PREVIOUS_MATCH, autoCompleteListener.new PreviousMatchAction());
+
+        /*
+         * Maps the tab key to the commit action, which finishes the
+         * autocomplete when given a suggestion.
+         */
+        jssTextArea.setFocusTraversalKeysEnabled(false);
+        jssTextArea.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_TAB, InputEvent.CTRL_DOWN_MASK), COMMIT_ACTION);
+        jssTextArea.getActionMap().put(COMMIT_ACTION, autoCompleteListener.new CommitAction());
     }
 
     // #########################################################################
