@@ -72,7 +72,9 @@ public class MidiPlayer implements AutoCloseable {
     private transient Path currentSongPath = null;
     private transient MidiThread playingThread = null;
 
-    private boolean looping = false;
+    private boolean songLooping = false;
+
+    private boolean playlistLooping = false;
 
     protected MidiPlayer() {
     }
@@ -89,17 +91,6 @@ public class MidiPlayer implements AutoCloseable {
                 System.out.println("\t" + sequencer.getDeviceInfo().getVendor());
                 System.out.println("\t" + sequencer.getDeviceInfo().getVersion());
                 System.out.println("\t" + sequencer.getDeviceInfo().getClass());
-
-                // Add listener to detect end of song
-                sequencer.addMetaEventListener((MetaMessage meta) -> {
-                    switch (meta.getType()) {
-                        case MidiPlayer.END_OF_TRACK_MESSAGE:
-                            // Notify player to force move to next song
-                            MidiPlayer.this.moveToNextSong(true);
-                            break;
-                            
-                    }
-                });
 
                 // Add listener to detect end of song
                 sequencer.addMetaEventListener((MetaMessage meta) -> {
@@ -152,19 +143,27 @@ public class MidiPlayer implements AutoCloseable {
     }
 
     public boolean isLooping() {
-        return looping;
+        return songLooping;
     }
 
     public void setLooping(boolean looping) {
-        this.looping = looping;
+        this.songLooping = looping;
 
         if (this.sequencer != null) {
             setupLoopCount();
         }
     }
 
+    public boolean isPlaylistLooping() {
+        return playlistLooping;
+    }
+
+    public void setPlaylistLooping(boolean looping) {
+        this.playlistLooping = looping;
+    }
+
     private void setupLoopCount() {
-        if (this.looping) {
+        if (this.songLooping) {
             // Loop until interrupted
             sequencer.setLoopCount(Sequencer.LOOP_CONTINUOUSLY);
         } else {
@@ -292,8 +291,12 @@ public class MidiPlayer implements AutoCloseable {
 
     protected synchronized boolean moveToNextSong(boolean force) {
         boolean moved = false;
-        // Increment position by 1 in playlist (if still inside playlist)
-        if (force || this.currentSongIndex < this.playlist.size() - 1) {
+        if (isPlaylistLooping()) {
+            // Increment position by 1 (loop back to start if needed)
+            this.setCurrentSongIndex((currentSongIndex + 1) % this.playlist.size());
+            moved = true;
+        } else if (force || this.currentSongIndex < this.playlist.size() - 1) {
+            // Increment position by 1 in playlist (if still inside playlist)
             this.setCurrentSongIndex(currentSongIndex + 1);
             moved = true;
         }
