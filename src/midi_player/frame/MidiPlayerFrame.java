@@ -474,6 +474,7 @@ public class MidiPlayerFrame extends JFrame implements LocaleChangeListener, Pro
 
         // Start playing song on double click in list
         tablePlaylist.addMouseListener(new MouseAdapter() {
+            @Override
             public void mousePressed(MouseEvent me) {
                 if (me.getSource() instanceof JTable) {
                     JTable table = (JTable) me.getSource();
@@ -854,6 +855,7 @@ public class MidiPlayerFrame extends JFrame implements LocaleChangeListener, Pro
             this.playingSongBackground = playingSongBackground;
         }
 
+        @Override
         public Component getTableCellRendererComponent(
                 JTable table, Object o,
                 boolean isSelected, boolean hasFocus,

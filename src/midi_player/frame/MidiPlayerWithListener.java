@@ -42,6 +42,8 @@ public class MidiPlayerWithListener extends MidiPlayer implements ReorderableTab
 
     public static final String CURRENT_SONG_CHANGE = "midi_player.current_song.change";
 
+    public static final String PLAYLIST_LOOP_CHANGE = "midi_player.playlist.loop";
+
     public static final String PLAYLIST_SIZE_CHANGE = "midi_player.playlist.size";
 
     public static final String PLAYLIST_CONTENT_CHANGE = "midi_player.playlist.content.change";
@@ -71,10 +73,18 @@ public class MidiPlayerWithListener extends MidiPlayer implements ReorderableTab
     }
 
     // #########################################################################
+    @Override
     public void setLooping(boolean loop) {
         boolean originallyLooping = this.isLooping();
         super.setLooping(loop);
         fireChange(LOOP_CHANGE, originallyLooping, loop);
+    }
+
+    @Override
+    public void setPlaylistLooping(boolean loop) {
+        boolean originallyLooping = this.isPlaylistLooping();
+        super.setPlaylistLooping(loop);
+        fireChange(PLAYLIST_LOOP_CHANGE, originallyLooping, loop);
     }
 
     // #########################################################################
@@ -140,7 +150,7 @@ public class MidiPlayerWithListener extends MidiPlayer implements ReorderableTab
 
     // #########################################################################
     @Override
-    public boolean add(Path path) {
+    public boolean add(Object path) {
         int originalSize = this.size();
         boolean added = super.add(path);
         if (added) {
@@ -152,19 +162,21 @@ public class MidiPlayerWithListener extends MidiPlayer implements ReorderableTab
     }
 
     @Override
-    public boolean add(int index, Path path) {
+    public boolean add(int index, Object path) {
         int originalSize = this.size();
+        int originalSongIndex = this.getCurrentSongIndex();
         boolean added = super.add(index, path);
         if (added) {
             int newSize = this.size();
             fireChange(PLAYLIST_SIZE_CHANGE, originalSize, newSize);
+            fireChange(CURRENT_SONG_CHANGE, originalSongIndex, this.getCurrentSongIndex());
             fireChange();
         }
         return added;
     }
 
     @Override
-    public boolean addAll(Collection<? extends Path> paths) {
+    public boolean addAll(Collection<? extends Object> paths) {
         int originalSize = this.size();
         boolean added = super.addAll(paths);
         if (added) {
@@ -176,12 +188,14 @@ public class MidiPlayerWithListener extends MidiPlayer implements ReorderableTab
     }
 
     @Override
-    public boolean addAll(int index, Collection<? extends Path> paths) {
+    public boolean addAll(int index, Collection<? extends Object> paths) {
         int originalSize = this.size();
+        int originalSongIndex = this.getCurrentSongIndex();
         boolean added = super.addAll(index, paths);
         if (added) {
             int newSize = this.size();
             fireChange(PLAYLIST_SIZE_CHANGE, originalSize, newSize);
+            fireChange(CURRENT_SONG_CHANGE, originalSongIndex, this.getCurrentSongIndex());
             fireChange();
         }
         return added;
@@ -199,7 +213,7 @@ public class MidiPlayerWithListener extends MidiPlayer implements ReorderableTab
     }
 
     @Override
-    protected boolean remove(Path path) {
+    protected boolean remove(Object path) {
         int originalSize = this.size();
         boolean removed = super.remove(path);
         if (removed) {
@@ -222,7 +236,7 @@ public class MidiPlayerWithListener extends MidiPlayer implements ReorderableTab
     }
 
     @Override
-    protected boolean removeAll(Collection<? extends Path> paths) {
+    protected boolean removeAll(Collection<? extends Object> paths) {
         int originalSize = this.size();
         boolean removed = super.removeAll(paths);
         if (removed) {
@@ -300,7 +314,8 @@ public class MidiPlayerWithListener extends MidiPlayer implements ReorderableTab
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         if (columnIndex == 0) {
-            return (rowIndex+1) + ". " + getPlaylist().get(rowIndex).getFileName();
+            return (rowIndex+1) + ". " 
+                + getSongInfo(getPlaylist().get(rowIndex), null);
         } else {
             return null;
         }
@@ -351,7 +366,7 @@ public class MidiPlayerWithListener extends MidiPlayer implements ReorderableTab
     }
     
     @Override
-    public boolean sortPlaylist(Comparator<Path> comparator) {
+    public boolean sortPlaylist(Comparator<Object> comparator) {
         boolean sorted = super.sortPlaylist(comparator);
         if (sorted) {
             fireChange(PLAYLIST_CONTENT_CHANGE, false, sorted);
