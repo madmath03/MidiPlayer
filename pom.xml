@@ -44,9 +44,6 @@
 
 		<jdk.version>1.8</jdk.version>
 		<junit.version>4.12</junit.version>
-		<commonsio.version>2.5</commonsio.version>
-		<commonscli.version>1.4</commonscli.version>
-		<log4j2.version>2.7</log4j2.version>
 
 		<maven.compiler.version>3.3</maven.compiler.version>
 		<maven.assembly.version>2.2-beta-2</maven.assembly.version>
@@ -107,7 +104,7 @@
 				<configuration>
 					<archive>
 						<manifest>
-							<mainClass>midi_player.MidiPlayerMain</mainClass>
+							<mainClass>midiplayer.MidiPlayerMain</mainClass>
 							<addClasspath>true</addClasspath>
 						</manifest>
 					</archive>
