@@ -130,7 +130,8 @@ public final class Serialization {
               abstractListModel = (AbstractListModel<?>) action;
             } else if (action instanceof AbstractJssComboAction
                 && ((AbstractJssComboAction<?>) action).getModel() instanceof AbstractListModel) {
-              abstractListModel = (AbstractListModel<?>) ((AbstractJssComboAction<?>) action).getModel();
+              abstractListModel =
+                  (AbstractListModel<?>) ((AbstractJssComboAction<?>) action).getModel();
             }
 
             if (abstractListModel != null) {
@@ -249,7 +250,8 @@ public final class Serialization {
           abstractListModel = (AbstractListModel<?>) action;
         } else if (action instanceof AbstractJssComboAction
             && ((AbstractJssComboAction<?>) action).getModel() instanceof AbstractListModel) {
-          abstractListModel = (AbstractListModel<?>) ((AbstractJssComboAction<?>) action).getModel();
+          abstractListModel =
+              (AbstractListModel<?>) ((AbstractJssComboAction<?>) action).getModel();
         }
 
         if (abstractListModel != null) {

@@ -21,10 +21,9 @@ import javax.swing.text.JTextComponent;
  *
  * @author Scott Robinson
  * @author Mathieu Brunot
- * @see <a href="http://stackabuse.com/example-adding-autocomplete-to-jtextfield/"
- *  >Example: Adding Autocomplete to JTextField</a>
- * @see <a href="http://java.sun.com/docs/books/tutorial/index.html"
- *  >The Java™ Tutorials </a>
+ * @see <a href="http://stackabuse.com/example-adding-autocomplete-to-jtextfield/" >Example: Adding
+ *      Autocomplete to JTextField</a>
+ * @see <a href="http://java.sun.com/docs/books/tutorial/index.html" >The Java™ Tutorials </a>
  */
 public class AutoCompleteDocumentListener implements DocumentListener {
 
