@@ -1,9 +1,10 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.github.madmath03</groupId>
 	<artifactId>MidiPlayer</artifactId>
-	<version>1.0.2-SNAPSHOT</version>
+	<version>1.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<description>A simple MIDI player with a SWING interface.</description>
 
@@ -44,6 +45,9 @@
 
 		<jdk.version>1.8</jdk.version>
 		<junit.version>4.12</junit.version>
+		<commonsio.version>2.5</commonsio.version>
+		<commonscli.version>1.4</commonscli.version>
+		<log4j2.version>2.7</log4j2.version>
 
 		<maven.compiler.version>3.3</maven.compiler.version>
 		<maven.assembly.version>2.2-beta-2</maven.assembly.version>
@@ -104,7 +108,7 @@
 				<configuration>
 					<archive>
 						<manifest>
-							<mainClass>midiplayer.MidiPlayerMain</mainClass>
+							<mainClass>midi_player.MidiPlayerMain</mainClass>
 							<addClasspath>true</addClasspath>
 						</manifest>
 					</archive>
