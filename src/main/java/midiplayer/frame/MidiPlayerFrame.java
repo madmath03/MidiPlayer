@@ -586,7 +586,7 @@ public class MidiPlayerFrame extends JFrame
       }
     } else {
       Object[] columnNames = {"Title"};
-      
+
       if (midiPlayer != null && !midiPlayer.getPlaylist().isEmpty()) {
         Object[] playlistPaths = player.getPlaylist().toArray();
         Object[][] rows = new Object[playlistPaths.length][1];
@@ -608,7 +608,7 @@ public class MidiPlayerFrame extends JFrame
         }
 
       };
-      
+
       tablePlaylist.setModel(playlistDataModel);
     }
   }

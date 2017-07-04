@@ -13,8 +13,8 @@ import java.beans.PropertyChangeEvent;
  * @author Mathieu Brunot
  *
  * @see LocaleChangeNotifier
- * @see <a
- *      href="http://docs.oracle.com/javame/config/cldc/opt-pkgs/api/ams-3.4/com/sun/ams/LocaleChangeListener.html
+ * @see <a href=
+ *      "http://docs.oracle.com/javame/config/cldc/opt-pkgs/api/ams-3.4/com/sun/ams/LocaleChangeListener.html"
  *      >JME - Interface LocaleChangeListener</a>
  */
 public interface LocaleChangeListener {

@@ -5,7 +5,7 @@ import javax.swing.table.TableModel;
 /**
  * Table model which handles row movements.
  *
- * @see <a href="http://stackoverflow.com/questions/638807/how-do-i-drag-and-drop-a-row-in-a-jtable
+ * @see <a href="http://stackoverflow.com/questions/638807/how-do-i-drag-and-drop-a-row-in-a-jtable"
  *      >How do I drag and drop a row in a JTable?</a>
  */
 public interface ReorderableTableModel extends TableModel {

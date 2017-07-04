@@ -176,7 +176,7 @@ public class LocaleChangeNotifier {
    *
    * <p>
    * This is merely a convenience wrapper around the more general
-   * {@link LocaleChangeNotifier#firePropertyChange(PropertyChangeEvent)} method.
+   * {@link LocaleChangeNotifier#fireLocaleChange(PropertyChangeEvent)} method.
    * </p>
    *
    * @param oldLocale the old {@code Locale} of the property "{@code user.language}"
@@ -196,7 +196,7 @@ public class LocaleChangeNotifier {
    *
    * <p>
    * This is merely a convenience wrapper around the more general
-   * {@link LocaleChangeNotifier#firePropertyChange(PropertyChangeEvent)} method.
+   * {@link LocaleChangeNotifier#fireLocaleChange(PropertyChangeEvent)} method.
    * </p>
    *
    * @param propertyName the programmatic name of the property that was changed
@@ -219,10 +219,10 @@ public class LocaleChangeNotifier {
    * </p>
    *
    * <p>
-   * If {@link LocaleChangeNotifier#isNotifyOnEDT} is {@code true} and called off the <i>Event Dispatch Thread</i> this
-   * implementation uses {@code SwingUtilities.invokeLater} to send out the notification on the
-   * <i>Event Dispatch Thread</i>. This ensures listeners are only ever notified on the <i>Event
-   * Dispatch Thread</i>.
+   * If {@link LocaleChangeNotifier#isNotifyOnEDT} is {@code true} and called off the <i>Event
+   * Dispatch Thread</i> this implementation uses {@code SwingUtilities.invokeLater} to send out the
+   * notification on the <i>Event Dispatch Thread</i>. This ensures listeners are only ever notified
+   * on the <i>Event Dispatch Thread</i>.
    * </p>
    *
    * @param evt the {@code PropertyChangeEvent} to be fired
@@ -254,10 +254,10 @@ public class LocaleChangeNotifier {
    * </p>
    *
    * <p>
-   * If {@link LocaleChangeNotifier#isNotifyOnEDT} is {@code true} and called off the <i>Event Dispatch Thread</i> this
-   * implementation uses {@code SwingUtilities.invokeLater} to send out the notification on the
-   * <i>Event Dispatch Thread</i>. This ensures listeners are only ever notified on the <i>Event
-   * Dispatch Thread</i>.
+   * If {@link LocaleChangeNotifier#isNotifyOnEDT} is {@code true} and called off the <i>Event
+   * Dispatch Thread</i> this implementation uses {@code SwingUtilities.invokeLater} to send out the
+   * notification on the <i>Event Dispatch Thread</i>. This ensures listeners are only ever notified
+   * on the <i>Event Dispatch Thread</i>.
    * </p>
    */
   public void fireLocaleChange() {
