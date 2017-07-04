@@ -3,7 +3,7 @@
 
 	<groupId>com.github.madmath03</groupId>
 	<artifactId>MidiPlayer</artifactId>
-	<version>1.0.3</version>
+	<version>1.0.4-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<description>A simple MIDI player with a SWING interface.</description>
 
@@ -22,7 +22,7 @@
 		<url>https://github.com/madmath03/MidiPlayer</url>
 		<connection>scm:git:git://github.com/madmath03/MidiPlayer.git</connection>
 		<developerConnection>scm:git:git@github.com:madmath03/MidiPlayer.git</developerConnection>
-		<tag>MidiPlayer-1.0.3</tag>
+		<tag>HEAD</tag>
 	</scm>
 
 	<issueManagement>
