@@ -105,7 +105,7 @@
 				<configuration>
 					<archive>
 						<manifest>
-							<mainClass>midi_player.MidiPlayerMain</mainClass>
+							<mainClass>midiplayer.MidiPlayerMain</mainClass>
 							<addClasspath>true</addClasspath>
 						</manifest>
 					</archive>
