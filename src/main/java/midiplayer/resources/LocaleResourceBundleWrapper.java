@@ -84,8 +84,8 @@ public class LocaleResourceBundleWrapper implements LocaleChangeListener {
   // #########################################################################
   /**
    * Creates a MessageFormat with the given pattern and uses it to format the given arguments. This
-   * is equivalent to <blockquote> <code>(new {@link #MessageFormat(String) MessageFormat}(pattern, 
-   * ResourceUtils.getLocale())).{@link MessageFormat#format(java.lang.Object[], java.lang.StringBuffer, java.text.FieldPosition) format}(arguments,
+   * is equivalent to <blockquote> <code>(new MessageFormat(pattern, 
+   * ResourceUtils.getLocale())).format(arguments,
    * new StringBuffer(), null).toString()</code> </blockquote>
    *
    * @param pattern the pattern for the temporary message format

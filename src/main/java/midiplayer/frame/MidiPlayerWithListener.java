@@ -468,7 +468,7 @@ public class MidiPlayerWithListener extends MidiPlayer
    *
    * <p>
    * This is merely a convenience wrapper around the more general
-   * {@link MidiPlayerWithListener#fireExceptionReceived(String)} method.
+   * {@link MidiPlayerWithListener#fireExceptionReceived(List, String)} method.
    * </p>
    *
    * @param msg Exception message received.
@@ -489,7 +489,7 @@ public class MidiPlayerWithListener extends MidiPlayer
    *
    * <p>
    * This is merely a convenience wrapper around the more general
-   * {@link MidiPlayerWithListener#fireExceptionReceived(Throwable)} method.
+   * {@link MidiPlayerWithListener#fireExceptionReceived(List, Throwable)} method.
    * </p>
    *
    * @param thrown Exception received.
@@ -505,7 +505,7 @@ public class MidiPlayerWithListener extends MidiPlayer
   }
 
   /**
-   * Fires an excpetion to listeners that have been registered to track errors of
+   * Fires an exception to listeners that have been registered to track errors of
    * {@code MidiPlayer}.
    *
    * <p>
@@ -642,7 +642,7 @@ public class MidiPlayerWithListener extends MidiPlayer
    *
    * <p>
    * This is merely a convenience wrapper around the more general
-   * {@link MidiPlayerWithListener#fireTableDataChanged(TableModelEvent)} method.
+   * {@link MidiPlayerWithListener#fireChange(TableModelEvent)} method.
    * </p>
    */
   public void fireChange() {
@@ -655,7 +655,7 @@ public class MidiPlayerWithListener extends MidiPlayer
    *
    * <p>
    * This is merely a convenience wrapper around the more general
-   * {@link MidiPlayerWithListener#fireTableDataChanged(TableModelEvent)} method.
+   * {@link MidiPlayerWithListener#fireChange(TableModelEvent)} method.
    * </p>
    *
    * @param rowIndex The row of data that has been updated
@@ -670,7 +670,7 @@ public class MidiPlayerWithListener extends MidiPlayer
    *
    * <p>
    * This is merely a convenience wrapper around the more general
-   * {@link MidiPlayerWithListener#fireTableDataChanged(TableModelEvent)} method.
+   * {@link MidiPlayerWithListener#fireChange(TableModelEvent)} method.
    * </p>
    *
    * @param firstRow The start index of rows of data that have been updated
@@ -686,7 +686,7 @@ public class MidiPlayerWithListener extends MidiPlayer
    *
    * <p>
    * This is merely a convenience wrapper around the more general
-   * {@link MidiPlayerWithListener#fireTableDataChanged(TableModelEvent)} method.
+   * {@link MidiPlayerWithListener#fireChange(TableModelEvent)} method.
    * </p>
    *
    * @param firstRow The start index of rows of data that have been updated
