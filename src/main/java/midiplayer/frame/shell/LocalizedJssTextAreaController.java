@@ -9,7 +9,7 @@ import jswingshell.gui.JssTextAreaController;
  *
  * <p>
  * The localized model must be set separately through
- * {@link LocalizedJssTextAreaController#setModel(midiplayer.shell.LocalizedJssModel) }.
+ * {@link #setModel(LocalizedJssModel)}.
  * </p>
  *
  * <p>

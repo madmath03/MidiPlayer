@@ -468,7 +468,7 @@ public class MidiPlayerWithListener extends MidiPlayer
    *
    * <p>
    * This is merely a convenience wrapper around the more general
-   * {@link MidiPlayerWithListener#fireExceptionReceived(List, String)} method.
+   * {@link #fireExceptionReceived(List, String)} method.
    * </p>
    *
    * @param msg Exception message received.
@@ -489,7 +489,7 @@ public class MidiPlayerWithListener extends MidiPlayer
    *
    * <p>
    * This is merely a convenience wrapper around the more general
-   * {@link MidiPlayerWithListener#fireExceptionReceived(List, Throwable)} method.
+   * {@link #fireExceptionReceived(List, Throwable)} method.
    * </p>
    *
    * @param thrown Exception received.
@@ -513,10 +513,10 @@ public class MidiPlayerWithListener extends MidiPlayer
    * </p>
    *
    * <p>
-   * If {@link MidiPlayerWithListener#isNotifyOnEDT} is {@code true} and called off the <i>Event
-   * Dispatch Thread</i> this implementation uses {@code SwingUtilities.invokeLater} to send out the
-   * notification on the <i>Event Dispatch Thread</i>. This ensures listeners are only ever notified
-   * on the <i>Event Dispatch Thread</i>.
+   * If {@link #isNotifyOnEDT} is {@code true} and called off the <i>Event Dispatch Thread</i> this
+   * implementation uses {@code SwingUtilities.invokeLater} to send out the notification on the
+   * <i>Event Dispatch Thread</i>. This ensures listeners are only ever notified on the <i>Event
+   * Dispatch Thread</i>.
    * </p>
    *
    * @param msg Exception message received.
@@ -642,7 +642,7 @@ public class MidiPlayerWithListener extends MidiPlayer
    *
    * <p>
    * This is merely a convenience wrapper around the more general
-   * {@link MidiPlayerWithListener#fireChange(TableModelEvent)} method.
+   * {@link #fireChange(TableModelEvent)} method.
    * </p>
    */
   public void fireChange() {
@@ -655,7 +655,7 @@ public class MidiPlayerWithListener extends MidiPlayer
    *
    * <p>
    * This is merely a convenience wrapper around the more general
-   * {@link MidiPlayerWithListener#fireChange(TableModelEvent)} method.
+   * {@link #fireChange(TableModelEvent)} method.
    * </p>
    *
    * @param rowIndex The row of data that has been updated
@@ -670,7 +670,7 @@ public class MidiPlayerWithListener extends MidiPlayer
    *
    * <p>
    * This is merely a convenience wrapper around the more general
-   * {@link MidiPlayerWithListener#fireChange(TableModelEvent)} method.
+   * {@link #fireChange(TableModelEvent)} method.
    * </p>
    *
    * @param firstRow The start index of rows of data that have been updated
@@ -686,7 +686,7 @@ public class MidiPlayerWithListener extends MidiPlayer
    *
    * <p>
    * This is merely a convenience wrapper around the more general
-   * {@link MidiPlayerWithListener#fireChange(TableModelEvent)} method.
+   * {@link #fireChange(TableModelEvent)} method.
    * </p>
    *
    * @param firstRow The start index of rows of data that have been updated
@@ -706,10 +706,10 @@ public class MidiPlayerWithListener extends MidiPlayer
    * </p>
    *
    * <p>
-   * If {@link MidiPlayerWithListener#isNotifyOnEDT} is {@code true} and called off the <i>Event
-   * Dispatch Thread</i> this implementation uses {@code SwingUtilities.invokeLater} to send out the
-   * notification on the <i>Event Dispatch Thread</i>. This ensures listeners are only ever notified
-   * on the <i>Event Dispatch Thread</i>.
+   * If {@link #isNotifyOnEDT} is {@code true} and called off the <i>Event Dispatch Thread</i> this
+   * implementation uses {@code SwingUtilities.invokeLater} to send out the notification on the
+   * <i>Event Dispatch Thread</i>. This ensures listeners are only ever notified on the <i>Event
+   * Dispatch Thread</i>.
    * </p>
    *
    * @param evt the {@code TableModelEvent} to be fired
@@ -737,10 +737,10 @@ public class MidiPlayerWithListener extends MidiPlayer
    * </p>
    *
    * <p>
-   * If {@link MidiPlayerWithListener#isNotifyOnEDT} is {@code true} and called off the <i>Event
-   * Dispatch Thread</i> this implementation uses {@code SwingUtilities.invokeLater} to send out the
-   * notification on the <i>Event Dispatch Thread</i>. This ensures listeners are only ever notified
-   * on the <i>Event Dispatch Thread</i>.
+   * If {@link #isNotifyOnEDT} is {@code true} and called off the <i>Event Dispatch Thread</i> this
+   * implementation uses {@code SwingUtilities.invokeLater} to send out the notification on the
+   * <i>Event Dispatch Thread</i>. This ensures listeners are only ever notified on the <i>Event
+   * Dispatch Thread</i>.
    * </p>
    */
   public void fireTableDataChanged() {
@@ -860,7 +860,7 @@ public class MidiPlayerWithListener extends MidiPlayer
    *
    * <p>
    * This is merely a convenience wrapper around the more general
-   * {@link MidiPlayerWithListener#firePropertyChange(PropertyChangeEvent)} method.
+   * {@link #fireChange(PropertyChangeEvent)} method.
    * </p>
    *
    * @param propertyName the programmatic name of the property that was changed

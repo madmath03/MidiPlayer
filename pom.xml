@@ -4,7 +4,7 @@
 
 	<groupId>com.github.madmath03</groupId>
 	<artifactId>MidiPlayer</artifactId>
-	<version>1.0.3-SNAPSHOT</version>
+	<version>1.0.4-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<description>A simple MIDI player with a SWING interface.</description>
 
