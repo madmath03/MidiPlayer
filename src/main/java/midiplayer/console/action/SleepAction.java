@@ -18,7 +18,8 @@ import midiplayer.resources.LocaleChangeListener;
  *
  * @author Mathieu Brunot
  */
-public final class SleepAction extends AbstractJssAction implements LocaleChangeListener {
+public final class SleepAction extends AbstractJssAction
+    implements LocaleChangeListener {
 
   /**
    * The {@code serialVersionUID}.
@@ -28,7 +29,8 @@ public final class SleepAction extends AbstractJssAction implements LocaleChange
   /**
    * Logger.
    */
-  private static final Logger LOGGER = Logger.getLogger(SleepAction.class.getName());
+  private static final Logger LOGGER =
+      Logger.getLogger(SleepAction.class.getName());
 
   /**
    * This action default identifier.
@@ -39,18 +41,20 @@ public final class SleepAction extends AbstractJssAction implements LocaleChange
 
   private static final String[] IDENTIFIERS = {DEFAULT_IDENTIFIER};
 
-  private static final String COMMAND_BRIEF_HELP = "Put the current thread to sleep.";
+  private static final String COMMAND_BRIEF_HELP =
+      "Put the current thread to sleep.";
 
   private static final String COMMAND_BRIEF_HELP_KEY =
-      "midi_player.console.action.sleep.help.short";
+      "midiplayer.console.action.sleep.help.short";
 
-  private static final String COMMAND_HELP_KEY = "midi_player.console.action.sleep.help.long";
+  private static final String COMMAND_HELP_KEY =
+      "midiplayer.console.action.sleep.help.long";
 
   private static final String COMMAND_RUN_INVALID_NUMBER_FORMAT_KEY =
-      "midi_player.console.action.sleep.run.invalid_number_format";
+      "midiplayer.console.action.sleep.run.invalid_number_format";
 
   private static final String COMMAND_RUN_NEGATIVE_TIME_KEY =
-      "midi_player.console.action.sleep.run.negative_time";
+      "midiplayer.console.action.sleep.run.negative_time";
 
   private static String commandHelp;
 
@@ -75,16 +79,23 @@ public final class SleepAction extends AbstractJssAction implements LocaleChange
       stringBuilder.append(action.getBriefHelp()).append("\n");
       stringBuilder.append("\n");
       try {
-        stringBuilder.append(ResourceUtils.getMessage(COMMAND_HELP_KEY, commandIdsAsString));
+        stringBuilder.append(
+            ResourceUtils.getMessage(COMMAND_HELP_KEY, commandIdsAsString));
       } catch (MissingResourceException e) {
-        LOGGER.log(Level.SEVERE, "Resource not found: \"" + COMMAND_HELP_KEY + "\"", e);
+        LOGGER.log(Level.SEVERE,
+            "Resource not found: \"" + COMMAND_HELP_KEY + "\"", e);
         stringBuilder.append("Put the current thread to sleep:").append("\n");
         stringBuilder.append("\t").append(commandIdsAsString).append("\n");
-        stringBuilder.append("The default time for sleep is 1000 milliseconds (1 second).")
+        stringBuilder
+            .append(
+                "The default time for sleep is 1000 milliseconds (1 second).")
             .append("\n");
-        stringBuilder.append("You can define the time for the sleep (in milliseconds) as follow:")
+        stringBuilder
+            .append(
+                "You can define the time for the sleep (in milliseconds) as follow:")
             .append("\n");
-        stringBuilder.append("\t").append(commandIdsAsString).append(" [time] ");
+        stringBuilder.append("\t").append(commandIdsAsString)
+            .append(" [time] ");
       }
 
       commandHelp = stringBuilder.toString();
@@ -105,7 +116,8 @@ public final class SleepAction extends AbstractJssAction implements LocaleChange
       try {
         commandBriefHelp = ResourceUtils.getMessage(COMMAND_BRIEF_HELP_KEY);
       } catch (MissingResourceException e) {
-        LOGGER.log(Level.SEVERE, "Resource not found: \"" + COMMAND_BRIEF_HELP_KEY + "\"", e);
+        LOGGER.log(Level.SEVERE,
+            "Resource not found: \"" + COMMAND_BRIEF_HELP_KEY + "\"", e);
         commandBriefHelp = COMMAND_BRIEF_HELP;
       }
       commandBriefHelpInitialized = true;
@@ -126,13 +138,15 @@ public final class SleepAction extends AbstractJssAction implements LocaleChange
   }
 
   // #########################################################################
-  public SleepAction(String name, Icon icon, IJssController shellController, String... args) {
+  public SleepAction(String name, Icon icon, IJssController shellController,
+      String... args) {
     super(name, icon, shellController, args);
     putValue(Action.ACTION_COMMAND_KEY, getDefaultCommandIdentifier());
     localeChanged();
   }
 
-  public SleepAction(String name, IJssController shellController, String... args) {
+  public SleepAction(String name, IJssController shellController,
+      String... args) {
     super(name, shellController, args);
     putValue(Action.ACTION_COMMAND_KEY, getDefaultCommandIdentifier());
     localeChanged();
@@ -182,12 +196,13 @@ public final class SleepAction extends AbstractJssAction implements LocaleChange
         LOGGER.log(Level.WARNING, "Invalid number format: " + args[1], e);
         String msg;
         try {
-          msg = ResourceUtils.getMessage(COMMAND_RUN_INVALID_NUMBER_FORMAT_KEY, args[1],
-              e.getLocalizedMessage());
+          msg = ResourceUtils.getMessage(COMMAND_RUN_INVALID_NUMBER_FORMAT_KEY,
+              args[1], e.getLocalizedMessage());
         } catch (MissingResourceException e1) {
-          LOGGER.log(Level.SEVERE,
-              "Resource not found: \"" + COMMAND_RUN_INVALID_NUMBER_FORMAT_KEY + "\"", e1);
-          msg = "Invalid number format: " + args[1] + " (" + e.getMessage() + ")";
+          LOGGER.log(Level.SEVERE, "Resource not found: \""
+              + COMMAND_RUN_INVALID_NUMBER_FORMAT_KEY + "\"", e1);
+          msg =
+              "Invalid number format: " + args[1] + " (" + e.getMessage() + ")";
         }
         shellController.publish(IJssController.PublicationLevel.ERROR, msg);
       }
@@ -200,7 +215,8 @@ public final class SleepAction extends AbstractJssAction implements LocaleChange
         Thread.sleep(millis);
       } catch (InterruptedException ex) {
         LOGGER.log(Level.SEVERE, null, ex);
-        shellController.publish(IJssController.PublicationLevel.FATAL_ERROR, ex.getMessage());
+        shellController.publish(IJssController.PublicationLevel.FATAL_ERROR,
+            ex.getMessage());
         commandReturnStatus = AbstractJssAction.ERROR;
       }
     } else {
@@ -209,7 +225,8 @@ public final class SleepAction extends AbstractJssAction implements LocaleChange
       try {
         msg = ResourceUtils.getMessage(COMMAND_RUN_NEGATIVE_TIME_KEY, millis);
       } catch (MissingResourceException e1) {
-        LOGGER.log(Level.SEVERE, "Resource not found: \"" + COMMAND_RUN_NEGATIVE_TIME_KEY + "\"",
+        LOGGER.log(Level.SEVERE,
+            "Resource not found: \"" + COMMAND_RUN_NEGATIVE_TIME_KEY + "\"",
             e1);
         msg = "Sleep time cannot be negative: " + millis;
       }

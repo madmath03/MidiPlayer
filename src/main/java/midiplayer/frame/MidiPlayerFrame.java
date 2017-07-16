@@ -77,8 +77,8 @@ import midiplayer.resources.ResourceUtils;
  *
  * @author brunot
  */
-public class MidiPlayerFrame extends JFrame
-    implements LocaleChangeListener, PropertyChangeListener, ThrowableListener, AutoCloseable {
+public class MidiPlayerFrame extends JFrame implements LocaleChangeListener,
+    PropertyChangeListener, ThrowableListener, AutoCloseable {
 
   /**
    * The {@code serialVersionUID}.
@@ -88,7 +88,8 @@ public class MidiPlayerFrame extends JFrame
   /**
    * Logger.
    */
-  private static final Logger LOGGER = Logger.getLogger(MidiPlayerFrame.class.getName());
+  private static final Logger LOGGER =
+      Logger.getLogger(MidiPlayerFrame.class.getName());
 
   public static final String ICON_KEY = "app_icon.png";
 
@@ -228,7 +229,8 @@ public class MidiPlayerFrame extends JFrame
     getContentPane().add(scrollPanePlaylist, java.awt.BorderLayout.CENTER);
 
     labelCurrentSongInformation.setText(" "); // NOI18N
-    getContentPane().add(labelCurrentSongInformation, java.awt.BorderLayout.PAGE_END);
+    getContentPane().add(labelCurrentSongInformation,
+        java.awt.BorderLayout.PAGE_END);
 
     menuFile.setText("File"); // NOI18N
 
@@ -374,11 +376,13 @@ public class MidiPlayerFrame extends JFrame
   // #########################################################################
   public ConsoleFrame getConsoleFrame() {
     if (consoleFrame == null) {
-      consoleFrame = new ConsoleFrame(null,
-          midiplayer.console.resources.ResourceUtils.getMessage("midi_player.console.title"));
+      consoleFrame =
+          new ConsoleFrame(null, midiplayer.console.resources.ResourceUtils
+              .getMessage("midiplayer.console.title"));
       consoleFrame.setVisible(false);
 
-      List<Image> frameIcons = ResourceUtils.createImages("application_xp_terminal.png", "Console");
+      List<Image> frameIcons =
+          ResourceUtils.createImages("application_xp_terminal.png", "Console");
       if (frameIcons != null) {
         consoleFrame.setIconImages(frameIcons);
       }
@@ -402,7 +406,8 @@ public class MidiPlayerFrame extends JFrame
   public MidiPlayerController getController() {
     if (controller == null) {
       ConsoleFrame console = getConsoleFrame();
-      controller = new MidiPlayerController(console.getJssTextArea(), this, this.getPlayer());
+      controller = new MidiPlayerController(console.getJssTextArea(), this,
+          this.getPlayer());
       console.setController(controller);
     }
     return controller;
@@ -418,11 +423,13 @@ public class MidiPlayerFrame extends JFrame
 
     final MidiPlayerWithListener midiPlayer = this.getPlayer();
     if (midiPlayer == null || midiPlayer.getSequencer() == null) {
-      this.throwableReceived(ResourceUtils.getMessage("midi_player.sequencer.not_found"));
+      this.throwableReceived(
+          ResourceUtils.getMessage("midiplayer.sequencer.not_found"));
       System.exit(1);
     }
     final MidiPlayerController midiPlayerController = this.getController();
-    midiActionFactory = new midiplayer.frame.action.util.ActionFactory(midiPlayerController);
+    midiActionFactory =
+        new midiplayer.frame.action.util.ActionFactory(midiPlayerController);
 
     // Load files and initialize components from received paths
     File directory;
@@ -448,15 +455,18 @@ public class MidiPlayerFrame extends JFrame
     ToggleControlsLargeIconsAction toggleControlsLargeIconsAction =
         (ToggleControlsLargeIconsAction) midiActionFactory
             .getAction(ToggleControlsLargeIconsAction.DEFAULT_IDENTIFIER);
-    this.displayControlsButtonLargeIcons = toggleControlsLargeIconsAction.isSelected();
+    this.displayControlsButtonLargeIcons =
+        toggleControlsLargeIconsAction.isSelected();
 
     DisplayConsoleAction displayConsoleAction =
-        (DisplayConsoleAction) midiActionFactory.getAction(DisplayConsoleAction.DEFAULT_IDENTIFIER);
+        (DisplayConsoleAction) midiActionFactory
+            .getAction(DisplayConsoleAction.DEFAULT_IDENTIFIER);
     menuItemConsole.setAction(displayConsoleAction);
     getConsoleFrame().setVisible(displayConsoleAction.isSelected());
 
     // File Actions
-    AddAction openAction = (AddAction) midiActionFactory.getAction(AddAction.DEFAULT_IDENTIFIER);
+    AddAction openAction =
+        (AddAction) midiActionFactory.getAction(AddAction.DEFAULT_IDENTIFIER);
     menuItemOpen.setAction(openAction);
 
     final ExitAction exitAction =
@@ -474,17 +484,19 @@ public class MidiPlayerFrame extends JFrame
     });
 
     // Control Actions
-    PreviousAction previousAction =
-        (PreviousAction) midiActionFactory.getAction(PreviousAction.DEFAULT_IDENTIFIER);
-    ActionWrapper wrappedPreviousAction = new ActionWrapper(previousAction,
-        displayControlsButtonNames, displayControlsButtonIcons, displayControlsButtonLargeIcons);
+    PreviousAction previousAction = (PreviousAction) midiActionFactory
+        .getAction(PreviousAction.DEFAULT_IDENTIFIER);
+    ActionWrapper wrappedPreviousAction =
+        new ActionWrapper(previousAction, displayControlsButtonNames,
+            displayControlsButtonIcons, displayControlsButtonLargeIcons);
     buttonPrevious.setAction(wrappedPreviousAction);
     menuItemPrevious.setAction(previousAction);
 
     final PlayAction playAction =
         (PlayAction) midiActionFactory.getAction(PlayAction.DEFAULT_IDENTIFIER);
-    ActionWrapper wrappedPlayAction = new ActionWrapper(playAction, displayControlsButtonNames,
-        displayControlsButtonIcons, displayControlsButtonLargeIcons);
+    ActionWrapper wrappedPlayAction =
+        new ActionWrapper(playAction, displayControlsButtonNames,
+            displayControlsButtonIcons, displayControlsButtonLargeIcons);
     buttonPlay.setAction(wrappedPlayAction);
     menuItemPlay.setAction(playAction);
 
@@ -497,44 +509,53 @@ public class MidiPlayerFrame extends JFrame
           Point p = me.getPoint();
           int row = table.rowAtPoint(p);
           if (me.getClickCount() == 2) {
-            playAction.actionPerformed(
-                new ActionEvent(me.getSource(), me.getID(), Integer.toString(row)));
+            playAction.actionPerformed(new ActionEvent(me.getSource(),
+                me.getID(), Integer.toString(row)));
           }
         }
       }
     });
 
-    PauseAction pauseAction =
-        (PauseAction) midiActionFactory.getAction(PauseAction.DEFAULT_IDENTIFIER);
-    ActionWrapper wrappedPauseAction = new ActionWrapper(pauseAction, displayControlsButtonNames,
-        displayControlsButtonIcons, displayControlsButtonLargeIcons);
+    PauseAction pauseAction = (PauseAction) midiActionFactory
+        .getAction(PauseAction.DEFAULT_IDENTIFIER);
+    ActionWrapper wrappedPauseAction =
+        new ActionWrapper(pauseAction, displayControlsButtonNames,
+            displayControlsButtonIcons, displayControlsButtonLargeIcons);
     buttonPause.setAction(wrappedPauseAction);
     menuItemPause.setAction(pauseAction);
 
-    StopAction stopAction = (StopAction) midiActionFactory.getAction(StopAction.DEFAULT_IDENTIFIER);
-    ActionWrapper wrappedStopAction = new ActionWrapper(stopAction, displayControlsButtonNames,
-        displayControlsButtonIcons, displayControlsButtonLargeIcons);
+    StopAction stopAction =
+        (StopAction) midiActionFactory.getAction(StopAction.DEFAULT_IDENTIFIER);
+    ActionWrapper wrappedStopAction =
+        new ActionWrapper(stopAction, displayControlsButtonNames,
+            displayControlsButtonIcons, displayControlsButtonLargeIcons);
     buttonStop.setAction(wrappedStopAction);
     menuItemStop.setAction(stopAction);
 
-    NextAction nextAction = (NextAction) midiActionFactory.getAction(NextAction.DEFAULT_IDENTIFIER);
-    ActionWrapper wrappedNextAction = new ActionWrapper(nextAction, displayControlsButtonNames,
-        displayControlsButtonIcons, displayControlsButtonLargeIcons);
+    NextAction nextAction =
+        (NextAction) midiActionFactory.getAction(NextAction.DEFAULT_IDENTIFIER);
+    ActionWrapper wrappedNextAction =
+        new ActionWrapper(nextAction, displayControlsButtonNames,
+            displayControlsButtonIcons, displayControlsButtonLargeIcons);
     buttonNext.setAction(wrappedNextAction);
     menuItemNext.setAction(nextAction);
 
-    LoopAction loopAction = (LoopAction) midiActionFactory.getAction(LoopAction.DEFAULT_IDENTIFIER);
-    ActionWrapper wrappedLoopAction = new ActionWrapper(loopAction, displayControlsButtonNames,
-        displayControlsButtonIcons, displayControlsButtonLargeIcons);
+    LoopAction loopAction =
+        (LoopAction) midiActionFactory.getAction(LoopAction.DEFAULT_IDENTIFIER);
+    ActionWrapper wrappedLoopAction =
+        new ActionWrapper(loopAction, displayControlsButtonNames,
+            displayControlsButtonIcons, displayControlsButtonLargeIcons);
     toggleButtonLoop.setAction(wrappedLoopAction);
     checkBoxMenuItemLoop.setAction(loopAction);
 
-    ShufflePlaylistAction shufflePlaylistAction = (ShufflePlaylistAction) midiActionFactory
-        .getAction(ShufflePlaylistAction.DEFAULT_IDENTIFIER);
+    ShufflePlaylistAction shufflePlaylistAction =
+        (ShufflePlaylistAction) midiActionFactory
+            .getAction(ShufflePlaylistAction.DEFAULT_IDENTIFIER);
     menuItemShuffle.setAction(shufflePlaylistAction);
 
     SortPlaylistAction sortPlaylistAction =
-        (SortPlaylistAction) midiActionFactory.getAction(SortPlaylistAction.DEFAULT_IDENTIFIER);
+        (SortPlaylistAction) midiActionFactory
+            .getAction(SortPlaylistAction.DEFAULT_IDENTIFIER);
     menuItemSort.setAction(sortPlaylistAction);
 
     menuViewCheckBoxDisplayNames.setAction(toggleControlsNamesAction);
@@ -542,25 +563,28 @@ public class MidiPlayerFrame extends JFrame
     menuViewCheckBoxDisplayLargeIcons.setAction(toggleControlsLargeIconsAction);
 
     DisplayAboutAction displayAboutAction =
-        (DisplayAboutAction) midiActionFactory.getAction(DisplayAboutAction.DEFAULT_IDENTIFIER);
+        (DisplayAboutAction) midiActionFactory
+            .getAction(DisplayAboutAction.DEFAULT_IDENTIFIER);
     menuItemAbout.setAction(displayAboutAction);
 
     // Remove song from list on delete key
     int condition = JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT;
     InputMap inputMap = tablePlaylist.getInputMap(condition);
     ActionMap actionMap = tablePlaylist.getActionMap();
-    inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_DELETE, 0), "RemoveSongFromPlaylist");
-    RemoveAction removeAction =
-        (RemoveAction) midiActionFactory.getAction(RemoveAction.DEFAULT_IDENTIFIER);
+    inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_DELETE, 0),
+        "RemoveSongFromPlaylist");
+    RemoveAction removeAction = (RemoveAction) midiActionFactory
+        .getAction(RemoveAction.DEFAULT_IDENTIFIER);
     actionMap.put("RemoveSongFromPlaylist", removeAction);
     popupMenuItemRemove.setAction(removeAction);
 
-    ClearAction clearAction =
-        (ClearAction) midiActionFactory.getAction(ClearAction.DEFAULT_IDENTIFIER);
+    ClearAction clearAction = (ClearAction) midiActionFactory
+        .getAction(ClearAction.DEFAULT_IDENTIFIER);
     popupMenuItemClear.setAction(clearAction);
 
     // Define a custom renderer for displaying current song
-    SongPathRenderer songPathRenderer = new SongPathRenderer(midiPlayer, tablePlaylist);
+    SongPathRenderer songPathRenderer =
+        new SongPathRenderer(midiPlayer, tablePlaylist);
     tablePlaylist.setDefaultRenderer(Object.class, songPathRenderer);
     this.getPlayer().addPropertyChangeListener(songPathRenderer);
 
@@ -582,7 +606,8 @@ public class MidiPlayerFrame extends JFrame
       tablePlaylist.setModel((TableModel) midiPlayer);
       tablePlaylist.setAutoCreateColumnsFromModel(true);
       if (midiPlayer instanceof LocaleChangeListener) {
-        ResourceUtils.addLocaleChangeListener((LocaleChangeListener) midiPlayer);
+        ResourceUtils
+            .addLocaleChangeListener((LocaleChangeListener) midiPlayer);
       }
     } else {
       Object[] columnNames = {"Title"};
@@ -624,10 +649,11 @@ public class MidiPlayerFrame extends JFrame
 
   // #########################################################################
   private void initInternationalization() {
-    ResourceUtils.setTextAndMnemonic(menuFile, "midi_player.menu.file.text");
-    ResourceUtils.setTextAndMnemonic(menuControls, "midi_player.menu.controls.text");
-    ResourceUtils.setTextAndMnemonic(menuView, "midi_player.menu.view.text");
-    ResourceUtils.setTextAndMnemonic(menuHelp, "midi_player.menu.help.text");
+    ResourceUtils.setTextAndMnemonic(menuFile, "midiplayer.menu.file.text");
+    ResourceUtils.setTextAndMnemonic(menuControls,
+        "midiplayer.menu.controls.text");
+    ResourceUtils.setTextAndMnemonic(menuView, "midiplayer.menu.view.text");
+    ResourceUtils.setTextAndMnemonic(menuHelp, "midiplayer.menu.help.text");
   }
 
   // #########################################################################
@@ -780,9 +806,9 @@ public class MidiPlayerFrame extends JFrame
           int nbTry = 0;
           while (nbTry < 10) {
             String currentSongInfo = getPlayer().getCurrentSongInfo();
-            System.out.println(
-                nbTry + ". midi_player.frame.MidiPlayerFrame.propertyChange():currentSongInfo="
-                    + currentSongInfo);
+            System.out.println(nbTry
+                + ". midiplayer.frame.MidiPlayerFrame.propertyChange():currentSongInfo="
+                + currentSongInfo);
             if (currentSongInfo != null && !currentSongInfo.isEmpty()) {
               labelCurrentSongInformation.setText(currentSongInfo);
               break;
@@ -811,11 +837,12 @@ public class MidiPlayerFrame extends JFrame
   public void throwableReceived(String msg, Throwable thrown) {
     StringBuilder errorMessageBuilder = new StringBuilder();
     if (msg != null) {
-      errorMessageBuilder.append("<strong>").append(msg).append(".</strong><br/>");
+      errorMessageBuilder.append("<strong>").append(msg)
+          .append(".</strong><br/>");
     }
     if (thrown != null && thrown.getMessage() != null) {
-      errorMessageBuilder.append("<p>").append(thrown.getClass()).append(":<br/>")
-          .append(thrown.getLocalizedMessage()).append("</p>");
+      errorMessageBuilder.append("<p>").append(thrown.getClass())
+          .append(":<br/>").append(thrown.getLocalizedMessage()).append("</p>");
     }
     String errorMessage = errorMessageBuilder.toString();
     if (errorMessage.isEmpty()) {
@@ -827,7 +854,7 @@ public class MidiPlayerFrame extends JFrame
 
     // Display error message
     JOptionPane.showMessageDialog(this, errorMessage,
-        ResourceUtils.getMessage("midi_player.message_dialog.title.error"),
+        ResourceUtils.getMessage("midiplayer.message_dialog.title.error"),
         JOptionPane.ERROR_MESSAGE);
   }
 
@@ -842,14 +869,16 @@ public class MidiPlayerFrame extends JFrame
   }
 
   // #########################################################################
-  static class SongPathRenderer extends DefaultTableCellRenderer implements PropertyChangeListener {
+  static class SongPathRenderer extends DefaultTableCellRenderer
+      implements PropertyChangeListener {
 
     /**
      * The {@code serialVersionUID}.
      */
     private static final long serialVersionUID = 2223204414413740386L;
 
-    public static final DefaultTableCellRenderer DEFAULT_RENDERER = new DefaultTableCellRenderer();
+    public static final DefaultTableCellRenderer DEFAULT_RENDERER =
+        new DefaultTableCellRenderer();
 
     private final MidiPlayer midiPlayer;
 
@@ -888,22 +917,23 @@ public class MidiPlayerFrame extends JFrame
     }
 
     @Override
-    public Component getTableCellRendererComponent(JTable table, Object o, boolean isSelected,
-        boolean hasFocus, int row, int column) {
+    public Component getTableCellRendererComponent(JTable table, Object o,
+        boolean isSelected, boolean hasFocus, int row, int column) {
       if (table != this.table) {
         return this;
       }
-      Component renderer =
-          super.getTableCellRendererComponent(table, o, isSelected, hasFocus, row, column);
-      Component defaultRenderer = DEFAULT_RENDERER.getTableCellRendererComponent(table, o,
+      Component renderer = super.getTableCellRendererComponent(table, o,
           isSelected, hasFocus, row, column);
+      Component defaultRenderer =
+          DEFAULT_RENDERER.getTableCellRendererComponent(table, o, isSelected,
+              hasFocus, row, column);
 
       Color foreground, background;
       if (midiPlayer.getCurrentSongIndex() == row) {
-        foreground = this.playingSongForeground != null ? this.playingSongForeground
-            : defaultRenderer.getForeground();
-        background = this.playingSongBackground != null ? this.playingSongBackground
-            : defaultRenderer.getBackground();
+        foreground = this.playingSongForeground != null
+            ? this.playingSongForeground : defaultRenderer.getForeground();
+        background = this.playingSongBackground != null
+            ? this.playingSongBackground : defaultRenderer.getBackground();
         if (isSelected) {
           foreground = foreground.brighter();
         }
@@ -926,7 +956,8 @@ public class MidiPlayerFrame extends JFrame
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
       System.out.println(
-          "midi_player.frame.MidiPlayerFrame.SongPathRenderer.propertyChange(" + evt + ")");
+          "midiplayer.frame.MidiPlayerFrame.SongPathRenderer.propertyChange("
+              + evt + ")");
       this.table.invalidate();
       this.table.repaint();
     }
@@ -969,8 +1000,8 @@ public class MidiPlayerFrame extends JFrame
      */
     private static final String ROWS_FLAVOR_DESCRIPTION = "Integer Rows Index";
 
-    private final DataFlavor rowsIndexFlavor =
-        new ActivationDataFlavor(int[].class, ROWS_FLAVOR_MIME_TYPE, ROWS_FLAVOR_DESCRIPTION);
+    private final DataFlavor rowsIndexFlavor = new ActivationDataFlavor(
+        int[].class, ROWS_FLAVOR_MIME_TYPE, ROWS_FLAVOR_DESCRIPTION);
 
     /**
      * The table expected as drop target. Also used as the drag source.
@@ -987,7 +1018,8 @@ public class MidiPlayerFrame extends JFrame
       this(table, null);
     }
 
-    public TableRowsAndFilesTransferHandler(JTable table, JComponent container) {
+    public TableRowsAndFilesTransferHandler(JTable table,
+        JComponent container) {
       this.table = table;
       this.container = container;
     }
@@ -995,15 +1027,18 @@ public class MidiPlayerFrame extends JFrame
     @Override
     protected Transferable createTransferable(JComponent c) {
       assert (c == table);
-      return new DataHandler(table.getSelectedRows(), rowsIndexFlavor.getMimeType());
+      return new DataHandler(table.getSelectedRows(),
+          rowsIndexFlavor.getMimeType());
     }
 
     @Override
     public boolean canImport(TransferHandler.TransferSupport info) {
-      boolean b = (info.getComponent() == table || info.getComponent() == container)
-          && info.isDrop() && (info.isDataFlavorSupported(rowsIndexFlavor)
-              || info.isDataFlavorSupported(filesFlavor));
-      table.setCursor(b ? DragSource.DefaultMoveDrop : DragSource.DefaultMoveNoDrop);
+      boolean b =
+          (info.getComponent() == table || info.getComponent() == container)
+              && info.isDrop() && (info.isDataFlavorSupported(rowsIndexFlavor)
+                  || info.isDataFlavorSupported(filesFlavor));
+      table.setCursor(
+          b ? DragSource.DefaultMoveDrop : DragSource.DefaultMoveNoDrop);
       return b;
     }
 
@@ -1042,12 +1077,14 @@ public class MidiPlayerFrame extends JFrame
       }
 
       Transferable transferable = info.getTransferable();
-      if (info.isDataFlavorSupported(rowsIndexFlavor) && model instanceof ReorderableTableModel) {
+      if (info.isDataFlavorSupported(rowsIndexFlavor)
+          && model instanceof ReorderableTableModel) {
         int[] rows;
         try {
           rows = (int[]) transferable.getTransferData(rowsIndexFlavor);
         } catch (UnsupportedFlavorException ex) {
-          LOGGER.log(Level.SEVERE, rowsIndexFlavor + " flavor is not supported.", ex);
+          LOGGER.log(Level.SEVERE,
+              rowsIndexFlavor + " flavor is not supported.", ex);
           rows = null;
         } catch (IOException ex) {
           LOGGER.log(Level.SEVERE, null, ex);
@@ -1061,21 +1098,23 @@ public class MidiPlayerFrame extends JFrame
         try {
           files = (List<File>) transferable.getTransferData(filesFlavor);
         } catch (UnsupportedFlavorException ex) {
-          LOGGER.log(Level.SEVERE, filesFlavor + " flavor is not supported.", ex);
+          LOGGER.log(Level.SEVERE, filesFlavor + " flavor is not supported.",
+              ex);
           files = null;
         } catch (IOException ex) {
           LOGGER.log(Level.SEVERE, null, ex);
           files = null;
         }
 
-        return transferFiles((MidiPlayerWithListener) model, target, index, files);
+        return transferFiles((MidiPlayerWithListener) model, target, index,
+            files);
       } else {
         return false;
       }
     }
 
-    private boolean transferRows(ReorderableTableModel model, JTable target, int index,
-        int[] rows) {
+    private boolean transferRows(ReorderableTableModel model, JTable target,
+        int index, int[] rows) {
       // Is selection continuous?
       boolean continuousSelection;
       int selectedRow;
@@ -1083,8 +1122,8 @@ public class MidiPlayerFrame extends JFrame
       if (rows != null && rows.length > 0) {
         selectedRow = rows[0];
         continuousSelection = true;
-        for (int i = 1, n = rows.length, previousRow = selectedRow, currentRow; i < n
-            && continuousSelection; i++) {
+        for (int i = 1, n = rows.length, previousRow =
+            selectedRow, currentRow; i < n && continuousSelection; i++) {
           currentRow = rows[i];
           if (currentRow == previousRow + 1) {
             previousRow = currentRow;
@@ -1108,20 +1147,22 @@ public class MidiPlayerFrame extends JFrame
       }
 
       // If selection and destination are valid
-      if (selectedRowsStart != -1 && (index < selectedRowsStart || index > selectedRowsEnd + 1)) {
+      if (selectedRowsStart != -1
+          && (index < selectedRowsStart || index > selectedRowsEnd + 1)) {
         model.moveRow(selectedRowsStart, selectedRowsEnd, index);
         if (index > selectedRowsEnd) {
           index -= 1 + selectionSize;
         }
-        target.getSelectionModel().addSelectionInterval(index, index + selectionSize);
+        target.getSelectionModel().addSelectionInterval(index,
+            index + selectionSize);
         return true;
       }
 
       return false;
     }
 
-    private boolean transferFiles(MidiPlayerWithListener model, JTable target, int index,
-        List<File> files) {
+    private boolean transferFiles(MidiPlayerWithListener model, JTable target,
+        int index, List<File> files) {
       if (files != null && !files.isEmpty()) {
         List<Path> paths = new ArrayList<>(files.size());
 
@@ -1132,7 +1173,8 @@ public class MidiPlayerFrame extends JFrame
 
         // Add all files to the playlist
         if (model.addAll(index, paths)) {
-          target.getSelectionModel().addSelectionInterval(index, index + paths.size() - 1);
+          target.getSelectionModel().addSelectionInterval(index,
+              index + paths.size() - 1);
           return true;
         }
 

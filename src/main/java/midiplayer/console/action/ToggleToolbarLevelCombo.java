@@ -33,8 +33,8 @@ import midiplayer.resources.LocaleChangeListener;
  *
  * @author Mathieu Brunot
  */
-public final class ToggleToolbarLevelCombo extends jswingshell.action.AbstractJssSwitchAction
-    implements LocaleChangeListener {
+public final class ToggleToolbarLevelCombo extends
+    jswingshell.action.AbstractJssSwitchAction implements LocaleChangeListener {
 
   /**
    * The {@code serialVersionUID}.
@@ -44,7 +44,8 @@ public final class ToggleToolbarLevelCombo extends jswingshell.action.AbstractJs
   /**
    * Logger.
    */
-  private static final Logger LOGGER = Logger.getLogger(ToggleToolbarLevelCombo.class.getName());
+  private static final Logger LOGGER =
+      Logger.getLogger(ToggleToolbarLevelCombo.class.getName());
 
   /**
    * This action default identifier.
@@ -56,16 +57,16 @@ public final class ToggleToolbarLevelCombo extends jswingshell.action.AbstractJs
   private static final String ACTION_LABEL = "Toggle toolbar level combo box";
 
   private static final String ACTION_LABEL_KEY =
-      "midi_player.console.action.toggle_toolbar_level_combo.name";
+      "midiplayer.console.action.toggle_toolbar_level_combo.name";
 
   private static final String COMMAND_BRIEF_HELP =
       "Toggle the frame's toolbar's level combo box display.";
 
   private static final String COMMAND_BRIEF_HELP_KEY =
-      "midi_player.console.action.toggle_toolbar_level_combo.help.short";
+      "midiplayer.console.action.toggle_toolbar_level_combo.help.short";
 
   private static final String COMMAND_HELP_KEY =
-      "midi_player.console.action.toggle_toolbar_level_combo.help.long";
+      "midiplayer.console.action.toggle_toolbar_level_combo.help.long";
 
   private static String commandHelp;
 
@@ -94,11 +95,15 @@ public final class ToggleToolbarLevelCombo extends jswingshell.action.AbstractJs
       stringBuilder.append(action.getBriefHelp()).append("\n");
       stringBuilder.append("\n");
       try {
-        stringBuilder.append(ResourceUtils.getMessage(COMMAND_HELP_KEY, commandIdsAsString,
-            action.getOnArgumentsAsString(), action.getOffArgumentsAsString()));
+        stringBuilder.append(ResourceUtils.getMessage(COMMAND_HELP_KEY,
+            commandIdsAsString, action.getOnArgumentsAsString(),
+            action.getOffArgumentsAsString()));
       } catch (MissingResourceException e) {
-        LOGGER.log(Level.SEVERE, "Resource not found: \"" + COMMAND_HELP_KEY + "\"", e);
-        stringBuilder.append("You can switch display mode of toolbar level combo box as follow:")
+        LOGGER.log(Level.SEVERE,
+            "Resource not found: \"" + COMMAND_HELP_KEY + "\"", e);
+        stringBuilder
+            .append(
+                "You can switch display mode of toolbar level combo box as follow:")
             .append("\n");
         stringBuilder.append("\t").append(commandIdsAsString).append(" ")
             .append(action.getOnArgumentsAsString()).append("\n");
@@ -124,7 +129,8 @@ public final class ToggleToolbarLevelCombo extends jswingshell.action.AbstractJs
       try {
         commandBriefHelp = ResourceUtils.getMessage(COMMAND_BRIEF_HELP_KEY);
       } catch (MissingResourceException e) {
-        LOGGER.log(Level.SEVERE, "Resource not found: \"" + COMMAND_BRIEF_HELP_KEY + "\"", e);
+        LOGGER.log(Level.SEVERE,
+            "Resource not found: \"" + COMMAND_BRIEF_HELP_KEY + "\"", e);
         commandBriefHelp = COMMAND_BRIEF_HELP;
       }
       commandBriefHelpInitialized = true;
@@ -157,12 +163,13 @@ public final class ToggleToolbarLevelCombo extends jswingshell.action.AbstractJs
     localeChanged();
   }
 
-  public ToggleToolbarLevelCombo(ConsoleFrame frame, JssTextAreaController shellController,
-      String... args) {
+  public ToggleToolbarLevelCombo(ConsoleFrame frame,
+      JssTextAreaController shellController, String... args) {
     this(false, frame, shellController, args);
   }
 
-  public ToggleToolbarLevelCombo(ConsoleFrame frame, JssTextAreaController shellController) {
+  public ToggleToolbarLevelCombo(ConsoleFrame frame,
+      JssTextAreaController shellController) {
     this(false, frame, shellController, (String[]) null);
   }
 
@@ -212,9 +219,11 @@ public final class ToggleToolbarLevelCombo extends jswingshell.action.AbstractJs
   }
 
   @Override
-  protected boolean doSwitch(IJssController shellController, Boolean switchValue) {
+  protected boolean doSwitch(IJssController shellController,
+      Boolean switchValue) {
     JToolBar.Separator levelSeparator = frame.getjToolbarSeparatorLevel();
-    JComboBox<IJssController.PublicationLevel> levelCombo = frame.getjToolbarLevelComboBox();
+    JComboBox<IJssController.PublicationLevel> levelCombo =
+        frame.getjToolbarLevelComboBox();
 
     if (levelSeparator != null && levelCombo != null) {
       levelSeparator.setVisible(switchValue);
@@ -245,11 +254,13 @@ public final class ToggleToolbarLevelCombo extends jswingshell.action.AbstractJs
     try {
       ResourceUtils.setTextAndMnemonic(this, ACTION_LABEL_KEY);
     } catch (MissingResourceException e) {
-      LOGGER.log(Level.SEVERE, "Resource not found: \"" + ACTION_LABEL_KEY + "\"", e);
+      LOGGER.log(Level.SEVERE,
+          "Resource not found: \"" + ACTION_LABEL_KEY + "\"", e);
       putValue(Action.NAME, ACTION_LABEL);
     }
     putValue(Action.SHORT_DESCRIPTION, this.getBriefHelp());
-    putValue(Action.LONG_DESCRIPTION, this.getHelp(this.getDefaultShellController()));
+    putValue(Action.LONG_DESCRIPTION,
+        this.getHelp(this.getDefaultShellController()));
   }
 
 }

@@ -35,7 +35,8 @@ import midiplayer.resources.LocaleChangeListener;
  *
  * @author Mathieu Brunot
  */
-public final class RecordAction extends jswingshell.action.AbstractThreadedJssAction
+public final class RecordAction
+    extends jswingshell.action.AbstractThreadedJssAction
     implements LocaleChangeListener {
 
   /**
@@ -46,7 +47,8 @@ public final class RecordAction extends jswingshell.action.AbstractThreadedJssAc
   /**
    * Logger.
    */
-  private static final Logger LOGGER = Logger.getLogger(RecordAction.class.getName());
+  private static final Logger LOGGER =
+      Logger.getLogger(RecordAction.class.getName());
 
   /**
    * This action default identifier.
@@ -57,23 +59,26 @@ public final class RecordAction extends jswingshell.action.AbstractThreadedJssAc
 
   private static final String ACTION_LABEL = "Record";
 
-  private static final String ACTION_LABEL_KEY = "midi_player.console.action.record.name";
+  private static final String ACTION_LABEL_KEY =
+      "midiplayer.console.action.record.name";
 
-  private static final String COMMAND_BRIEF_HELP = "Record the executed shell commands to a file.";
+  private static final String COMMAND_BRIEF_HELP =
+      "Record the executed shell commands to a file.";
 
   private static final String COMMAND_BRIEF_HELP_KEY =
-      "midi_player.console.action.record.help.short";
+      "midiplayer.console.action.record.help.short";
 
-  private static final String COMMAND_HELP_KEY = "midi_player.console.action.record.help.long";
+  private static final String COMMAND_HELP_KEY =
+      "midiplayer.console.action.record.help.long";
 
   private static final String COMMAND_RUN_FILE_WRITING_ERROR_KEY =
-      "midi_player.console.action.record.run.file_writing_error";
+      "midiplayer.console.action.record.run.file_writing_error";
 
   private static final String COMMAND_RUN_BUFFERED_FILE_CLOSING_ERROR_KEY =
-      "midi_player.console.action.record.run.buffered_file_closing_error";
+      "midiplayer.console.action.record.run.buffered_file_closing_error";
 
   private static final String COMMAND_RUN_FILE_CLOSING_ERROR_KEY =
-      "midi_player.console.action.record.run.file_closing_error";
+      "midiplayer.console.action.record.run.file_closing_error";
 
   private static String commandHelp;
 
@@ -95,38 +100,44 @@ public final class RecordAction extends jswingshell.action.AbstractThreadedJssAc
       StringBuilder stringBuilder = new StringBuilder();
 
       String commandIdsAsString = action.getCommandIdentifiersAsString(),
-          startArgument = RECORD_START, stopArgument = RECORD_STOP, saveArgument = RECORD_SAVE;
+          startArgument = RECORD_START, stopArgument = RECORD_STOP,
+          saveArgument = RECORD_SAVE;
       stringBuilder.append(action.getBriefHelp()).append("\n");
       stringBuilder.append("\n");
       try {
-        stringBuilder.append(ResourceUtils.getMessage(COMMAND_HELP_KEY, commandIdsAsString,
-            startArgument, stopArgument, saveArgument));
+        stringBuilder.append(ResourceUtils.getMessage(COMMAND_HELP_KEY,
+            commandIdsAsString, startArgument, stopArgument, saveArgument));
       } catch (MissingResourceException e) {
-        LOGGER.log(Level.SEVERE, "Resource not found: \"" + COMMAND_HELP_KEY + "\"", e);
+        LOGGER.log(Level.SEVERE,
+            "Resource not found: \"" + COMMAND_HELP_KEY + "\"", e);
         stringBuilder.append("Start recording commands:").append("\n");
-        stringBuilder.append("\t").append(commandIdsAsString).append(" ").append(startArgument)
-            .append("\n");
+        stringBuilder.append("\t").append(commandIdsAsString).append(" ")
+            .append(startArgument).append("\n");
         stringBuilder.append("If a start was already entered, ")
             .append("only the last one before a stop or save command ")
             .append("will be taken into account.").append("\n");
         stringBuilder.append("\n");
         stringBuilder.append("Stop recording commands:").append("\n");
-        stringBuilder.append("\t").append(commandIdsAsString).append(" ").append(stopArgument)
-            .append("\n");
+        stringBuilder.append("\t").append(commandIdsAsString).append(" ")
+            .append(stopArgument).append("\n");
         stringBuilder.append("If a stop was already entered, ")
             .append("only the first one after a start command ")
             .append("will be taken into account.").append("\n");
         stringBuilder.append("\n");
         stringBuilder.append("Save recording commands:").append("\n");
-        stringBuilder.append("\t").append(commandIdsAsString).append(" ").append(saveArgument)
-            .append(" file_path").append("\n");
+        stringBuilder.append("\t").append(commandIdsAsString).append(" ")
+            .append(saveArgument).append(" file_path").append("\n");
         stringBuilder.append("If no stop was entered, ")
             .append("the record will go from the last start command ")
             .append("to the current save command.").append("\n");
-        stringBuilder.append("The recording will not stop until a stop command is entered, ")
+        stringBuilder
+            .append(
+                "The recording will not stop until a stop command is entered, ")
             .append("or until the application exits, ")
-            .append("meaning that a new save command will go from the last start command ")
-            .append("to the current save command, even if there were save done in between.");
+            .append(
+                "meaning that a new save command will go from the last start command ")
+            .append(
+                "to the current save command, even if there were save done in between.");
       }
 
       commandHelp = stringBuilder.toString();
@@ -147,7 +158,8 @@ public final class RecordAction extends jswingshell.action.AbstractThreadedJssAc
       try {
         commandBriefHelp = ResourceUtils.getMessage(COMMAND_BRIEF_HELP_KEY);
       } catch (MissingResourceException e) {
-        LOGGER.log(Level.SEVERE, "Resource not found: \"" + COMMAND_BRIEF_HELP_KEY + "\"", e);
+        LOGGER.log(Level.SEVERE,
+            "Resource not found: \"" + COMMAND_BRIEF_HELP_KEY + "\"", e);
         commandBriefHelp = COMMAND_BRIEF_HELP;
       }
       commandBriefHelpInitialized = true;
@@ -222,12 +234,15 @@ public final class RecordAction extends jswingshell.action.AbstractThreadedJssAc
   }
 
   @Override
-  protected AbstractJssActionWorker prepareWorker(IJssController shellController, String... args) {
+  protected AbstractJssActionWorker prepareWorker(
+      IJssController shellController, String... args) {
     RecordWorker worker = null;
 
-    if (shellController != null && shellController instanceof AbstractJssController) {
+    if (shellController != null
+        && shellController instanceof AbstractJssController) {
       if (args == null || args.length == 1 || args.length > 3) {
-        shellController.publish(IJssController.PublicationLevel.WARNING, getHelp(shellController));
+        shellController.publish(IJssController.PublicationLevel.WARNING,
+            getHelp(shellController));
       } else {
         String recordAction = args[1].toUpperCase();
         switch (recordAction) {
@@ -244,9 +259,10 @@ public final class RecordAction extends jswingshell.action.AbstractThreadedJssAc
           case RECORD_SAVE:
             if (args.length == 3) {
               String filePath = args[2];
-              String[] recordedCommands =
-                  extractRecordedCommands((AbstractJssController) shellController);
-              worker = new RecordWorker(shellController, filePath, recordedCommands);
+              String[] recordedCommands = extractRecordedCommands(
+                  (AbstractJssController) shellController);
+              worker =
+                  new RecordWorker(shellController, filePath, recordedCommands);
             } else {
               shellController.publish(IJssController.PublicationLevel.WARNING,
                   getHelp(shellController));
@@ -263,20 +279,23 @@ public final class RecordAction extends jswingshell.action.AbstractThreadedJssAc
     return worker;
   }
 
-  private String[] extractRecordedCommands(AbstractJssController shellController) {
+  private String[] extractRecordedCommands(
+      AbstractJssController shellController) {
     Deque<String> commands = new ArrayDeque<>();
 
-    AbstractJssController.CommandHistory commandHistory = shellController.getCommandHistory();
+    AbstractJssController.CommandHistory commandHistory =
+        shellController.getCommandHistory();
     int endIndex = -1;
 
     for (int i = commandHistory.size() - 1; i >= 0; i--) {
       String command = commandHistory.previous();
-      String[] args = shellController.getCommandLineParser().extractCommandArguments(command);
+      String[] args = shellController.getCommandLineParser()
+          .extractCommandArguments(command);
 
       if (args != null && args.length > 0) {
 
-        if ((command.startsWith(IDENTIFIERS[0]) || command.startsWith("\"" + IDENTIFIERS[0]))
-            && args.length > 1) {
+        if ((command.startsWith(IDENTIFIERS[0])
+            || command.startsWith("\"" + IDENTIFIERS[0])) && args.length > 1) {
           String recordAction = args[1].toUpperCase().replace("\"", "");
 
           switch (recordAction) {
@@ -316,7 +335,8 @@ public final class RecordAction extends jswingshell.action.AbstractThreadedJssAc
 
     final String[] commands;
 
-    public RecordWorker(IJssController shellController, String filePath, String[] commands) {
+    public RecordWorker(IJssController shellController, String filePath,
+        String[] commands) {
       super(shellController);
       this.filePath = filePath;
       this.commands = commands;
@@ -342,14 +362,15 @@ public final class RecordAction extends jswingshell.action.AbstractThreadedJssAc
 
         String msg;
         try {
-          msg =
-              ResourceUtils.getMessage(COMMAND_RUN_FILE_WRITING_ERROR_KEY, e.getLocalizedMessage());
+          msg = ResourceUtils.getMessage(COMMAND_RUN_FILE_WRITING_ERROR_KEY,
+              e.getLocalizedMessage());
         } catch (MissingResourceException e1) {
-          LOGGER.log(Level.SEVERE,
-              "Resource not found: \"" + COMMAND_RUN_FILE_WRITING_ERROR_KEY + "\"", e1);
+          LOGGER.log(Level.SEVERE, "Resource not found: \""
+              + COMMAND_RUN_FILE_WRITING_ERROR_KEY + "\"", e1);
           msg = "Error occured while reading file: " + e.getMessage();
         }
-        this.publish(new JssActionWorkerChunk(IJssController.PublicationLevel.FATAL_ERROR, msg));
+        this.publish(new JssActionWorkerChunk(
+            IJssController.PublicationLevel.FATAL_ERROR, msg));
 
         workerCommandReturnStatus = AbstractThreadedJssAction.ERROR;
       } finally {
@@ -357,19 +378,21 @@ public final class RecordAction extends jswingshell.action.AbstractThreadedJssAc
           try {
             bw.close();
           } catch (IOException ex) {
-            LOGGER.log(Level.SEVERE, "Error occured while closing buffered file writer.", ex);
+            LOGGER.log(Level.SEVERE,
+                "Error occured while closing buffered file writer.", ex);
             String msg;
             try {
-              msg = ResourceUtils.getMessage(COMMAND_RUN_BUFFERED_FILE_CLOSING_ERROR_KEY,
+              msg = ResourceUtils.getMessage(
+                  COMMAND_RUN_BUFFERED_FILE_CLOSING_ERROR_KEY,
                   ex.getLocalizedMessage());
             } catch (MissingResourceException e1) {
-              LOGGER.log(Level.SEVERE,
-                  "Resource not found: \"" + COMMAND_RUN_BUFFERED_FILE_CLOSING_ERROR_KEY + "\"",
-                  e1);
-              msg = "Error occured while closing buffered file writer: " + ex.getMessage();
+              LOGGER.log(Level.SEVERE, "Resource not found: \""
+                  + COMMAND_RUN_BUFFERED_FILE_CLOSING_ERROR_KEY + "\"", e1);
+              msg = "Error occured while closing buffered file writer: "
+                  + ex.getMessage();
             }
-            this.publish(
-                new JssActionWorkerChunk(IJssController.PublicationLevel.FATAL_ERROR, msg));
+            this.publish(new JssActionWorkerChunk(
+                IJssController.PublicationLevel.FATAL_ERROR, msg));
             workerCommandReturnStatus = AbstractThreadedJssAction.ERROR;
           }
         }
@@ -377,18 +400,20 @@ public final class RecordAction extends jswingshell.action.AbstractThreadedJssAc
           try {
             fw.close();
           } catch (IOException ex) {
-            LOGGER.log(Level.SEVERE, "Error occured while closing file writer.", ex);
+            LOGGER.log(Level.SEVERE, "Error occured while closing file writer.",
+                ex);
             String msg;
             try {
               msg = ResourceUtils.getMessage(COMMAND_RUN_FILE_CLOSING_ERROR_KEY,
                   ex.getLocalizedMessage());
             } catch (MissingResourceException e1) {
-              LOGGER.log(Level.SEVERE,
-                  "Resource not found: \"" + COMMAND_RUN_FILE_CLOSING_ERROR_KEY + "\"", e1);
-              msg = "Error occured while closing file writer: " + ex.getMessage();
+              LOGGER.log(Level.SEVERE, "Resource not found: \""
+                  + COMMAND_RUN_FILE_CLOSING_ERROR_KEY + "\"", e1);
+              msg =
+                  "Error occured while closing file writer: " + ex.getMessage();
             }
-            this.publish(
-                new JssActionWorkerChunk(IJssController.PublicationLevel.FATAL_ERROR, msg));
+            this.publish(new JssActionWorkerChunk(
+                IJssController.PublicationLevel.FATAL_ERROR, msg));
             workerCommandReturnStatus = AbstractThreadedJssAction.ERROR;
           }
         }
@@ -411,11 +436,13 @@ public final class RecordAction extends jswingshell.action.AbstractThreadedJssAc
     try {
       ResourceUtils.setTextAndMnemonic(this, ACTION_LABEL_KEY);
     } catch (MissingResourceException e) {
-      LOGGER.log(Level.SEVERE, "Resource not found: \"" + ACTION_LABEL_KEY + "\"", e);
+      LOGGER.log(Level.SEVERE,
+          "Resource not found: \"" + ACTION_LABEL_KEY + "\"", e);
       putValue(Action.NAME, ACTION_LABEL);
     }
     putValue(Action.SHORT_DESCRIPTION, this.getBriefHelp());
-    putValue(Action.LONG_DESCRIPTION, this.getHelp(this.getDefaultShellController()));
+    putValue(Action.LONG_DESCRIPTION,
+        this.getHelp(this.getDefaultShellController()));
   }
 
   // #########################################################################

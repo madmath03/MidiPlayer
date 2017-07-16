@@ -14,7 +14,8 @@ import midiplayer.resources.ResourceUtils;
  */
 public final class MidiPlayerMain {
 
-  private static final Logger LOGGER = Logger.getLogger(MidiPlayerMain.class.getName());
+  private static final Logger LOGGER =
+      Logger.getLogger(MidiPlayerMain.class.getName());
 
   /**
    * Private constructor.
@@ -42,7 +43,8 @@ public final class MidiPlayerMain {
           break;
         }
       }
-    } catch (ClassNotFoundException | InstantiationException | IllegalAccessException
+    } catch (ClassNotFoundException | InstantiationException
+        | IllegalAccessException
         | javax.swing.UnsupportedLookAndFeelException ex) {
       LOGGER.log(java.util.logging.Level.SEVERE, null, ex);
     }
@@ -59,7 +61,8 @@ public final class MidiPlayerMain {
     if (args.length > 0) {
       // Play MIDI files without GUI?
       int i = 0;
-      if ("-s".equalsIgnoreCase(args[i]) || "--silent".equalsIgnoreCase(args[i])) {
+      if ("-s".equalsIgnoreCase(args[i])
+          || "--silent".equalsIgnoreCase(args[i])) {
         silentMode = true;
         i++;
       }
@@ -86,7 +89,8 @@ public final class MidiPlayerMain {
 
       /* Create and display the form */
       java.awt.EventQueue.invokeLater(() -> {
-        final MidiPlayerFrame appFrame = new MidiPlayerFrame("MIDI Player", filesToOpen);
+        final MidiPlayerFrame appFrame =
+            new MidiPlayerFrame("MIDI Player", filesToOpen);
 
         // Register frame for locale change
         ResourceUtils.addLocaleChangeListener(appFrame);

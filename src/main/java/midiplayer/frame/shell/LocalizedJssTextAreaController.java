@@ -8,8 +8,7 @@ import jswingshell.gui.JssTextAreaController;
  * A shell controller with a localized model.
  *
  * <p>
- * The localized model must be set separately through
- * {@link #setModel(LocalizedJssModel)}.
+ * The localized model must be set separately through {@link #setModel(LocalizedJssModel)}.
  * </p>
  *
  * <p>

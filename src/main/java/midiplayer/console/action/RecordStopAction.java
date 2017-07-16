@@ -29,7 +29,8 @@ import midiplayer.resources.LocaleChangeListener;
  *
  * @author Mathieu Brunot
  */
-public final class RecordStopAction extends AbstractAction implements LocaleChangeListener {
+public final class RecordStopAction extends AbstractAction
+    implements LocaleChangeListener {
 
   /**
    * The {@code serialVersionUID}.
@@ -39,18 +40,21 @@ public final class RecordStopAction extends AbstractAction implements LocaleChan
   /**
    * Logger.
    */
-  private static final Logger LOGGER = Logger.getLogger(RecordStopAction.class.getName());
+  private static final Logger LOGGER =
+      Logger.getLogger(RecordStopAction.class.getName());
 
   private static final String ACTION_LABEL = "Stop recording";
 
-  private static final String ACTION_LABEL_KEY = "midi_player.console.action.record_stop.name";
+  private static final String ACTION_LABEL_KEY =
+      "midiplayer.console.action.record_stop.name";
 
   private static final String ICON_KEY = "control_stop_blue.png";
 
-  private static final String COMMAND_BRIEF_HELP = "Mark the end of a shell recording session.";
+  private static final String COMMAND_BRIEF_HELP =
+      "Mark the end of a shell recording session.";
 
   private static final String COMMAND_BRIEF_HELP_KEY =
-      "midi_player.console.action.record_stop.help.short";
+      "midiplayer.console.action.record_stop.help.short";
 
   private static String commandBriefHelp;
 
@@ -68,7 +72,8 @@ public final class RecordStopAction extends AbstractAction implements LocaleChan
       try {
         commandBriefHelp = ResourceUtils.getMessage(COMMAND_BRIEF_HELP_KEY);
       } catch (MissingResourceException e) {
-        LOGGER.log(Level.SEVERE, "Resource not found: \"" + COMMAND_BRIEF_HELP_KEY + "\"", e);
+        LOGGER.log(Level.SEVERE,
+            "Resource not found: \"" + COMMAND_BRIEF_HELP_KEY + "\"", e);
         commandBriefHelp = COMMAND_BRIEF_HELP;
       }
       commandBriefHelpInitialized = true;
@@ -96,17 +101,19 @@ public final class RecordStopAction extends AbstractAction implements LocaleChan
       throw new IllegalArgumentException("Record action is null");
     }
     this.recordAction = recordAction;
-    this.defaultArgs =
-        new String[] {recordAction.getDefaultCommandIdentifier(), RecordAction.RECORD_STOP};
+    this.defaultArgs = new String[] {recordAction.getDefaultCommandIdentifier(),
+        RecordAction.RECORD_STOP};
 
-    putValue(Action.LARGE_ICON_KEY, ResourceUtils.createImageIcon(ICON_KEY, ACTION_LABEL, true));
+    putValue(Action.LARGE_ICON_KEY,
+        ResourceUtils.createImageIcon(ICON_KEY, ACTION_LABEL, true));
     localeChanged();
   }
 
   // #########################################################################
   @Override
   public void actionPerformed(ActionEvent e) {
-    IJssController defaultShellController = this.recordAction.getDefaultShellController();
+    IJssController defaultShellController =
+        this.recordAction.getDefaultShellController();
 
     // Run action
     if (defaultShellController != null) {
@@ -115,7 +122,8 @@ public final class RecordStopAction extends AbstractAction implements LocaleChan
       if (defaultArgs != null && defaultArgs.length > 0) {
         for (String arg : defaultArgs) {
           commandBuilder.append("\"").append(arg).append("\"");
-          commandBuilder.append(defaultShellController.getCommandParameterSeparator());
+          commandBuilder
+              .append(defaultShellController.getCommandParameterSeparator());
         }
       } else {
         String[] commandIdentifiers = this.recordAction.getCommandIdentifiers();
@@ -144,7 +152,8 @@ public final class RecordStopAction extends AbstractAction implements LocaleChan
     try {
       ResourceUtils.setTextAndMnemonic(this, ACTION_LABEL_KEY);
     } catch (MissingResourceException e) {
-      LOGGER.log(Level.SEVERE, "Resource not found: \"" + ACTION_LABEL_KEY + "\"", e);
+      LOGGER.log(Level.SEVERE,
+          "Resource not found: \"" + ACTION_LABEL_KEY + "\"", e);
       putValue(Action.NAME, ACTION_LABEL);
     }
     putValue(Action.SHORT_DESCRIPTION, getBriefHelp(this));

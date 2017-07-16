@@ -33,7 +33,8 @@ import javax.swing.SwingUtilities;
  */
 public class LocaleChangeNotifier {
 
-  private final List<LocaleChangeListener> localeChangeListeners = new ArrayList<>();
+  private final List<LocaleChangeListener> localeChangeListeners =
+      new ArrayList<>();
 
   /**
    * The object to be provided as the "source" for any generated events.
@@ -100,7 +101,8 @@ public class LocaleChangeNotifier {
    *
    * @return {@code true} (as specified by {@link Collection#add})
    */
-  public synchronized boolean addLocaleChangeListener(LocaleChangeListener listener) {
+  public synchronized boolean addLocaleChangeListener(
+      LocaleChangeListener listener) {
     return localeChangeListeners.add(listener);
   }
 
@@ -123,7 +125,8 @@ public class LocaleChangeNotifier {
    * @return {@code true} if this {@code LocaleChangeNotifier} contained the
    *         {@code LocaleChangeListener}
    */
-  public synchronized boolean removeLocaleChangeListener(LocaleChangeListener listener) {
+  public synchronized boolean removeLocaleChangeListener(
+      LocaleChangeListener listener) {
     return localeChangeListeners.remove(listener);
   }
 
@@ -151,7 +154,8 @@ public class LocaleChangeNotifier {
    *
    * @see List#contains(java.lang.Object)
    */
-  public synchronized boolean containsLocaleChangeListener(LocaleChangeListener listener) {
+  public synchronized boolean containsLocaleChangeListener(
+      LocaleChangeListener listener) {
     return localeChangeListeners.contains(listener);
   }
 
@@ -203,11 +207,13 @@ public class LocaleChangeNotifier {
    * @param oldValue the old value of the property
    * @param newValue the new value of the property
    */
-  public void fireLocaleChange(String propertyName, Locale oldValue, Object newValue) {
+  public void fireLocaleChange(String propertyName, Locale oldValue,
+      Object newValue) {
     if (oldValue != null && newValue != null && oldValue.equals(newValue)) {
       return;
     }
-    fireLocaleChange(new PropertyChangeEvent(this.source, propertyName, oldValue, newValue));
+    fireLocaleChange(
+        new PropertyChangeEvent(this.source, propertyName, oldValue, newValue));
   }
 
   /**
@@ -270,7 +276,8 @@ public class LocaleChangeNotifier {
     }
   }
 
-  private static void fire(List<LocaleChangeListener> listeners, PropertyChangeEvent event) {
+  private static void fire(List<LocaleChangeListener> listeners,
+      PropertyChangeEvent event) {
     if (listeners != null) {
       listeners.stream().forEach((listener) -> {
         listener.localeChanged(event);

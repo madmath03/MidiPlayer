@@ -35,8 +35,8 @@ import midiplayer.resources.LocaleChangeListener;
  *
  * @author Mathieu Brunot
  */
-public final class ToggleToolbarNamesAction extends jswingshell.action.AbstractJssSwitchAction
-    implements LocaleChangeListener {
+public final class ToggleToolbarNamesAction extends
+    jswingshell.action.AbstractJssSwitchAction implements LocaleChangeListener {
 
   /**
    * The {@code serialVersionUID}.
@@ -46,7 +46,8 @@ public final class ToggleToolbarNamesAction extends jswingshell.action.AbstractJ
   /**
    * Logger.
    */
-  private static final Logger LOGGER = Logger.getLogger(ToggleToolbarNamesAction.class.getName());
+  private static final Logger LOGGER =
+      Logger.getLogger(ToggleToolbarNamesAction.class.getName());
 
   /**
    * This action default identifier.
@@ -58,15 +59,16 @@ public final class ToggleToolbarNamesAction extends jswingshell.action.AbstractJ
   private static final String ACTION_LABEL = "Toggle toolbar names";
 
   private static final String ACTION_LABEL_KEY =
-      "midi_player.console.action.toggle_toolbar_names.name";
+      "midiplayer.console.action.toggle_toolbar_names.name";
 
-  private static final String COMMAND_BRIEF_HELP = "Toggle the frame's toolbar's names display.";
+  private static final String COMMAND_BRIEF_HELP =
+      "Toggle the frame's toolbar's names display.";
 
   private static final String COMMAND_BRIEF_HELP_KEY =
-      "midi_player.console.action.toggle_toolbar_names.help.short";
+      "midiplayer.console.action.toggle_toolbar_names.help.short";
 
   private static final String COMMAND_HELP_KEY =
-      "midi_player.console.action.toggle_toolbar_names.help.long";
+      "midiplayer.console.action.toggle_toolbar_names.help.long";
 
   private static String commandHelp;
 
@@ -95,11 +97,14 @@ public final class ToggleToolbarNamesAction extends jswingshell.action.AbstractJ
       stringBuilder.append(action.getBriefHelp()).append("\n");
       stringBuilder.append("\n");
       try {
-        stringBuilder.append(ResourceUtils.getMessage(COMMAND_HELP_KEY, commandIdsAsString,
-            action.getOnArgumentsAsString(), action.getOffArgumentsAsString()));
+        stringBuilder.append(ResourceUtils.getMessage(COMMAND_HELP_KEY,
+            commandIdsAsString, action.getOnArgumentsAsString(),
+            action.getOffArgumentsAsString()));
       } catch (MissingResourceException e) {
-        LOGGER.log(Level.SEVERE, "Resource not found: \"" + COMMAND_HELP_KEY + "\"", e);
-        stringBuilder.append("You can switch display mode of toolbar's names as follow:")
+        LOGGER.log(Level.SEVERE,
+            "Resource not found: \"" + COMMAND_HELP_KEY + "\"", e);
+        stringBuilder
+            .append("You can switch display mode of toolbar's names as follow:")
             .append("\n");
         stringBuilder.append("\t").append(commandIdsAsString).append(" ")
             .append(action.getOnArgumentsAsString()).append("\n");
@@ -125,7 +130,8 @@ public final class ToggleToolbarNamesAction extends jswingshell.action.AbstractJ
       try {
         commandBriefHelp = ResourceUtils.getMessage(COMMAND_BRIEF_HELP_KEY);
       } catch (MissingResourceException e) {
-        LOGGER.log(Level.SEVERE, "Resource not found: \"" + COMMAND_BRIEF_HELP_KEY + "\"", e);
+        LOGGER.log(Level.SEVERE,
+            "Resource not found: \"" + COMMAND_BRIEF_HELP_KEY + "\"", e);
         commandBriefHelp = COMMAND_BRIEF_HELP;
       }
       commandBriefHelpInitialized = true;
@@ -158,12 +164,13 @@ public final class ToggleToolbarNamesAction extends jswingshell.action.AbstractJ
     localeChanged();
   }
 
-  public ToggleToolbarNamesAction(ConsoleFrame frame, JssTextAreaController shellController,
-      String... args) {
+  public ToggleToolbarNamesAction(ConsoleFrame frame,
+      JssTextAreaController shellController, String... args) {
     this(false, frame, shellController, args);
   }
 
-  public ToggleToolbarNamesAction(ConsoleFrame frame, JssTextAreaController shellController) {
+  public ToggleToolbarNamesAction(ConsoleFrame frame,
+      JssTextAreaController shellController) {
     this(false, frame, shellController, (String[]) null);
   }
 
@@ -213,7 +220,8 @@ public final class ToggleToolbarNamesAction extends jswingshell.action.AbstractJ
   }
 
   @Override
-  protected boolean doSwitch(IJssController shellController, Boolean switchValue) {
+  protected boolean doSwitch(IJssController shellController,
+      Boolean switchValue) {
     JToolBar toolbar = frame.getjToolBar();
 
     if (toolbar != null) {
@@ -257,11 +265,13 @@ public final class ToggleToolbarNamesAction extends jswingshell.action.AbstractJ
     try {
       ResourceUtils.setTextAndMnemonic(this, ACTION_LABEL_KEY);
     } catch (MissingResourceException e) {
-      LOGGER.log(Level.SEVERE, "Resource not found: \"" + ACTION_LABEL_KEY + "\"", e);
+      LOGGER.log(Level.SEVERE,
+          "Resource not found: \"" + ACTION_LABEL_KEY + "\"", e);
       putValue(Action.NAME, ACTION_LABEL);
     }
     putValue(Action.SHORT_DESCRIPTION, this.getBriefHelp());
-    putValue(Action.LONG_DESCRIPTION, this.getHelp(this.getDefaultShellController()));
+    putValue(Action.LONG_DESCRIPTION,
+        this.getHelp(this.getDefaultShellController()));
   }
 
 }

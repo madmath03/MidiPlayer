@@ -47,7 +47,8 @@ public final class SelectAllAction extends jswingshell.action.AbstractJssAction
   /**
    * Logger.
    */
-  private static final Logger LOGGER = Logger.getLogger(SelectAllAction.class.getName());
+  private static final Logger LOGGER =
+      Logger.getLogger(SelectAllAction.class.getName());
 
   /**
    * This action default identifier.
@@ -58,14 +59,17 @@ public final class SelectAllAction extends jswingshell.action.AbstractJssAction
 
   private static final String ACTION_LABEL = "Select All";
 
-  private static final String ACTION_LABEL_KEY = "midi_player.console.action.select_all.name";
+  private static final String ACTION_LABEL_KEY =
+      "midiplayer.console.action.select_all.name";
 
-  private static final String COMMAND_BRIEF_HELP = "Select everything in the shell.";
+  private static final String COMMAND_BRIEF_HELP =
+      "Select everything in the shell.";
 
   private static final String COMMAND_BRIEF_HELP_KEY =
-      "midi_player.console.action.select_all.help.short";
+      "midiplayer.console.action.select_all.help.short";
 
-  private static final String COMMAND_HELP_KEY = "midi_player.console.action.select_all.help.long";
+  private static final String COMMAND_HELP_KEY =
+      "midiplayer.console.action.select_all.help.long";
 
   private static String commandHelp;
 
@@ -90,9 +94,11 @@ public final class SelectAllAction extends jswingshell.action.AbstractJssAction
       stringBuilder.append(action.getBriefHelp());
       stringBuilder.append("\n");
       try {
-        stringBuilder.append(ResourceUtils.getMessage(COMMAND_HELP_KEY, commandIdsAsString));
+        stringBuilder.append(
+            ResourceUtils.getMessage(COMMAND_HELP_KEY, commandIdsAsString));
       } catch (MissingResourceException e) {
-        LOGGER.log(Level.SEVERE, "Resource not found: \"" + COMMAND_HELP_KEY + "\"", e);
+        LOGGER.log(Level.SEVERE,
+            "Resource not found: \"" + COMMAND_HELP_KEY + "\"", e);
         stringBuilder.append("\n").append("Selects all in the shell:");
         stringBuilder.append("\n\t").append(commandIdsAsString);
       }
@@ -115,7 +121,8 @@ public final class SelectAllAction extends jswingshell.action.AbstractJssAction
       try {
         commandBriefHelp = ResourceUtils.getMessage(COMMAND_BRIEF_HELP_KEY);
       } catch (MissingResourceException e) {
-        LOGGER.log(Level.SEVERE, "Resource not found: \"" + COMMAND_BRIEF_HELP_KEY + "\"", e);
+        LOGGER.log(Level.SEVERE,
+            "Resource not found: \"" + COMMAND_BRIEF_HELP_KEY + "\"", e);
         commandBriefHelp = COMMAND_BRIEF_HELP;
       }
       commandBriefHelpInitialized = true;
@@ -145,7 +152,8 @@ public final class SelectAllAction extends jswingshell.action.AbstractJssAction
       throw new IllegalArgumentException("Text area controller cannot be null");
     }
     this.textAreaController = textAreaController;
-    putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_A, ActionEvent.CTRL_MASK));
+    putValue(Action.ACCELERATOR_KEY,
+        KeyStroke.getKeyStroke(KeyEvent.VK_A, ActionEvent.CTRL_MASK));
     putValue(Action.ACTION_COMMAND_KEY, getDefaultCommandIdentifier());
     localeChanged();
   }
@@ -170,7 +178,8 @@ public final class SelectAllAction extends jswingshell.action.AbstractJssAction
   @Override
   public void setDefaultShellController(IJssController shellController) {
     super.setDefaultShellController(shellController);
-    if (textAreaController == null && shellController instanceof JssTextAreaController) {
+    if (textAreaController == null
+        && shellController instanceof JssTextAreaController) {
       this.textAreaController = (JssTextAreaController) shellController;
     }
   }
@@ -203,7 +212,8 @@ public final class SelectAllAction extends jswingshell.action.AbstractJssAction
       if (args == null || args.length == 1) {
         view.selectAll();
       } else if (shellController != null) {
-        shellController.publish(IJssController.PublicationLevel.WARNING, getHelp(shellController));
+        shellController.publish(IJssController.PublicationLevel.WARNING,
+            getHelp(shellController));
       }
     }
 
@@ -227,11 +237,13 @@ public final class SelectAllAction extends jswingshell.action.AbstractJssAction
     try {
       ResourceUtils.setTextAndMnemonic(this, ACTION_LABEL_KEY);
     } catch (MissingResourceException e) {
-      LOGGER.log(Level.SEVERE, "Resource not found: \"" + ACTION_LABEL_KEY + "\"", e);
+      LOGGER.log(Level.SEVERE,
+          "Resource not found: \"" + ACTION_LABEL_KEY + "\"", e);
       putValue(Action.NAME, ACTION_LABEL);
     }
     putValue(Action.SHORT_DESCRIPTION, this.getBriefHelp());
-    putValue(Action.LONG_DESCRIPTION, this.getHelp(this.getDefaultShellController()));
+    putValue(Action.LONG_DESCRIPTION,
+        this.getHelp(this.getDefaultShellController()));
   }
 
   // #########################################################################

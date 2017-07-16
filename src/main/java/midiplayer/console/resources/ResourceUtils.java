@@ -31,14 +31,15 @@ public final class ResourceUtils {
   /**
    * Logger.
    */
-  private static final Logger LOGGER = Logger.getLogger(ResourceUtils.class.getName());
+  private static final Logger LOGGER =
+      Logger.getLogger(ResourceUtils.class.getName());
 
   private static final String SMALL_ICON_PATH = "icons/16x16/";
 
   private static final String LARGE_ICON_PATH = "icons/32x32/";
 
   private static final String CONSOLE_FRAME_RESOURCE_BUNDLE =
-      "midi_player.console.resources.i8n.consoleframe";
+      "midiplayer.console.resources.i8n.consoleframe";
 
   // #########################################################################
   /**
@@ -64,7 +65,8 @@ public final class ResourceUtils {
    */
   public static Locale[] getAvailableLocales() {
     // If application did not define its available locales
-    if (APPLICATION_AVAILABLE_LOCALES == null || APPLICATION_AVAILABLE_LOCALES.length == 0) {
+    if (APPLICATION_AVAILABLE_LOCALES == null
+        || APPLICATION_AVAILABLE_LOCALES.length == 0) {
       // Use the JVM available locales
       return Locale.getAvailableLocales();
     } else {
@@ -95,7 +97,8 @@ public final class ResourceUtils {
     midiplayer.resources.ResourceUtils.setLocale(newLocale);
     Locale oldLocale = getLocale();
     // First alert resource bundle wrappers to reload of resource bundles
-    RESOURCE_BUNDLE_LOCALE_CHANGE_NOTIFIER.fireLocaleChange(oldLocale, newLocale);
+    RESOURCE_BUNDLE_LOCALE_CHANGE_NOTIFIER.fireLocaleChange(oldLocale,
+        newLocale);
     // Then call main resource
     midiplayer.resources.ResourceUtils.setLocale(newLocale);
   }
@@ -119,8 +122,10 @@ public final class ResourceUtils {
    * @return {@code true} if this {@code LocaleChangeNotifier} contained the
    *         {@code LocaleChangeListener}
    */
-  public static boolean removeLocaleChangeListener(LocaleChangeListener listener) {
-    return midiplayer.resources.ResourceUtils.removeLocaleChangeListener(listener);
+  public static boolean removeLocaleChangeListener(
+      LocaleChangeListener listener) {
+    return midiplayer.resources.ResourceUtils
+        .removeLocaleChangeListener(listener);
   }
 
   /**
@@ -131,8 +136,10 @@ public final class ResourceUtils {
    * @return {@code true} if this {@code LocaleChangeNotifier} contains the
    *         {@code LocaleChangeListener}
    */
-  public static boolean containsLocaleChangeListener(LocaleChangeListener listener) {
-    return midiplayer.resources.ResourceUtils.containsLocaleChangeListener(listener);
+  public static boolean containsLocaleChangeListener(
+      LocaleChangeListener listener) {
+    return midiplayer.resources.ResourceUtils
+        .containsLocaleChangeListener(listener);
   }
 
   // #########################################################################
@@ -140,8 +147,10 @@ public final class ResourceUtils {
 
   protected static LocaleResourceBundleWrapper getLocaleResourceBundle() {
     if (localeResourceBundleManager == null) {
-      localeResourceBundleManager = new LocaleResourceBundleWrapper(CONSOLE_FRAME_RESOURCE_BUNDLE);
-      midiplayer.resources.ResourceUtils.addResourceBundleWrapper(localeResourceBundleManager);
+      localeResourceBundleManager =
+          new LocaleResourceBundleWrapper(CONSOLE_FRAME_RESOURCE_BUNDLE);
+      midiplayer.resources.ResourceUtils
+          .addResourceBundleWrapper(localeResourceBundleManager);
     }
     return localeResourceBundleManager;
   }
@@ -150,7 +159,8 @@ public final class ResourceUtils {
     return getLocaleResourceBundle().getResourceBundle();
   }
 
-  public static String getMessage(String key, Object... arguments) throws MissingResourceException {
+  public static String getMessage(String key, Object... arguments)
+      throws MissingResourceException {
     return getLocaleResourceBundle().getMessage(key, arguments);
   }
 
@@ -158,17 +168,18 @@ public final class ResourceUtils {
     return getLocaleResourceBundle().getMnemonic(key);
   }
 
-  public static int getDisplayedMnemonicIndex(String key) throws MissingResourceException {
+  public static int getDisplayedMnemonicIndex(String key)
+      throws MissingResourceException {
     return getLocaleResourceBundle().getDisplayedMnemonicIndex(key);
   }
 
-  public static void setTextAndMnemonic(JComponent comp, String key, Object... arguments)
-      throws MissingResourceException {
+  public static void setTextAndMnemonic(JComponent comp, String key,
+      Object... arguments) throws MissingResourceException {
     getLocaleResourceBundle().setTextAndMnemonic(comp, key, arguments);
   }
 
-  public static void setTextAndMnemonic(Action action, String key, Object... arguments)
-      throws MissingResourceException {
+  public static void setTextAndMnemonic(Action action, String key,
+      Object... arguments) throws MissingResourceException {
     getLocaleResourceBundle().setTextAndMnemonic(action, key, arguments);
   }
 
@@ -185,7 +196,8 @@ public final class ResourceUtils {
    * @param largeSize Use a large size icon?
    * @return an ImageIcon, or null if the path was invalid.
    */
-  public static ImageIcon createImageIcon(String fileName, String description, boolean largeSize) {
+  public static ImageIcon createImageIcon(String fileName, String description,
+      boolean largeSize) {
     String path = (largeSize ? LARGE_ICON_PATH : SMALL_ICON_PATH) + fileName;
     java.net.URL imgURL = ResourceUtils.class.getResource(path);
     if (imgURL != null) {

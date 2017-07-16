@@ -100,7 +100,8 @@ public class ConsoleFrame extends javax.swing.JFrame
   /**
    * Logger.
    */
-  private static final Logger LOGGER = Logger.getLogger(ConsoleFrame.class.getName());
+  private static final Logger LOGGER =
+      Logger.getLogger(ConsoleFrame.class.getName());
 
   private static final String NEXT_MATCH = "next_match";
 
@@ -209,12 +210,16 @@ public class ConsoleFrame extends javax.swing.JFrame
     jMenuToolbarSeparatorDisplay = new javax.swing.JPopupMenu.Separator();
     jMenuToolbarCheckBoxDisplayIcons = new javax.swing.JCheckBoxMenuItem();
     jMenuToolbarCheckBoxDisplayNames = new javax.swing.JCheckBoxMenuItem();
-    jMenuToolbarSeparatorDisplayLargeIcons = new javax.swing.JPopupMenu.Separator();
+    jMenuToolbarSeparatorDisplayLargeIcons =
+        new javax.swing.JPopupMenu.Separator();
     jMenuToolbarCheckBoxDisplayLargeIcons = new javax.swing.JCheckBoxMenuItem();
-    jMenuToolbarSeparatorDisplayLevelCombo = new javax.swing.JPopupMenu.Separator();
+    jMenuToolbarSeparatorDisplayLevelCombo =
+        new javax.swing.JPopupMenu.Separator();
     jMenuToolbarCheckBoxDisplayLevelCombo = new javax.swing.JCheckBoxMenuItem();
-    jMenuToolbarSeparatorDisplayLocaleCombo = new javax.swing.JPopupMenu.Separator();
-    jMenuToolbarCheckBoxDisplayLocaleCombo = new javax.swing.JCheckBoxMenuItem();
+    jMenuToolbarSeparatorDisplayLocaleCombo =
+        new javax.swing.JPopupMenu.Separator();
+    jMenuToolbarCheckBoxDisplayLocaleCombo =
+        new javax.swing.JCheckBoxMenuItem();
     jMenuViewMenuZoom = new javax.swing.JMenu();
     jMenuZoomItemZoomIn = new javax.swing.JMenuItem();
     jMenuZoomItemZoomOut = new javax.swing.JMenuItem();
@@ -246,7 +251,8 @@ public class ConsoleFrame extends javax.swing.JFrame
 
     jPopupMenuItemSelectAll.setText("Slect All");
     jPopupMenu.add(jPopupMenuItemSelectAll);
-    jPopupMenuItemSelectAll.getAccessibleContext().setAccessibleName("Select All");
+    jPopupMenuItemSelectAll.getAccessibleContext()
+        .setAccessibleName("Select All");
 
     jPopupMenu.getAccessibleContext().setAccessibleName("");
 
@@ -279,58 +285,76 @@ public class ConsoleFrame extends javax.swing.JFrame
 
     jToolBarButtonCut.setText("Cut");
     jToolBarButtonCut.setFocusable(false);
-    jToolBarButtonCut.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-    jToolBarButtonCut.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+    jToolBarButtonCut
+        .setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+    jToolBarButtonCut
+        .setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
     jToolBar.add(jToolBarButtonCut);
 
     jToolBarButtonCopy.setText("Copy");
     jToolBarButtonCopy.setFocusable(false);
-    jToolBarButtonCopy.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-    jToolBarButtonCopy.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+    jToolBarButtonCopy
+        .setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+    jToolBarButtonCopy
+        .setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
     jToolBar.add(jToolBarButtonCopy);
 
     jToolBarButtonPaste.setText("Paste");
     jToolBarButtonPaste.setFocusable(false);
-    jToolBarButtonPaste.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-    jToolBarButtonPaste.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+    jToolBarButtonPaste
+        .setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+    jToolBarButtonPaste
+        .setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
     jToolBar.add(jToolBarButtonPaste);
     jToolBar.add(jToolBarSeparatorZoom);
 
     jToolBarButtonZoomOut.setText("Zoom out");
     jToolBarButtonZoomOut.setFocusable(false);
-    jToolBarButtonZoomOut.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-    jToolBarButtonZoomOut.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+    jToolBarButtonZoomOut
+        .setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+    jToolBarButtonZoomOut
+        .setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
     jToolBar.add(jToolBarButtonZoomOut);
 
     jToolBarButtonZoomReset.setText("Reset");
     jToolBarButtonZoomReset.setFocusable(false);
-    jToolBarButtonZoomReset.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-    jToolBarButtonZoomReset.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+    jToolBarButtonZoomReset
+        .setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+    jToolBarButtonZoomReset
+        .setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
     jToolBar.add(jToolBarButtonZoomReset);
 
     jToolBarButtonZoomIn.setText("Zoom in");
     jToolBarButtonZoomIn.setFocusable(false);
-    jToolBarButtonZoomIn.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-    jToolBarButtonZoomIn.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+    jToolBarButtonZoomIn
+        .setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+    jToolBarButtonZoomIn
+        .setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
     jToolBar.add(jToolBarButtonZoomIn);
     jToolBar.add(jToolBarSeparatorRecord);
 
     jToolBarButtonRecordStart.setText("Start");
     jToolBarButtonRecordStart.setFocusable(false);
-    jToolBarButtonRecordStart.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-    jToolBarButtonRecordStart.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+    jToolBarButtonRecordStart
+        .setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+    jToolBarButtonRecordStart
+        .setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
     jToolBar.add(jToolBarButtonRecordStart);
 
     jToolBarButtonRecordStop.setText("Stop");
     jToolBarButtonRecordStop.setFocusable(false);
-    jToolBarButtonRecordStop.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-    jToolBarButtonRecordStop.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+    jToolBarButtonRecordStop
+        .setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+    jToolBarButtonRecordStop
+        .setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
     jToolBar.add(jToolBarButtonRecordStop);
 
     jToolBarButtonRecordSave.setText("Save");
     jToolBarButtonRecordSave.setFocusable(false);
-    jToolBarButtonRecordSave.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-    jToolBarButtonRecordSave.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+    jToolBarButtonRecordSave
+        .setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+    jToolBarButtonRecordSave
+        .setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
     jToolBar.add(jToolBarButtonRecordSave);
 
     getContentPane().add(jToolBar, java.awt.BorderLayout.PAGE_START);
@@ -410,7 +434,8 @@ public class ConsoleFrame extends javax.swing.JFrame
     jMenuViewMenuToolbar.add(jMenuToolbarCheckBoxDisplayLocaleCombo);
 
     jMenuView.add(jMenuViewMenuToolbar);
-    jMenuViewMenuToolbar.getAccessibleContext().setAccessibleName("jMenuViewMenuToolbar");
+    jMenuViewMenuToolbar.getAccessibleContext()
+        .setAccessibleName("jMenuViewMenuToolbar");
 
     jMenuViewMenuZoom.setText("Zoom");
 
@@ -571,7 +596,8 @@ public class ConsoleFrame extends javax.swing.JFrame
     if (aShellController != null) {
       this.shellController = aShellController;
     } else {
-      this.shellController = new LocalizedJssTextAreaController(this.getJssTextArea());
+      this.shellController =
+          new LocalizedJssTextAreaController(this.getJssTextArea());
     }
     LocalizedJssModel localizedModel = null;
     {
@@ -587,30 +613,39 @@ public class ConsoleFrame extends javax.swing.JFrame
     shellController.setModel(localizedModel);
 
     // Create the action factory to initialize actions
-    consoleActionFactory = new midiplayer.console.action.util.ActionFactory(this);
-    midiActionFactory = new midiplayer.frame.action.util.ActionFactory(aShellController);
+    consoleActionFactory =
+        new midiplayer.console.action.util.ActionFactory(this);
+    midiActionFactory =
+        new midiplayer.frame.action.util.ActionFactory(aShellController);
   }
 
   // #########################################################################
   private void initInternationalization() {
-    ResourceUtils.setTextAndMnemonic(jMenuFile, "midi_player.console.menu.file.text");
-    ResourceUtils.setTextAndMnemonic(jMenuEdit, "midi_player.console.menu.edit.text");
-    ResourceUtils.setTextAndMnemonic(jMenuView, "midi_player.console.menu.view.text");
+    ResourceUtils.setTextAndMnemonic(jMenuFile,
+        "midiplayer.console.menu.file.text");
+    ResourceUtils.setTextAndMnemonic(jMenuEdit,
+        "midiplayer.console.menu.edit.text");
+    ResourceUtils.setTextAndMnemonic(jMenuView,
+        "midiplayer.console.menu.view.text");
     ResourceUtils.setTextAndMnemonic(jMenuViewMenuToolbar,
-        "midi_player.console.menu.view.toolbar.text");
-    ResourceUtils.setTextAndMnemonic(jMenuViewMenuZoom, "midi_player.console.menu.view.zoom.text");
-    ResourceUtils.setTextAndMnemonic(jMenuRecord, "midi_player.console.menu.record.text");
-    ResourceUtils.setTextAndMnemonic(jMenuHelp, "midi_player.console.menu.help.text");
+        "midiplayer.console.menu.view.toolbar.text");
+    ResourceUtils.setTextAndMnemonic(jMenuViewMenuZoom,
+        "midiplayer.console.menu.view.zoom.text");
+    ResourceUtils.setTextAndMnemonic(jMenuRecord,
+        "midiplayer.console.menu.record.text");
+    ResourceUtils.setTextAndMnemonic(jMenuHelp,
+        "midiplayer.console.menu.help.text");
   }
 
   // #########################################################################
   private void initActions() {
-    LocaleAction localeComboAction =
-        (LocaleAction) midiActionFactory.getAction(LocaleAction.DEFAULT_IDENTIFIER);
+    LocaleAction localeComboAction = (LocaleAction) midiActionFactory
+        .getAction(LocaleAction.DEFAULT_IDENTIFIER);
 
     // Retrieve actions that hold frame's properties to update
-    ToggleToolbarAction toggleToolbarAction = (ToggleToolbarAction) consoleActionFactory
-        .getAction(ToggleToolbarAction.DEFAULT_IDENTIFIER);
+    ToggleToolbarAction toggleToolbarAction =
+        (ToggleToolbarAction) consoleActionFactory
+            .getAction(ToggleToolbarAction.DEFAULT_IDENTIFIER);
     this.displayToolbar = toggleToolbarAction.isSelected();
     ToggleToolbarIconsAction toggleToolbarIconsAction =
         (ToggleToolbarIconsAction) consoleActionFactory
@@ -623,66 +658,76 @@ public class ConsoleFrame extends javax.swing.JFrame
     ToggleToolbarLargeIconsAction toggleToolbarLargeIconsAction =
         (ToggleToolbarLargeIconsAction) consoleActionFactory
             .getAction(ToggleToolbarLargeIconsAction.DEFAULT_IDENTIFIER);
-    this.displayToolbarButtonLargeIcons = toggleToolbarLargeIconsAction.isSelected();
+    this.displayToolbarButtonLargeIcons =
+        toggleToolbarLargeIconsAction.isSelected();
 
-    ToggleToolbarLevelCombo toggleToolbarLevelCombo = (ToggleToolbarLevelCombo) consoleActionFactory
-        .getAction(ToggleToolbarLevelCombo.DEFAULT_IDENTIFIER);
+    ToggleToolbarLevelCombo toggleToolbarLevelCombo =
+        (ToggleToolbarLevelCombo) consoleActionFactory
+            .getAction(ToggleToolbarLevelCombo.DEFAULT_IDENTIFIER);
     this.displayToolbarLevelCombo = toggleToolbarLevelCombo.isSelected();
     ToggleToolbarLocaleCombo toggleToolbarLocaleCombo =
         (ToggleToolbarLocaleCombo) consoleActionFactory
             .getAction(ToggleToolbarLocaleCombo.DEFAULT_IDENTIFIER);
     this.displayToolbarLocaleCombo = toggleToolbarLocaleCombo.isSelected();
 
-    OpenAction openAction =
-        (OpenAction) consoleActionFactory.getAction(OpenAction.DEFAULT_IDENTIFIER);
-    SaveScreenAction saveScreenAction =
-        (SaveScreenAction) consoleActionFactory.getAction(SaveScreenAction.DEFAULT_IDENTIFIER);
+    OpenAction openAction = (OpenAction) consoleActionFactory
+        .getAction(OpenAction.DEFAULT_IDENTIFIER);
+    SaveScreenAction saveScreenAction = (SaveScreenAction) consoleActionFactory
+        .getAction(SaveScreenAction.DEFAULT_IDENTIFIER);
     DisplayConsoleAction displayConsoleAction =
-        (DisplayConsoleAction) midiActionFactory.getAction(DisplayConsoleAction.DEFAULT_IDENTIFIER);
+        (DisplayConsoleAction) midiActionFactory
+            .getAction(DisplayConsoleAction.DEFAULT_IDENTIFIER);
     final CloseAction closeAction = new CloseAction(displayConsoleAction);
     ResourceUtils.addLocaleChangeListener(closeAction);
 
-    CutAction cutAction = (CutAction) consoleActionFactory.getAction(CutAction.DEFAULT_IDENTIFIER);
-    ActionWrapper wrappedCutAction = new ActionWrapper(cutAction, displayToolbarButtonNames,
-        displayToolbarButtonIcons, displayToolbarButtonLargeIcons);
+    CutAction cutAction = (CutAction) consoleActionFactory
+        .getAction(CutAction.DEFAULT_IDENTIFIER);
+    ActionWrapper wrappedCutAction =
+        new ActionWrapper(cutAction, displayToolbarButtonNames,
+            displayToolbarButtonIcons, displayToolbarButtonLargeIcons);
 
-    CopyAction copyAction =
-        (CopyAction) consoleActionFactory.getAction(CopyAction.DEFAULT_IDENTIFIER);
-    ActionWrapper wrappedCopyAction = new ActionWrapper(copyAction, displayToolbarButtonNames,
-        displayToolbarButtonIcons, displayToolbarButtonLargeIcons);
+    CopyAction copyAction = (CopyAction) consoleActionFactory
+        .getAction(CopyAction.DEFAULT_IDENTIFIER);
+    ActionWrapper wrappedCopyAction =
+        new ActionWrapper(copyAction, displayToolbarButtonNames,
+            displayToolbarButtonIcons, displayToolbarButtonLargeIcons);
 
-    PasteAction pasteAction =
-        (PasteAction) consoleActionFactory.getAction(PasteAction.DEFAULT_IDENTIFIER);
+    PasteAction pasteAction = (PasteAction) consoleActionFactory
+        .getAction(PasteAction.DEFAULT_IDENTIFIER);
     ResourceUtils.addLocaleChangeListener(pasteAction);
-    ActionWrapper wrappedPasteAction = new ActionWrapper(pasteAction, displayToolbarButtonNames,
-        displayToolbarButtonIcons, displayToolbarButtonLargeIcons);
+    ActionWrapper wrappedPasteAction =
+        new ActionWrapper(pasteAction, displayToolbarButtonNames,
+            displayToolbarButtonIcons, displayToolbarButtonLargeIcons);
 
-    ClearAction clearAction =
-        (ClearAction) consoleActionFactory.getAction(ClearAction.DEFAULT_IDENTIFIER);
+    ClearAction clearAction = (ClearAction) consoleActionFactory
+        .getAction(ClearAction.DEFAULT_IDENTIFIER);
 
-    SelectAllAction selectAllAction =
-        (SelectAllAction) consoleActionFactory.getAction(SelectAllAction.DEFAULT_IDENTIFIER);
+    SelectAllAction selectAllAction = (SelectAllAction) consoleActionFactory
+        .getAction(SelectAllAction.DEFAULT_IDENTIFIER);
 
-    ZoomAction zoomAction =
-        (ZoomAction) consoleActionFactory.getAction(ZoomAction.DEFAULT_IDENTIFIER);
+    ZoomAction zoomAction = (ZoomAction) consoleActionFactory
+        .getAction(ZoomAction.DEFAULT_IDENTIFIER);
     ZoomInAction zoomInAction = new ZoomInAction(zoomAction);
     ResourceUtils.addLocaleChangeListener(zoomInAction);
     ZoomFitAction zoomFitAction = new ZoomFitAction(zoomAction);
     ResourceUtils.addLocaleChangeListener(zoomFitAction);
     ZoomOutAction zoomOutAction = new ZoomOutAction(zoomAction);
     ResourceUtils.addLocaleChangeListener(zoomOutAction);
-    ActionWrapper wrappedZoomInAction = new ActionWrapper(zoomInAction, displayToolbarButtonNames,
-        displayToolbarButtonIcons, displayToolbarButtonLargeIcons);
-    ActionWrapper wrappedZoomFitAction = new ActionWrapper(zoomFitAction, displayToolbarButtonNames,
-        displayToolbarButtonIcons, displayToolbarButtonLargeIcons);
-    ActionWrapper wrappedZoomOutAction = new ActionWrapper(zoomOutAction, displayToolbarButtonNames,
-        displayToolbarButtonIcons, displayToolbarButtonLargeIcons);
+    ActionWrapper wrappedZoomInAction =
+        new ActionWrapper(zoomInAction, displayToolbarButtonNames,
+            displayToolbarButtonIcons, displayToolbarButtonLargeIcons);
+    ActionWrapper wrappedZoomFitAction =
+        new ActionWrapper(zoomFitAction, displayToolbarButtonNames,
+            displayToolbarButtonIcons, displayToolbarButtonLargeIcons);
+    ActionWrapper wrappedZoomOutAction =
+        new ActionWrapper(zoomOutAction, displayToolbarButtonNames,
+            displayToolbarButtonIcons, displayToolbarButtonLargeIcons);
 
-    FullScreenAction fullScreenAction =
-        (FullScreenAction) consoleActionFactory.getAction(FullScreenAction.DEFAULT_IDENTIFIER);
+    FullScreenAction fullScreenAction = (FullScreenAction) consoleActionFactory
+        .getAction(FullScreenAction.DEFAULT_IDENTIFIER);
 
-    RecordAction recordAction =
-        (RecordAction) consoleActionFactory.getAction(RecordAction.DEFAULT_IDENTIFIER);
+    RecordAction recordAction = (RecordAction) consoleActionFactory
+        .getAction(RecordAction.DEFAULT_IDENTIFIER);
     RecordStartAction recordStartAction = new RecordStartAction(recordAction);
     ResourceUtils.addLocaleChangeListener(recordStartAction);
     RecordStopAction recordStopAction = new RecordStopAction(recordAction);
@@ -690,26 +735,29 @@ public class ConsoleFrame extends javax.swing.JFrame
     RecordSaveAction recordSaveAction =
         new RecordSaveAction(recordAction, this.getjFileChooser(), this);
     ResourceUtils.addLocaleChangeListener(recordSaveAction);
-    ActionWrapper wrappedRecordStartAction = new ActionWrapper(recordStartAction,
-        displayToolbarButtonNames, displayToolbarButtonIcons, displayToolbarButtonLargeIcons);
-    ActionWrapper wrappedRecordStopAction = new ActionWrapper(recordStopAction,
-        displayToolbarButtonNames, displayToolbarButtonIcons, displayToolbarButtonLargeIcons);
-    ActionWrapper wrappedRecordSaveAction = new ActionWrapper(recordSaveAction,
-        displayToolbarButtonNames, displayToolbarButtonIcons, displayToolbarButtonLargeIcons);
+    ActionWrapper wrappedRecordStartAction =
+        new ActionWrapper(recordStartAction, displayToolbarButtonNames,
+            displayToolbarButtonIcons, displayToolbarButtonLargeIcons);
+    ActionWrapper wrappedRecordStopAction =
+        new ActionWrapper(recordStopAction, displayToolbarButtonNames,
+            displayToolbarButtonIcons, displayToolbarButtonLargeIcons);
+    ActionWrapper wrappedRecordSaveAction =
+        new ActionWrapper(recordSaveAction, displayToolbarButtonNames,
+            displayToolbarButtonIcons, displayToolbarButtonLargeIcons);
 
-    HelpAction helpAction =
-        (HelpAction) consoleActionFactory.getAction(HelpAction.DEFAULT_IDENTIFIER);
-    EchoAction echoAction =
-        (EchoAction) consoleActionFactory.getAction(EchoAction.DEFAULT_IDENTIFIER);
-    TimeAction timeAction =
-        (TimeAction) consoleActionFactory.getAction(TimeAction.DEFAULT_IDENTIFIER);
-    SleepAction sleepAction =
-        (SleepAction) consoleActionFactory.getAction(SleepAction.DEFAULT_IDENTIFIER);
-    WaitAction waitAction =
-        (WaitAction) consoleActionFactory.getAction(WaitAction.DEFAULT_IDENTIFIER);
+    HelpAction helpAction = (HelpAction) consoleActionFactory
+        .getAction(HelpAction.DEFAULT_IDENTIFIER);
+    EchoAction echoAction = (EchoAction) consoleActionFactory
+        .getAction(EchoAction.DEFAULT_IDENTIFIER);
+    TimeAction timeAction = (TimeAction) consoleActionFactory
+        .getAction(TimeAction.DEFAULT_IDENTIFIER);
+    SleepAction sleepAction = (SleepAction) consoleActionFactory
+        .getAction(SleepAction.DEFAULT_IDENTIFIER);
+    WaitAction waitAction = (WaitAction) consoleActionFactory
+        .getAction(WaitAction.DEFAULT_IDENTIFIER);
 
-    LevelAction levelComboAction =
-        (LevelAction) consoleActionFactory.getAction(LevelAction.DEFAULT_IDENTIFIER);
+    LevelAction levelComboAction = (LevelAction) consoleActionFactory
+        .getAction(LevelAction.DEFAULT_IDENTIFIER);
 
     // And link some actions to the GUI
     this.getjMenuFileItemOpenFile().setAction(openAction);
@@ -724,12 +772,17 @@ public class ConsoleFrame extends javax.swing.JFrame
 
     this.getjToolBar().setVisible(displayToolbar);
     this.getjMenuToolbarCheckBoxShow().setAction(toggleToolbarAction);
-    this.getjMenuToolbarCheckBoxDisplayIcons().setAction(toggleToolbarIconsAction);
-    this.getjMenuToolbarCheckBoxDisplayNames().setAction(toggleToolbarNamesAction);
-    this.getjMenuToolbarCheckBoxDisplayLargeIcons().setAction(toggleToolbarLargeIconsAction);
+    this.getjMenuToolbarCheckBoxDisplayIcons()
+        .setAction(toggleToolbarIconsAction);
+    this.getjMenuToolbarCheckBoxDisplayNames()
+        .setAction(toggleToolbarNamesAction);
+    this.getjMenuToolbarCheckBoxDisplayLargeIcons()
+        .setAction(toggleToolbarLargeIconsAction);
 
-    this.getjMenuToolbarCheckBoxDisplayLevelCombo().setAction(toggleToolbarLevelCombo);
-    this.getjMenuToolbarCheckBoxDisplayLocaleCombo().setAction(toggleToolbarLocaleCombo);
+    this.getjMenuToolbarCheckBoxDisplayLevelCombo()
+        .setAction(toggleToolbarLevelCombo);
+    this.getjMenuToolbarCheckBoxDisplayLocaleCombo()
+        .setAction(toggleToolbarLocaleCombo);
 
     this.getjMenuZoomItemZoomIn().setAction(zoomInAction);
     this.getjMenuZoomItemZoomReset().setAction(zoomFitAction);
@@ -767,13 +820,15 @@ public class ConsoleFrame extends javax.swing.JFrame
     jToolBar.add(jToolbarLevelComboBox);
 
     this.getjMenuEditMenuLevel().setAction(levelComboAction);
-    levelComboAction.getInnerElementActions().stream().map((levelItemAction) -> {
-      JRadioButtonMenuItem jMenuLevelRadioButtonItem = new JRadioButtonMenuItem();
-      jMenuLevelRadioButtonItem.setAction(levelItemAction);
-      return jMenuLevelRadioButtonItem;
-    }).forEach((jMenuLevelRadioButtonItem) -> {
-      this.getjMenuEditMenuLevel().add(jMenuLevelRadioButtonItem);
-    });
+    levelComboAction.getInnerElementActions().stream()
+        .map((levelItemAction) -> {
+          JRadioButtonMenuItem jMenuLevelRadioButtonItem =
+              new JRadioButtonMenuItem();
+          jMenuLevelRadioButtonItem.setAction(levelItemAction);
+          return jMenuLevelRadioButtonItem;
+        }).forEach((jMenuLevelRadioButtonItem) -> {
+          this.getjMenuEditMenuLevel().add(jMenuLevelRadioButtonItem);
+        });
     jToolbarSeparatorLevel.setVisible(displayToolbarLevelCombo);
     jToolbarLevelComboBox.setVisible(displayToolbarLevelCombo);
 
@@ -785,13 +840,15 @@ public class ConsoleFrame extends javax.swing.JFrame
     jToolBar.add(jToolbarLocaleComboBox);
 
     this.getjMenuEditMenuLocale().setAction(localeComboAction);
-    localeComboAction.getInnerElementActions().stream().map((localeItemAction) -> {
-      JRadioButtonMenuItem jMenuLocaleRadioButtonItem = new JRadioButtonMenuItem();
-      jMenuLocaleRadioButtonItem.setAction(localeItemAction);
-      return jMenuLocaleRadioButtonItem;
-    }).forEach((jMenuLocaleRadioButtonItem) -> {
-      this.getjMenuEditMenuLocale().add(jMenuLocaleRadioButtonItem);
-    });
+    localeComboAction.getInnerElementActions().stream()
+        .map((localeItemAction) -> {
+          JRadioButtonMenuItem jMenuLocaleRadioButtonItem =
+              new JRadioButtonMenuItem();
+          jMenuLocaleRadioButtonItem.setAction(localeItemAction);
+          return jMenuLocaleRadioButtonItem;
+        }).forEach((jMenuLocaleRadioButtonItem) -> {
+          this.getjMenuEditMenuLocale().add(jMenuLocaleRadioButtonItem);
+        });
     jToolbarSeparatorLocale.setVisible(displayToolbarLocaleCombo);
     jToolbarLocaleComboBox.setVisible(displayToolbarLocaleCombo);
 
@@ -814,37 +871,45 @@ public class ConsoleFrame extends javax.swing.JFrame
 
     // Handle Drop of file from OS
     jssTextArea.setDropMode(DropMode.USE_SELECTION);
-    TransferHandler transferHandler = new TextAreaFilesTransferHandler(jssTextArea);
+    TransferHandler transferHandler =
+        new TextAreaFilesTransferHandler(jssTextArea);
     jssTextArea.setTransferHandler(transferHandler);
 
     // Handle auto-complete for commands
-    AutoCompleteDocumentListener autoCompleteListener = new AutoCompleteDocumentListener(
-        jssTextArea, shellController.getModel().getActionIdentifiers());
+    AutoCompleteDocumentListener autoCompleteListener =
+        new AutoCompleteDocumentListener(jssTextArea,
+            shellController.getModel().getActionIdentifiers());
     jssTextArea.getDocument().addDocumentListener(autoCompleteListener);
 
     /*
      * Maps the tab key to the next action, which changes the autocomplete to the next suggestion
      * (looping).
      */
-    jssTextArea.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_TAB, 0), NEXT_MATCH);
-    jssTextArea.getActionMap().put(NEXT_MATCH, autoCompleteListener.new NextMatchAction());
+    jssTextArea.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_TAB, 0),
+        NEXT_MATCH);
+    jssTextArea.getActionMap().put(NEXT_MATCH,
+        autoCompleteListener.new NextMatchAction());
 
     /*
      * Maps the tab key to the previous action, which changes the autocomplete to the previous
      * suggestion (looping).
      */
-    jssTextArea.getInputMap()
-        .put(KeyStroke.getKeyStroke(KeyEvent.VK_TAB, InputEvent.SHIFT_DOWN_MASK), PREVIOUS_MATCH);
-    jssTextArea.getActionMap().put(PREVIOUS_MATCH, autoCompleteListener.new PreviousMatchAction());
+    jssTextArea.getInputMap().put(
+        KeyStroke.getKeyStroke(KeyEvent.VK_TAB, InputEvent.SHIFT_DOWN_MASK),
+        PREVIOUS_MATCH);
+    jssTextArea.getActionMap().put(PREVIOUS_MATCH,
+        autoCompleteListener.new PreviousMatchAction());
 
     /*
      * Maps the tab key to the commit action, which finishes the autocomplete when given a
      * suggestion.
      */
     jssTextArea.setFocusTraversalKeysEnabled(false);
-    jssTextArea.getInputMap()
-        .put(KeyStroke.getKeyStroke(KeyEvent.VK_TAB, InputEvent.CTRL_DOWN_MASK), COMMIT_ACTION);
-    jssTextArea.getActionMap().put(COMMIT_ACTION, autoCompleteListener.new CommitAction());
+    jssTextArea.getInputMap().put(
+        KeyStroke.getKeyStroke(KeyEvent.VK_TAB, InputEvent.CTRL_DOWN_MASK),
+        COMMIT_ACTION);
+    jssTextArea.getActionMap().put(COMMIT_ACTION,
+        autoCompleteListener.new CommitAction());
   }
 
   // #########################################################################
@@ -857,12 +922,12 @@ public class ConsoleFrame extends javax.swing.JFrame
 
     if (e.isControlDown() && (rotation > 0 || rotation < 0)) {
       // Down or Up
-      IJssAction action =
-          shellController.getModel().getActionForCommandIdentifier(ZoomAction.DEFAULT_IDENTIFIER);
+      IJssAction action = shellController.getModel()
+          .getActionForCommandIdentifier(ZoomAction.DEFAULT_IDENTIFIER);
       if (action != null && action instanceof ZoomAction) {
         ZoomAction zoomAction = (ZoomAction) action;
-        String[] defaultArgs =
-            new String[] {zoomAction.getDefaultCommandIdentifier(), "" + (-rotation)};
+        String[] defaultArgs = new String[] {
+            zoomAction.getDefaultCommandIdentifier(), "" + (-rotation)};
         zoomAction.run(defaultArgs);
       }
     } else if (e.getSource() != null && e.getSource().equals(jssTextArea)) {
@@ -1262,7 +1327,8 @@ public class ConsoleFrame extends javax.swing.JFrame
       this(textArea, null);
     }
 
-    public TextAreaFilesTransferHandler(JssTextArea textArea, JComponent container) {
+    public TextAreaFilesTransferHandler(JssTextArea textArea,
+        JComponent container) {
       this.textArea = textArea;
       this.container = container;
     }
@@ -1286,7 +1352,8 @@ public class ConsoleFrame extends javax.swing.JFrame
           p1 = doc.createPosition(end);
         } catch (BadLocationException e) {
           // unable to do a drag
-          LOGGER.log(Level.SEVERE, "Could not find position: start=" + start + ", end=" + end, e);
+          LOGGER.log(Level.SEVERE,
+              "Could not find position: start=" + start + ", end=" + end, e);
           p0 = p1 = null;
         }
         String data = source.getSelectedText();
@@ -1315,7 +1382,8 @@ public class ConsoleFrame extends javax.swing.JFrame
       if ((p0 != null) && (p1 != null) && (p0.getOffset() != p1.getOffset())) {
         try {
           JTextComponent tc = (JTextComponent) c;
-          tc.getDocument().remove(p0.getOffset(), p1.getOffset() - p0.getOffset());
+          tc.getDocument().remove(p0.getOffset(),
+              p1.getOffset() - p0.getOffset());
         } catch (BadLocationException e) {
           LOGGER.log(Level.SEVERE, "Can't remove text from source.", e);
         }
@@ -1324,10 +1392,12 @@ public class ConsoleFrame extends javax.swing.JFrame
 
     @Override
     public boolean canImport(TransferHandler.TransferSupport info) {
-      boolean b = (info.getComponent() == textArea || info.getComponent() == container)
-          && (info.isDataFlavorSupported(filesFlavor)
-              || info.isDataFlavorSupported(DataFlavor.stringFlavor));
-      textArea.setCursor(b ? DragSource.DefaultMoveDrop : DragSource.DefaultMoveNoDrop);
+      boolean b =
+          (info.getComponent() == textArea || info.getComponent() == container)
+              && (info.isDataFlavorSupported(filesFlavor)
+                  || info.isDataFlavorSupported(DataFlavor.stringFlavor));
+      textArea.setCursor(
+          b ? DragSource.DefaultMoveDrop : DragSource.DefaultMoveNoDrop);
       return b;
     }
 
@@ -1357,7 +1427,8 @@ public class ConsoleFrame extends javax.swing.JFrame
       if (info.isDrop()) {
         DropLocation dropLocation = info.getDropLocation();
         if (dropLocation instanceof JTextArea.DropLocation) {
-          JTextArea.DropLocation dl = (JTextArea.DropLocation) info.getDropLocation();
+          JTextArea.DropLocation dl =
+              (JTextArea.DropLocation) info.getDropLocation();
           index = dl.getIndex();
         }
       } else {
@@ -1378,19 +1449,22 @@ public class ConsoleFrame extends javax.swing.JFrame
         try {
           files = (List<File>) transferable.getTransferData(filesFlavor);
         } catch (UnsupportedFlavorException ex) {
-          LOGGER.log(Level.SEVERE, filesFlavor + " flavor is not supported.", ex);
+          LOGGER.log(Level.SEVERE, filesFlavor + " flavor is not supported.",
+              ex);
         } catch (IOException ex) {
           LOGGER.log(Level.SEVERE, null, ex);
         }
 
         if (files != null) {
           String shellText = controller.getShellText();
-          StringBuilder stringBuilder = new StringBuilder(shellText.substring(0, index));
+          StringBuilder stringBuilder =
+              new StringBuilder(shellText.substring(0, index));
           for (File file : files) {
             stringBuilder.append(controller.getCommandParameterSeparator())
-                .append(JssTextAreaController.COMMAND_PARAMETER_ENCLOSURE_CHARACTER)
-                .append(file.toString())
-                .append(JssTextAreaController.COMMAND_PARAMETER_ENCLOSURE_CHARACTER);
+                .append(
+                    JssTextAreaController.COMMAND_PARAMETER_ENCLOSURE_CHARACTER)
+                .append(file.toString()).append(
+                    JssTextAreaController.COMMAND_PARAMETER_ENCLOSURE_CHARACTER);
           }
           if (index < max) {
             stringBuilder.append(shellText.substring(index + 1, max));
@@ -1403,7 +1477,8 @@ public class ConsoleFrame extends javax.swing.JFrame
         try {
           data = (String) transferable.getTransferData(DataFlavor.stringFlavor);
         } catch (UnsupportedFlavorException ex) {
-          LOGGER.log(Level.SEVERE, DataFlavor.stringFlavor + " flavor is not supported.", ex);
+          LOGGER.log(Level.SEVERE,
+              DataFlavor.stringFlavor + " flavor is not supported.", ex);
         } catch (IOException ex) {
           LOGGER.log(Level.SEVERE, null, ex);
         }

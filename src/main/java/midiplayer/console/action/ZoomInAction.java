@@ -30,7 +30,8 @@ import midiplayer.resources.LocaleChangeListener;
  *
  * @author Mathieu Brunot
  */
-public final class ZoomInAction extends AbstractAction implements LocaleChangeListener {
+public final class ZoomInAction extends AbstractAction
+    implements LocaleChangeListener {
 
   /**
    * The {@code serialVersionUID}.
@@ -40,18 +41,21 @@ public final class ZoomInAction extends AbstractAction implements LocaleChangeLi
   /**
    * Logger.
    */
-  private static final Logger LOGGER = Logger.getLogger(ZoomInAction.class.getName());
+  private static final Logger LOGGER =
+      Logger.getLogger(ZoomInAction.class.getName());
 
   private static final String ACTION_LABEL = "Zoom in";
 
-  private static final String ACTION_LABEL_KEY = "midi_player.console.action.zoom_in.name";
+  private static final String ACTION_LABEL_KEY =
+      "midiplayer.console.action.zoom_in.name";
 
   private static final String ICON_KEY = "magnifier_zoom_in.png";
 
-  private static final String COMMAND_BRIEF_HELP = "Increase the size of the shell text.";
+  private static final String COMMAND_BRIEF_HELP =
+      "Increase the size of the shell text.";
 
   private static final String COMMAND_BRIEF_HELP_KEY =
-      "midi_player.console.action.zoom_in.help.short";
+      "midiplayer.console.action.zoom_in.help.short";
 
   private static String commandBriefHelp;
 
@@ -69,7 +73,8 @@ public final class ZoomInAction extends AbstractAction implements LocaleChangeLi
       try {
         commandBriefHelp = ResourceUtils.getMessage(COMMAND_BRIEF_HELP_KEY);
       } catch (MissingResourceException e) {
-        LOGGER.log(Level.SEVERE, "Resource not found: \"" + COMMAND_BRIEF_HELP_KEY + "\"", e);
+        LOGGER.log(Level.SEVERE,
+            "Resource not found: \"" + COMMAND_BRIEF_HELP_KEY + "\"", e);
         commandBriefHelp = COMMAND_BRIEF_HELP;
       }
       commandBriefHelpInitialized = true;
@@ -97,9 +102,11 @@ public final class ZoomInAction extends AbstractAction implements LocaleChangeLi
       throw new IllegalArgumentException("Zoom action is null");
     }
     this.zoomAction = zoomAction;
-    this.defaultArgs = new String[] {zoomAction.getDefaultCommandIdentifier(), ZoomAction.ZOOM_IN};
+    this.defaultArgs = new String[] {zoomAction.getDefaultCommandIdentifier(),
+        ZoomAction.ZOOM_IN};
 
-    putValue(Action.LARGE_ICON_KEY, ResourceUtils.createImageIcon(ICON_KEY, ACTION_LABEL, true));
+    putValue(Action.LARGE_ICON_KEY,
+        ResourceUtils.createImageIcon(ICON_KEY, ACTION_LABEL, true));
     // putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(
     // KeyEvent.VK_PLUS, ActionEvent.CTRL_MASK));
     putValue(Action.ACCELERATOR_KEY,
@@ -125,7 +132,8 @@ public final class ZoomInAction extends AbstractAction implements LocaleChangeLi
     try {
       ResourceUtils.setTextAndMnemonic(this, ACTION_LABEL_KEY);
     } catch (MissingResourceException e) {
-      LOGGER.log(Level.SEVERE, "Resource not found: \"" + ACTION_LABEL_KEY + "\"", e);
+      LOGGER.log(Level.SEVERE,
+          "Resource not found: \"" + ACTION_LABEL_KEY + "\"", e);
       putValue(Action.NAME, ACTION_LABEL);
     }
     putValue(Action.SHORT_DESCRIPTION, getBriefHelp(this));

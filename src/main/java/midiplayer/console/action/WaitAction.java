@@ -17,7 +17,8 @@ import midiplayer.resources.LocaleChangeListener;
  *
  * @author Mathieu Brunot
  */
-public final class WaitAction extends AbstractThreadedJssAction implements LocaleChangeListener {
+public final class WaitAction extends AbstractThreadedJssAction
+    implements LocaleChangeListener {
 
   /**
    * The {@code serialVersionUID}.
@@ -27,7 +28,8 @@ public final class WaitAction extends AbstractThreadedJssAction implements Local
   /**
    * Logger.
    */
-  private static final Logger LOGGER = Logger.getLogger(WaitAction.class.getName());
+  private static final Logger LOGGER =
+      Logger.getLogger(WaitAction.class.getName());
 
   /**
    * This action default identifier.
@@ -38,20 +40,23 @@ public final class WaitAction extends AbstractThreadedJssAction implements Local
 
   private static final String[] IDENTIFIERS = {DEFAULT_IDENTIFIER};
 
-  private static final String COMMAND_BRIEF_HELP = "Wait for a given time in a separate thread.";
+  private static final String COMMAND_BRIEF_HELP =
+      "Wait for a given time in a separate thread.";
 
-  private static final String COMMAND_BRIEF_HELP_KEY = "midi_player.console.action.wait.help.short";
+  private static final String COMMAND_BRIEF_HELP_KEY =
+      "midiplayer.console.action.wait.help.short";
 
-  private static final String COMMAND_HELP_KEY = "midi_player.console.action.wait.help.long";
+  private static final String COMMAND_HELP_KEY =
+      "midiplayer.console.action.wait.help.long";
 
   private static final String COMMAND_RUN_INVALID_NUMBER_FORMAT_KEY =
-      "midi_player.console.action.wait.run.invalid_number_format";
+      "midiplayer.console.action.wait.run.invalid_number_format";
 
   private static final String COMMAND_RUN_NEGATIVE_TIME_KEY =
-      "midi_player.console.action.wait.run.negative_time";
+      "midiplayer.console.action.wait.run.negative_time";
 
   private static final String COMMAND_RUN_INTERRUPTED_KEY =
-      "midi_player.console.action.wait.run.interrupted";
+      "midiplayer.console.action.wait.run.interrupted";
 
   private static String commandHelp;
 
@@ -76,21 +81,30 @@ public final class WaitAction extends AbstractThreadedJssAction implements Local
       stringBuilder.append(action.getBriefHelp()).append("\n");
       stringBuilder.append("\n");
       try {
-        stringBuilder.append(ResourceUtils.getMessage(COMMAND_HELP_KEY, commandIdsAsString));
+        stringBuilder.append(
+            ResourceUtils.getMessage(COMMAND_HELP_KEY, commandIdsAsString));
       } catch (MissingResourceException e) {
-        LOGGER.log(Level.SEVERE, "Resource not found: \"" + COMMAND_HELP_KEY + "\"", e);
-        stringBuilder.append("Wait for a given time in a separate thread:").append("\n");
+        LOGGER.log(Level.SEVERE,
+            "Resource not found: \"" + COMMAND_HELP_KEY + "\"", e);
+        stringBuilder.append("Wait for a given time in a separate thread:")
+            .append("\n");
         stringBuilder.append("\t").append(commandIdsAsString).append("\n");
-        stringBuilder.append("The default time for waiting is 1000 milliseconds (1 second).")
+        stringBuilder
+            .append(
+                "The default time for waiting is 1000 milliseconds (1 second).")
             .append("\n");
-        stringBuilder.append("You can define the time for the wait (in milliseconds) as follow:")
+        stringBuilder
+            .append(
+                "You can define the time for the wait (in milliseconds) as follow:")
             .append("\n");
-        stringBuilder.append("\t").append(commandIdsAsString).append(" [time] ").append("\n");
+        stringBuilder.append("\t").append(commandIdsAsString).append(" [time] ")
+            .append("\n");
         stringBuilder
             .append(
                 "This action is suited for manual use since it will wait a given time without blocking the current thread.")
             .append("\n");
-        stringBuilder.append("This action should not be called outside of the EDT.");
+        stringBuilder
+            .append("This action should not be called outside of the EDT.");
       }
 
       commandHelp = stringBuilder.toString();
@@ -111,7 +125,8 @@ public final class WaitAction extends AbstractThreadedJssAction implements Local
       try {
         commandBriefHelp = ResourceUtils.getMessage(COMMAND_BRIEF_HELP_KEY);
       } catch (MissingResourceException e) {
-        LOGGER.log(Level.SEVERE, "Resource not found: \"" + COMMAND_BRIEF_HELP_KEY + "\"", e);
+        LOGGER.log(Level.SEVERE,
+            "Resource not found: \"" + COMMAND_BRIEF_HELP_KEY + "\"", e);
         commandBriefHelp = COMMAND_BRIEF_HELP;
       }
       commandBriefHelpInitialized = true;
@@ -132,12 +147,14 @@ public final class WaitAction extends AbstractThreadedJssAction implements Local
   }
 
   // #########################################################################
-  public WaitAction(String name, Icon icon, IJssController shellController, String... args) {
+  public WaitAction(String name, Icon icon, IJssController shellController,
+      String... args) {
     super(name, icon, shellController, args);
     localeChanged();
   }
 
-  public WaitAction(String name, IJssController shellController, String... args) {
+  public WaitAction(String name, IJssController shellController,
+      String... args) {
     super(name, shellController, args);
     localeChanged();
   }
@@ -174,7 +191,8 @@ public final class WaitAction extends AbstractThreadedJssAction implements Local
   }
 
   @Override
-  protected AbstractJssActionWorker prepareWorker(IJssController shellController, String... args) {
+  protected AbstractJssActionWorker prepareWorker(
+      IJssController shellController, String... args) {
     SleepWorker worker = null;
 
     // Sleep default value
@@ -187,12 +205,13 @@ public final class WaitAction extends AbstractThreadedJssAction implements Local
         LOGGER.log(Level.WARNING, "Invalid number format: " + args[1], e);
         String msg;
         try {
-          msg = ResourceUtils.getMessage(COMMAND_RUN_INVALID_NUMBER_FORMAT_KEY, args[1],
-              e.getLocalizedMessage());
+          msg = ResourceUtils.getMessage(COMMAND_RUN_INVALID_NUMBER_FORMAT_KEY,
+              args[1], e.getLocalizedMessage());
         } catch (MissingResourceException e1) {
-          LOGGER.log(Level.SEVERE,
-              "Resource not found: \"" + COMMAND_RUN_INVALID_NUMBER_FORMAT_KEY + "\"", e1);
-          msg = "Invalid number format: " + args[1] + " (" + e.getMessage() + ")";
+          LOGGER.log(Level.SEVERE, "Resource not found: \""
+              + COMMAND_RUN_INVALID_NUMBER_FORMAT_KEY + "\"", e1);
+          msg =
+              "Invalid number format: " + args[1] + " (" + e.getMessage() + ")";
         }
         shellController.publish(IJssController.PublicationLevel.ERROR, msg);
       }
@@ -207,7 +226,8 @@ public final class WaitAction extends AbstractThreadedJssAction implements Local
       try {
         msg = ResourceUtils.getMessage(COMMAND_RUN_NEGATIVE_TIME_KEY, millis);
       } catch (MissingResourceException e1) {
-        LOGGER.log(Level.SEVERE, "Resource not found: \"" + COMMAND_RUN_NEGATIVE_TIME_KEY + "\"",
+        LOGGER.log(Level.SEVERE,
+            "Resource not found: \"" + COMMAND_RUN_NEGATIVE_TIME_KEY + "\"",
             e1);
         msg = "Sleep time cannot be negative: " + millis;
       }
@@ -238,14 +258,16 @@ public final class WaitAction extends AbstractThreadedJssAction implements Local
         LOGGER.log(Level.WARNING, "Wait action interrupted.", ex);
         String msg;
         try {
-          msg = ResourceUtils.getMessage(COMMAND_RUN_INTERRUPTED_KEY, ex.getLocalizedMessage());
+          msg = ResourceUtils.getMessage(COMMAND_RUN_INTERRUPTED_KEY,
+              ex.getLocalizedMessage());
         } catch (MissingResourceException e1) {
-          LOGGER.log(Level.SEVERE, "Resource not found: \"" + COMMAND_RUN_INTERRUPTED_KEY + "\"",
+          LOGGER.log(Level.SEVERE,
+              "Resource not found: \"" + COMMAND_RUN_INTERRUPTED_KEY + "\"",
               e1);
           msg = "Wait action interrupted: " + ex.getMessage();
         }
-        this.publish(
-            WaitAction.this.new JssActionWorkerChunk(IJssController.PublicationLevel.WARNING, msg));
+        this.publish(WaitAction.this.new JssActionWorkerChunk(
+            IJssController.PublicationLevel.WARNING, msg));
         workerCommandReturnStatus = AbstractThreadedJssAction.ERROR;
       }
 

@@ -30,7 +30,8 @@ import midiplayer.resources.LocaleChangeListener;
  *
  * @author Mathieu Brunot
  */
-public final class ClearAction extends AbstractJssAction implements LocaleChangeListener {
+public final class ClearAction extends AbstractJssAction
+    implements LocaleChangeListener {
 
   /**
    * The {@code serialVersionUID}.
@@ -40,7 +41,8 @@ public final class ClearAction extends AbstractJssAction implements LocaleChange
   /**
    * Logger.
    */
-  private static final Logger LOGGER = Logger.getLogger(ClearAction.class.getName());
+  private static final Logger LOGGER =
+      Logger.getLogger(ClearAction.class.getName());
 
   /**
    * This action default identifier.
@@ -51,14 +53,16 @@ public final class ClearAction extends AbstractJssAction implements LocaleChange
 
   private static final String[] IDENTIFIERS = {DEFAULT_IDENTIFIER};
 
-  private static final String COMMAND_BRIEF_HELP = "Clears all messages in the shell.";
+  private static final String COMMAND_BRIEF_HELP =
+      "Clears all messages in the shell.";
 
   private static final String COMMAND_BRIEF_HELP_KEY =
-      "midi_player.console.action.clear.help.short";
+      "midiplayer.console.action.clear.help.short";
 
   private static final String ACTION_LABEL = "Clear";
 
-  private static final String ACTION_LABEL_KEY = "midi_player.console.action.clear.name";
+  private static final String ACTION_LABEL_KEY =
+      "midiplayer.console.action.clear.name";
 
   private static final String ICON_KEY = "broom.png";
 
@@ -104,7 +108,8 @@ public final class ClearAction extends AbstractJssAction implements LocaleChange
       try {
         commandBriefHelp = ResourceUtils.getMessage(COMMAND_BRIEF_HELP_KEY);
       } catch (MissingResourceException e) {
-        LOGGER.log(Level.SEVERE, "Resource not found: \"" + COMMAND_BRIEF_HELP_KEY + "\"", e);
+        LOGGER.log(Level.SEVERE,
+            "Resource not found: \"" + COMMAND_BRIEF_HELP_KEY + "\"", e);
         commandBriefHelp = COMMAND_BRIEF_HELP;
       }
       commandBriefHelpInitialized = true;
@@ -126,9 +131,10 @@ public final class ClearAction extends AbstractJssAction implements LocaleChange
 
   // #########################################################################
   public ClearAction(IJssController shellController, String... args) {
-    super(ACTION_LABEL, ResourceUtils.createImageIcon(ICON_KEY, ACTION_LABEL), shellController,
-        args);
-    putValue(Action.LARGE_ICON_KEY, ResourceUtils.createImageIcon(ICON_KEY, ACTION_LABEL, true));
+    super(ACTION_LABEL, ResourceUtils.createImageIcon(ICON_KEY, ACTION_LABEL),
+        shellController, args);
+    putValue(Action.LARGE_ICON_KEY,
+        ResourceUtils.createImageIcon(ICON_KEY, ACTION_LABEL, true));
     putValue(Action.ACTION_COMMAND_KEY, getDefaultCommandIdentifier());
     localeChanged();
   }
@@ -182,11 +188,13 @@ public final class ClearAction extends AbstractJssAction implements LocaleChange
     try {
       ResourceUtils.setTextAndMnemonic(this, ACTION_LABEL_KEY);
     } catch (MissingResourceException e) {
-      LOGGER.log(Level.SEVERE, "Resource not found: \"" + ACTION_LABEL_KEY + "\"", e);
+      LOGGER.log(Level.SEVERE,
+          "Resource not found: \"" + ACTION_LABEL_KEY + "\"", e);
       putValue(Action.NAME, ACTION_LABEL);
     }
     putValue(Action.SHORT_DESCRIPTION, this.getBriefHelp());
-    putValue(Action.LONG_DESCRIPTION, this.getHelp(this.getDefaultShellController()));
+    putValue(Action.LONG_DESCRIPTION,
+        this.getHelp(this.getDefaultShellController()));
   }
 
   // #########################################################################

@@ -88,7 +88,8 @@ public class AutoCompleteDocumentListener implements DocumentListener {
    * @param textComponent Text component
    * @param keywords keywords for autocompletion.
    */
-  public AutoCompleteDocumentListener(JTextComponent textComponent, Collection<String> keywords) {
+  public AutoCompleteDocumentListener(JTextComponent textComponent,
+      Collection<String> keywords) {
     this(textComponent, keywords, false);
   }
 
@@ -116,8 +117,8 @@ public class AutoCompleteDocumentListener implements DocumentListener {
    * @param keywords keywords for autocompletion.
    * @param copy Should we make a copy of the keywords collection?
    */
-  public AutoCompleteDocumentListener(JTextComponent textComponent, Collection<String> keywords,
-      boolean copy) {
+  public AutoCompleteDocumentListener(JTextComponent textComponent,
+      Collection<String> keywords, boolean copy) {
     this.textComponent = textComponent;
     if (keywords == null) {
       throw new IllegalArgumentException("Keywords cannot be null");
@@ -185,7 +186,8 @@ public class AutoCompleteDocumentListener implements DocumentListener {
         String completion = match.substring(pos - start);
         // We cannot modify Document from within notification,
         // so we submit a task that does the change later
-        SwingUtilities.invokeLater(this.new CompletionTask(completion, pos + 1));
+        SwingUtilities
+            .invokeLater(this.new CompletionTask(completion, pos + 1));
 
         // Construct a list of all matches
         matches.clear();
@@ -284,7 +286,8 @@ public class AutoCompleteDocumentListener implements DocumentListener {
       this.textForInsertion = textForInsertion;
     }
 
-    public PreviousMatchAction(String textForInsertion, String name, Icon icon) {
+    public PreviousMatchAction(String textForInsertion, String name,
+        Icon icon) {
       super(name, icon);
       this.textForInsertion = textForInsertion;
     }

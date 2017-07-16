@@ -33,7 +33,8 @@ public final class PauseAction extends AbstractJssAction
   /**
    * Logger.
    */
-  private static final Logger LOGGER = Logger.getLogger(PauseAction.class.getName());
+  private static final Logger LOGGER =
+      Logger.getLogger(PauseAction.class.getName());
 
   /**
    * This action default identifier.
@@ -46,13 +47,16 @@ public final class PauseAction extends AbstractJssAction
 
   private static final String ACTION_LABEL = "Pause";
 
-  private static final String ACTION_LABEL_KEY = "midi_player.action.pause.name";
+  private static final String ACTION_LABEL_KEY = "midiplayer.action.pause.name";
 
-  private static final String COMMAND_BRIEF_HELP = "Pause the current MIDI song.";
+  private static final String COMMAND_BRIEF_HELP =
+      "Pause the current MIDI song.";
 
-  private static final String COMMAND_BRIEF_HELP_KEY = "midi_player.action.pause.help.short";
+  private static final String COMMAND_BRIEF_HELP_KEY =
+      "midiplayer.action.pause.help.short";
 
-  private static final String COMMAND_HELP_KEY = "midi_player.action.pause.help.long";
+  private static final String COMMAND_HELP_KEY =
+      "midiplayer.action.pause.help.long";
 
   private static final String ICON_KEY = "control_pause_blue.png";
 
@@ -79,10 +83,13 @@ public final class PauseAction extends AbstractJssAction
       stringBuilder.append(action.getBriefHelp());
       stringBuilder.append("\n");
       try {
-        stringBuilder.append(ResourceUtils.getMessage(COMMAND_HELP_KEY, commandIdsAsString));
+        stringBuilder.append(
+            ResourceUtils.getMessage(COMMAND_HELP_KEY, commandIdsAsString));
       } catch (MissingResourceException e) {
-        LOGGER.log(Level.SEVERE, "Resource not found: \"" + COMMAND_HELP_KEY + "\"", e);
-        stringBuilder.append("\n").append("Pauses the current song in the playlist:");
+        LOGGER.log(Level.SEVERE,
+            "Resource not found: \"" + COMMAND_HELP_KEY + "\"", e);
+        stringBuilder.append("\n")
+            .append("Pauses the current song in the playlist:");
         stringBuilder.append("\n\t").append(commandIdsAsString);
       }
 
@@ -104,7 +111,8 @@ public final class PauseAction extends AbstractJssAction
       try {
         commandBriefHelp = ResourceUtils.getMessage(COMMAND_BRIEF_HELP_KEY);
       } catch (MissingResourceException e) {
-        LOGGER.log(Level.SEVERE, "Resource not found: \"" + COMMAND_BRIEF_HELP_KEY + "\"", e);
+        LOGGER.log(Level.SEVERE,
+            "Resource not found: \"" + COMMAND_BRIEF_HELP_KEY + "\"", e);
         commandBriefHelp = COMMAND_BRIEF_HELP;
       }
       commandBriefHelpInitialized = true;
@@ -127,15 +135,18 @@ public final class PauseAction extends AbstractJssAction
   // #########################################################################
   private transient MidiPlayer midiPlayer;
 
-  public PauseAction(MidiPlayer midiPlayer, IJssController shellController, String... args) {
-    super(ACTION_LABEL, ResourceUtils.createImageIcon(ICON_KEY, ACTION_LABEL), shellController,
-        args);
+  public PauseAction(MidiPlayer midiPlayer, IJssController shellController,
+      String... args) {
+    super(ACTION_LABEL, ResourceUtils.createImageIcon(ICON_KEY, ACTION_LABEL),
+        shellController, args);
     if (midiPlayer == null) {
       throw new IllegalArgumentException("Midi player is null");
     }
     this.midiPlayer = midiPlayer;
-    putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_NUMPAD5, 0));
-    putValue(Action.LARGE_ICON_KEY, ResourceUtils.createImageIcon(ICON_KEY, ACTION_LABEL, true));
+    putValue(Action.ACCELERATOR_KEY,
+        KeyStroke.getKeyStroke(KeyEvent.VK_NUMPAD5, 0));
+    putValue(Action.LARGE_ICON_KEY,
+        ResourceUtils.createImageIcon(ICON_KEY, ACTION_LABEL, true));
     putValue(Action.ACTION_COMMAND_KEY, getDefaultCommandIdentifier());
     localeChanged();
   }
@@ -174,7 +185,8 @@ public final class PauseAction extends AbstractJssAction
 
   @Override
   public int run(IJssController shellController, String... args) {
-    return midiPlayer.pausePlaying() ? AbstractJssAction.SUCCESS : AbstractJssAction.ERROR;
+    return midiPlayer.pausePlaying() ? AbstractJssAction.SUCCESS
+        : AbstractJssAction.ERROR;
   }
 
   // #########################################################################
@@ -189,11 +201,13 @@ public final class PauseAction extends AbstractJssAction
     try {
       ResourceUtils.setTextAndMnemonic(this, ACTION_LABEL_KEY);
     } catch (MissingResourceException e) {
-      LOGGER.log(Level.SEVERE, "Resource not found: \"" + ACTION_LABEL_KEY + "\"", e);
+      LOGGER.log(Level.SEVERE,
+          "Resource not found: \"" + ACTION_LABEL_KEY + "\"", e);
       putValue(Action.NAME, ACTION_LABEL);
     }
     putValue(Action.SHORT_DESCRIPTION, this.getBriefHelp());
-    putValue(Action.LONG_DESCRIPTION, this.getHelp(this.getDefaultShellController()));
+    putValue(Action.LONG_DESCRIPTION,
+        this.getHelp(this.getDefaultShellController()));
   }
 
   // #########################################################################

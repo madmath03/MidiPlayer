@@ -38,7 +38,8 @@ public class LocaleResourceBundleWrapper implements LocaleChangeListener {
     this(baseName, null, null);
   }
 
-  public LocaleResourceBundleWrapper(String baseName, ResourceBundle.Control control) {
+  public LocaleResourceBundleWrapper(String baseName,
+      ResourceBundle.Control control) {
     this(baseName, null, control);
   }
 
@@ -72,10 +73,11 @@ public class LocaleResourceBundleWrapper implements LocaleChangeListener {
       } else if (this.control != null && this.loader == null) {
         rb = ResourceBundle.getBundle(this.baseName, this.control);
       } else if (this.control == null && this.loader != null) {
-        rb = ResourceBundle.getBundle(this.baseName, ResourceUtils.getLocale(), this.loader);
+        rb = ResourceBundle.getBundle(this.baseName, ResourceUtils.getLocale(),
+            this.loader);
       } else {
-        rb = ResourceBundle.getBundle(this.baseName, ResourceUtils.getLocale(), this.loader,
-            this.control);
+        rb = ResourceBundle.getBundle(this.baseName, ResourceUtils.getLocale(),
+            this.loader, this.control);
       }
     }
     return rb;
@@ -101,7 +103,8 @@ public class LocaleResourceBundleWrapper implements LocaleChangeListener {
   }
 
   // #########################################################################
-  public String getMessage(String key, Object... arguments) throws MissingResourceException {
+  public String getMessage(String key, Object... arguments)
+      throws MissingResourceException {
     try {
       String msg = getResourceBundle().getString(key);
 
@@ -130,7 +133,8 @@ public class LocaleResourceBundleWrapper implements LocaleChangeListener {
       return msg;
     } catch (SecurityException | IllegalArgumentException e) {
       Object[] args = {key, e};
-      LOGGER.log(Level.SEVERE, "Error occurred while retrieving message for key {0}: {1}", args);
+      LOGGER.log(Level.SEVERE,
+          "Error occurred while retrieving message for key {0}: {1}", args);
       return null;
     }
 
@@ -142,9 +146,11 @@ public class LocaleResourceBundleWrapper implements LocaleChangeListener {
 
       for (int idx = 0; (idx = msg.indexOf('&', idx)) != -1; idx++) {
         char mnemonic = msg.charAt(idx + 1);
-        if (Character.isLowerCase(mnemonic) || Character.isUpperCase(mnemonic)) {
+        if (Character.isLowerCase(mnemonic)
+            || Character.isUpperCase(mnemonic)) {
           Class<?> keyEvent = Class.forName("java.awt.event.KeyEvent");
-          Field field = keyEvent.getDeclaredField("VK_" + Character.toUpperCase(mnemonic));
+          Field field = keyEvent
+              .getDeclaredField("VK_" + Character.toUpperCase(mnemonic));
           int keyCode = field.getInt(null);
 
           return keyCode;
@@ -153,30 +159,34 @@ public class LocaleResourceBundleWrapper implements LocaleChangeListener {
     } catch (ClassNotFoundException | NoSuchFieldException | SecurityException
         | IllegalArgumentException | IllegalAccessException e) {
       Object[] args = {key, e};
-      LOGGER.log(Level.SEVERE, "Error occurred while retrieving mnemonic for key {0}: {1}", args);
+      LOGGER.log(Level.SEVERE,
+          "Error occurred while retrieving mnemonic for key {0}: {1}", args);
     }
     return -1;
   }
 
-  public int getDisplayedMnemonicIndex(String key) throws MissingResourceException {
+  public int getDisplayedMnemonicIndex(String key)
+      throws MissingResourceException {
     try {
       String msg = getResourceBundle().getString(key);
 
       for (int idx = 0; (idx = msg.indexOf('&', idx)) != -1; idx++) {
         char mnemonic = msg.charAt(idx + 1);
-        if (Character.isLowerCase(mnemonic) || Character.isUpperCase(mnemonic)) {
+        if (Character.isLowerCase(mnemonic)
+            || Character.isUpperCase(mnemonic)) {
           return idx;
         }
       }
     } catch (SecurityException | IllegalArgumentException e) {
       Object[] args = {key, e};
-      LOGGER.log(Level.SEVERE, "Error occurred while retrieving mnemonic for key {0}: {1}", args);
+      LOGGER.log(Level.SEVERE,
+          "Error occurred while retrieving mnemonic for key {0}: {1}", args);
     }
     return -1;
   }
 
-  public void setTextAndMnemonic(JComponent comp, String key, Object... arguments)
-      throws MissingResourceException {
+  public void setTextAndMnemonic(JComponent comp, String key,
+      Object... arguments) throws MissingResourceException {
     try {
       String msg = getResourceBundle().getString(key);
       String txt = null;
@@ -194,7 +204,8 @@ public class LocaleResourceBundleWrapper implements LocaleChangeListener {
           txt = first.concat(last);
         }
         // and break the loop
-        if (Character.isLowerCase(mnemonic) || Character.isUpperCase(mnemonic)) {
+        if (Character.isLowerCase(mnemonic)
+            || Character.isUpperCase(mnemonic)) {
           break;
         }
       }
@@ -218,7 +229,8 @@ public class LocaleResourceBundleWrapper implements LocaleChangeListener {
       // If a mnemonic was extracted
       if (Character.isLowerCase(mnemonic) || Character.isUpperCase(mnemonic)) {
         Class<?> keyEvent = Class.forName("java.awt.event.KeyEvent");
-        Field field = keyEvent.getDeclaredField("VK_" + Character.toUpperCase(mnemonic));
+        Field field =
+            keyEvent.getDeclaredField("VK_" + Character.toUpperCase(mnemonic));
         int keyCode = field.getInt(null);
 
         if (comp instanceof AbstractButton) {
@@ -233,7 +245,8 @@ public class LocaleResourceBundleWrapper implements LocaleChangeListener {
         | IllegalArgumentException | IllegalAccessException e) {
       Object[] args = {comp, key, e};
       LOGGER.log(Level.SEVERE,
-          "Error occurred while setting text and menomic for component {0} and key {1}: {2}", args);
+          "Error occurred while setting text and menomic for component {0} and key {1}: {2}",
+          args);
     }
   }
 
@@ -256,7 +269,8 @@ public class LocaleResourceBundleWrapper implements LocaleChangeListener {
           txt = first.concat(last);
         }
         // and break the loop
-        if (Character.isLowerCase(mnemonic) || Character.isUpperCase(mnemonic)) {
+        if (Character.isLowerCase(mnemonic)
+            || Character.isUpperCase(mnemonic)) {
           break;
         }
       }
@@ -276,7 +290,8 @@ public class LocaleResourceBundleWrapper implements LocaleChangeListener {
       // If a mnemonic was extracted
       if (Character.isLowerCase(mnemonic) || Character.isUpperCase(mnemonic)) {
         Class<?> keyEvent = Class.forName("java.awt.event.KeyEvent");
-        Field field = keyEvent.getDeclaredField("VK_" + Character.toUpperCase(mnemonic));
+        Field field =
+            keyEvent.getDeclaredField("VK_" + Character.toUpperCase(mnemonic));
         int keyCode = field.getInt(null);
 
         action.putValue(Action.MNEMONIC_KEY, keyCode);
@@ -286,7 +301,8 @@ public class LocaleResourceBundleWrapper implements LocaleChangeListener {
         | IllegalArgumentException | IllegalAccessException e) {
       Object[] args = {action, key, e};
       LOGGER.log(Level.SEVERE,
-          "Error occurred while setting text and menomic for action {0} and key {1}: {2}", args);
+          "Error occurred while setting text and menomic for action {0} and key {1}: {2}",
+          args);
     }
   }
 

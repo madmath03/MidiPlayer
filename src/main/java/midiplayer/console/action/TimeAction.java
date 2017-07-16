@@ -22,7 +22,8 @@ import midiplayer.resources.LocaleChangeListener;
  *
  * @author Mathieu Brunot
  */
-public final class TimeAction extends AbstractJssAction implements LocaleChangeListener {
+public final class TimeAction extends AbstractJssAction
+    implements LocaleChangeListener {
 
   /**
    * The {@code serialVersionUID}.
@@ -32,7 +33,8 @@ public final class TimeAction extends AbstractJssAction implements LocaleChangeL
   /**
    * Logger.
    */
-  private static final Logger LOGGER = Logger.getLogger(TimeAction.class.getName());
+  private static final Logger LOGGER =
+      Logger.getLogger(TimeAction.class.getName());
 
   /**
    * This action default identifier.
@@ -46,24 +48,26 @@ public final class TimeAction extends AbstractJssAction implements LocaleChangeL
   private static final String COMMAND_BRIEF_HELP =
       "Display the current time and date in the shell.";
 
-  private static final String COMMAND_BRIEF_HELP_KEY = "midi_player.console.action.time.help.short";
+  private static final String COMMAND_BRIEF_HELP_KEY =
+      "midiplayer.console.action.time.help.short";
 
-  private static final String COMMAND_HELP_KEY = "midi_player.console.action.time.help.long";
+  private static final String COMMAND_HELP_KEY =
+      "midiplayer.console.action.time.help.long";
 
   private static final String COMMAND_HELP_EXAMPLE_KEY =
-      "midi_player.console.action.time.help.long.example";
+      "midiplayer.console.action.time.help.long.example";
 
   private static final String COMMAND_RUN_INVALID_DATE_FORMAT_KEY =
-      "midi_player.console.action.time.run.invalid_date_format";
+      "midiplayer.console.action.time.run.invalid_date_format";
 
   private static final String COMMAND_RUN_INVALID_LANGUAGE_FORMAT_KEY =
-      "midi_player.console.action.time.run.invalid_language_format";
+      "midiplayer.console.action.time.run.invalid_language_format";
 
   private static final String COMMAND_RUN_INVALID_COUNTRY_FORMAT_KEY =
-      "midi_player.console.action.time.run.invalid_country_format";
+      "midiplayer.console.action.time.run.invalid_country_format";
 
   private static final String COMMAND_RUN_INVALID_VARIANT_FORMAT_KEY =
-      "midi_player.console.action.time.run.invalid_variant_format";
+      "midiplayer.console.action.time.run.invalid_variant_format";
 
   private static String commandHelp;
 
@@ -90,12 +94,17 @@ public final class TimeAction extends AbstractJssAction implements LocaleChangeL
       stringBuilder.append("\n");
 
       try {
-        stringBuilder.append(ResourceUtils.getMessage(COMMAND_HELP_KEY, commandIdsAsString));
+        stringBuilder.append(
+            ResourceUtils.getMessage(COMMAND_HELP_KEY, commandIdsAsString));
       } catch (MissingResourceException e) {
-        LOGGER.log(Level.SEVERE, "Resource not found: \"" + COMMAND_HELP_KEY + "\"", e);
-        stringBuilder.append("Displays the current time and date:").append("\n");
+        LOGGER.log(Level.SEVERE,
+            "Resource not found: \"" + COMMAND_HELP_KEY + "\"", e);
+        stringBuilder.append("Displays the current time and date:")
+            .append("\n");
         stringBuilder.append("\t").append(commandIdsAsString).append("\n");
-        stringBuilder.append("The date/time format can be specified as well as the language:")
+        stringBuilder
+            .append(
+                "The date/time format can be specified as well as the language:")
             .append("\n");
         stringBuilder.append("\t").append(commandIdsAsString)
             .append(" [format] [language] [country] [variant] ").append("\n");
@@ -107,34 +116,36 @@ public final class TimeAction extends AbstractJssAction implements LocaleChangeL
       if (defaultCommandIdentifier != null) {
         String exampleMsg;
         try {
-          exampleMsg = ResourceUtils.getMessage(COMMAND_HELP_EXAMPLE_KEY, commandIdsAsString);
+          exampleMsg = ResourceUtils.getMessage(COMMAND_HELP_EXAMPLE_KEY,
+              commandIdsAsString);
         } catch (MissingResourceException e) {
-          LOGGER.log(Level.SEVERE, "Resource not found: \"" + COMMAND_HELP_EXAMPLE_KEY + "\"", e);
+          LOGGER.log(Level.SEVERE,
+              "Resource not found: \"" + COMMAND_HELP_EXAMPLE_KEY + "\"", e);
           exampleMsg = "Example: ";
         }
 
         stringBuilder.append("\n");
         stringBuilder.append(exampleMsg).append("\n");
-        stringBuilder.append(defaultCommandIdentifier).append(" yyyy-MM-dd'T'HH:mm:ss.SSSZ")
-            .append("\n");
+        stringBuilder.append(defaultCommandIdentifier)
+            .append(" yyyy-MM-dd'T'HH:mm:ss.SSSZ").append("\n");
         stringBuilder.append("2001-07-04T12:08:56.235-0700").append("\n");
 
         stringBuilder.append("\n");
         stringBuilder.append(exampleMsg).append("\n");
-        stringBuilder.append(defaultCommandIdentifier).append(" \"EEE, MMM d, ''yy\" en us")
-            .append("\n");
+        stringBuilder.append(defaultCommandIdentifier)
+            .append(" \"EEE, MMM d, ''yy\" en us").append("\n");
         stringBuilder.append("Wed, Jul 4, '01").append("\n");
 
         stringBuilder.append("\n");
         stringBuilder.append(exampleMsg).append("\n");
-        stringBuilder.append(defaultCommandIdentifier).append(" \"EEEE dd MMMM yyyy\" th th th")
-            .append("\n");
+        stringBuilder.append(defaultCommandIdentifier)
+            .append(" \"EEEE dd MMMM yyyy\" th th th").append("\n");
         stringBuilder.append("วันพุธ 04 กรกฎาคม 2001").append("\n");
 
         stringBuilder.append("\n");
         stringBuilder.append(exampleMsg).append("\n");
-        stringBuilder.append(defaultCommandIdentifier).append(" \"EEEE dd MMMM yyyy\" th TH TH")
-            .append("\n");
+        stringBuilder.append(defaultCommandIdentifier)
+            .append(" \"EEEE dd MMMM yyyy\" th TH TH").append("\n");
         stringBuilder.append("วันพุธ ๐๘ กรกฎาคม ๒๕๔๔");
       }
 
@@ -156,7 +167,8 @@ public final class TimeAction extends AbstractJssAction implements LocaleChangeL
       try {
         commandBriefHelp = ResourceUtils.getMessage(COMMAND_BRIEF_HELP_KEY);
       } catch (MissingResourceException e) {
-        LOGGER.log(Level.SEVERE, "Resource not found: \"" + COMMAND_BRIEF_HELP_KEY + "\"", e);
+        LOGGER.log(Level.SEVERE,
+            "Resource not found: \"" + COMMAND_BRIEF_HELP_KEY + "\"", e);
         commandBriefHelp = COMMAND_BRIEF_HELP;
       }
       commandBriefHelpInitialized = true;
@@ -177,13 +189,15 @@ public final class TimeAction extends AbstractJssAction implements LocaleChangeL
   }
 
   // #########################################################################
-  public TimeAction(String name, Icon icon, IJssController shellController, String... args) {
+  public TimeAction(String name, Icon icon, IJssController shellController,
+      String... args) {
     super(name, icon, shellController, args);
     putValue(Action.ACTION_COMMAND_KEY, getDefaultCommandIdentifier());
     localeChanged();
   }
 
-  public TimeAction(String name, IJssController shellController, String... args) {
+  public TimeAction(String name, IJssController shellController,
+      String... args) {
     super(name, shellController, args);
     putValue(Action.ACTION_COMMAND_KEY, getDefaultCommandIdentifier());
     localeChanged();
@@ -242,7 +256,8 @@ public final class TimeAction extends AbstractJssAction implements LocaleChangeL
     return commandReturnStatus;
   }
 
-  private DateFormat prepareDateFormat(IJssController shellController, String... args) {
+  private DateFormat prepareDateFormat(IJssController shellController,
+      String... args) {
     DateFormat dateFormat;
 
     if (args != null && args.length > 1) {
@@ -253,20 +268,22 @@ public final class TimeAction extends AbstractJssAction implements LocaleChangeL
             Locale displayLocale = new Locale(args[2], args[3], args[4]);
             dateFormat = new SimpleDateFormat(args[1], displayLocale);
           } catch (IllegalArgumentException e) {
-            String[] parameters = new String[] {e.getMessage(), args[1], args[2], args[3], args[4]};
+            String[] parameters = new String[] {e.getMessage(), args[1],
+                args[2], args[3], args[4]};
             LOGGER.log(Level.WARNING,
                 "Error occurred while parsing date/time format {1} for language {2} and country {3} and variant {4}: {0}",
                 parameters);
             String msg;
             try {
-              msg = ResourceUtils.getMessage(COMMAND_RUN_INVALID_VARIANT_FORMAT_KEY,
+              msg = ResourceUtils.getMessage(
+                  COMMAND_RUN_INVALID_VARIANT_FORMAT_KEY,
                   e.getLocalizedMessage(), args[1], args[2], args[3], args[4]);
             } catch (MissingResourceException e1) {
-              LOGGER.log(Level.SEVERE,
-                  "Resource not found: \"" + COMMAND_RUN_INVALID_VARIANT_FORMAT_KEY + "\"", e1);
-              msg = "Error occurred while parsing date/time format " + args[1] + " for language "
-                  + args[2] + " and country " + args[3] + " and variant " + args[4] + ": "
-                  + e.getMessage();
+              LOGGER.log(Level.SEVERE, "Resource not found: \""
+                  + COMMAND_RUN_INVALID_VARIANT_FORMAT_KEY + "\"", e1);
+              msg = "Error occurred while parsing date/time format " + args[1]
+                  + " for language " + args[2] + " and country " + args[3]
+                  + " and variant " + args[4] + ": " + e.getMessage();
             }
             shellController.publish(IJssController.PublicationLevel.ERROR, msg);
             dateFormat = null;
@@ -277,19 +294,22 @@ public final class TimeAction extends AbstractJssAction implements LocaleChangeL
             Locale displayLocale = new Locale(args[2], args[3]);
             dateFormat = new SimpleDateFormat(args[1], displayLocale);
           } catch (IllegalArgumentException e) {
-            String[] parameters = new String[] {e.getMessage(), args[1], args[2], args[3]};
+            String[] parameters =
+                new String[] {e.getMessage(), args[1], args[2], args[3]};
             LOGGER.log(Level.WARNING,
                 "Error occurred while parsing date/time format {1} for language {2} and country {3}: {0}",
                 parameters);
             String msg;
             try {
-              msg = ResourceUtils.getMessage(COMMAND_RUN_INVALID_COUNTRY_FORMAT_KEY,
+              msg = ResourceUtils.getMessage(
+                  COMMAND_RUN_INVALID_COUNTRY_FORMAT_KEY,
                   e.getLocalizedMessage(), args[1], args[2], args[3]);
             } catch (MissingResourceException e1) {
-              LOGGER.log(Level.SEVERE,
-                  "Resource not found: \"" + COMMAND_RUN_INVALID_COUNTRY_FORMAT_KEY + "\"", e1);
-              msg = "Error occurred while parsing date/time format " + args[1] + " for language "
-                  + args[2] + " and country " + args[3] + ": " + e.getMessage();
+              LOGGER.log(Level.SEVERE, "Resource not found: \""
+                  + COMMAND_RUN_INVALID_COUNTRY_FORMAT_KEY + "\"", e1);
+              msg = "Error occurred while parsing date/time format " + args[1]
+                  + " for language " + args[2] + " and country " + args[3]
+                  + ": " + e.getMessage();
             }
             shellController.publish(IJssController.PublicationLevel.ERROR, msg);
             dateFormat = null;
@@ -300,19 +320,21 @@ public final class TimeAction extends AbstractJssAction implements LocaleChangeL
             Locale displayLocale = new Locale(args[2]);
             dateFormat = new SimpleDateFormat(args[1], displayLocale);
           } catch (IllegalArgumentException e) {
-            String[] parameters = new String[] {e.getMessage(), args[1], args[2]};
+            String[] parameters =
+                new String[] {e.getMessage(), args[1], args[2]};
             LOGGER.log(Level.WARNING,
                 "Error occurred while parsing date/time format {1} for language {2}: {0}",
                 parameters);
             String msg;
             try {
-              msg = ResourceUtils.getMessage(COMMAND_RUN_INVALID_LANGUAGE_FORMAT_KEY,
+              msg = ResourceUtils.getMessage(
+                  COMMAND_RUN_INVALID_LANGUAGE_FORMAT_KEY,
                   e.getLocalizedMessage(), args[1], args[2]);
             } catch (MissingResourceException e1) {
-              LOGGER.log(Level.SEVERE,
-                  "Resource not found: \"" + COMMAND_RUN_INVALID_LANGUAGE_FORMAT_KEY + "\"", e1);
-              msg = "Error occurred while parsing date/time format " + args[1] + " for language "
-                  + args[2] + ": " + e.getMessage();
+              LOGGER.log(Level.SEVERE, "Resource not found: \""
+                  + COMMAND_RUN_INVALID_LANGUAGE_FORMAT_KEY + "\"", e1);
+              msg = "Error occurred while parsing date/time format " + args[1]
+                  + " for language " + args[2] + ": " + e.getMessage();
             }
             shellController.publish(IJssController.PublicationLevel.ERROR, msg);
             dateFormat = null;
@@ -322,20 +344,23 @@ public final class TimeAction extends AbstractJssAction implements LocaleChangeL
         case 2:
         default:
           try {
-            dateFormat = new SimpleDateFormat(args[1], ResourceUtils.getLocale());
+            dateFormat =
+                new SimpleDateFormat(args[1], ResourceUtils.getLocale());
           } catch (IllegalArgumentException e) {
             String[] parameters = new String[] {e.getMessage(), args[1]};
-            LOGGER.log(Level.WARNING, "Error occurred while parsing date/time format {1}: {0}",
+            LOGGER.log(Level.WARNING,
+                "Error occurred while parsing date/time format {1}: {0}",
                 parameters);
             String msg;
             try {
-              msg = ResourceUtils.getMessage(COMMAND_RUN_INVALID_DATE_FORMAT_KEY,
-                  e.getLocalizedMessage(), args[1]);
+              msg =
+                  ResourceUtils.getMessage(COMMAND_RUN_INVALID_DATE_FORMAT_KEY,
+                      e.getLocalizedMessage(), args[1]);
             } catch (MissingResourceException e1) {
-              LOGGER.log(Level.SEVERE,
-                  "Resource not found: \"" + COMMAND_RUN_INVALID_DATE_FORMAT_KEY + "\"", e1);
-              msg = "Error occurred while parsing date/time format " + args[1] + ": "
-                  + e.getMessage();
+              LOGGER.log(Level.SEVERE, "Resource not found: \""
+                  + COMMAND_RUN_INVALID_DATE_FORMAT_KEY + "\"", e1);
+              msg = "Error occurred while parsing date/time format " + args[1]
+                  + ": " + e.getMessage();
             }
             shellController.publish(IJssController.PublicationLevel.ERROR, msg);
             dateFormat = null;

@@ -23,7 +23,8 @@ import midiplayer.resources.LocaleChangeListener;
  *
  * @author Mathieu Brunot
  */
-public final class LocaleAction extends jswingshell.action.AbstractJssComboAction<Locale>
+public final class LocaleAction
+    extends jswingshell.action.AbstractJssComboAction<Locale>
     implements LocaleChangeListener {
 
   /**
@@ -34,7 +35,8 @@ public final class LocaleAction extends jswingshell.action.AbstractJssComboActio
   /**
    * Logger.
    */
-  private static final Logger LOGGER = Logger.getLogger(LocaleAction.class.getName());
+  private static final Logger LOGGER =
+      Logger.getLogger(LocaleAction.class.getName());
 
   /**
    * This action default identifier.
@@ -45,24 +47,29 @@ public final class LocaleAction extends jswingshell.action.AbstractJssComboActio
 
   private static final String ACTION_LABEL = "Locale";
 
-  private static final String ACTION_LABEL_KEY = "midi_player.console.action.locale.name";
+  private static final String ACTION_LABEL_KEY =
+      "midiplayer.console.action.locale.name";
 
-  private static final String COMMAND_BRIEF_HELP = "Change the JVM default locale.";
+  private static final String COMMAND_BRIEF_HELP =
+      "Change the JVM default locale.";
 
   private static final String COMMAND_BRIEF_HELP_KEY =
-      "midi_player.console.action.locale.help.short";
+      "midiplayer.console.action.locale.help.short";
 
-  private static final String COMMAND_HELP_KEY = "midi_player.console.action.locale.help.long";
+  private static final String COMMAND_HELP_KEY =
+      "midiplayer.console.action.locale.help.long";
 
-  private static final String COMMAND_RUN_CURRENT_LOCALE_MESSAGE = "Current locale is ";
+  private static final String COMMAND_RUN_CURRENT_LOCALE_MESSAGE =
+      "Current locale is ";
 
   private static final String COMMAND_RUN_CURRENT_LOCALE_MESSAGE_KEY =
-      "midi_player.console.action.locale.run.current_locale";
+      "midiplayer.console.action.locale.run.current_locale";
 
-  private static final String INTERNAL_COMMAND_BRIEF_HELP = "Sets the shell's locale to ";
+  private static final String INTERNAL_COMMAND_BRIEF_HELP =
+      "Sets the shell's locale to ";
 
   private static final String INTERNAL_COMMAND_BRIEF_HELP_KEY =
-      "midi_player.console.action.locale.internal_command.help.short";
+      "midiplayer.console.action.locale.internal_command.help.short";
 
   private static String commandHelp;
 
@@ -90,19 +97,23 @@ public final class LocaleAction extends jswingshell.action.AbstractJssComboActio
       stringBuilder.append("\n");
 
       try {
-        stringBuilder.append(
-            ResourceUtils.getMessage(COMMAND_HELP_KEY, commandIdsAsString, commandIdentifier));
+        stringBuilder.append(ResourceUtils.getMessage(COMMAND_HELP_KEY,
+            commandIdsAsString, commandIdentifier));
       } catch (MissingResourceException e) {
-        LOGGER.log(Level.SEVERE, "Resource not found: \"" + COMMAND_HELP_KEY + "\"", e);
+        LOGGER.log(Level.SEVERE,
+            "Resource not found: \"" + COMMAND_HELP_KEY + "\"", e);
 
         stringBuilder.append("You can set the locale as follow:");
       }
 
-      Map<Locale, Collection<String>> argumentsByValue = action.getSwitchArgumentsByValue();
+      Map<Locale, Collection<String>> argumentsByValue =
+          action.getSwitchArgumentsByValue();
       if (argumentsByValue != null) {
-        for (Map.Entry<Locale, Collection<String>> entry : argumentsByValue.entrySet()) {
+        for (Map.Entry<Locale, Collection<String>> entry : argumentsByValue
+            .entrySet()) {
           stringBuilder.append("\n");
-          stringBuilder.append("\t").append(commandIdentifier).append(" ").append(entry.getValue());
+          stringBuilder.append("\t").append(commandIdentifier).append(" ")
+              .append(entry.getValue());
         }
       }
 
@@ -124,7 +135,8 @@ public final class LocaleAction extends jswingshell.action.AbstractJssComboActio
       try {
         commandBriefHelp = ResourceUtils.getMessage(COMMAND_BRIEF_HELP_KEY);
       } catch (MissingResourceException e) {
-        LOGGER.log(Level.SEVERE, "Resource not found: \"" + COMMAND_BRIEF_HELP_KEY + "\"", e);
+        LOGGER.log(Level.SEVERE,
+            "Resource not found: \"" + COMMAND_BRIEF_HELP_KEY + "\"", e);
         commandBriefHelp = COMMAND_BRIEF_HELP;
       }
       commandBriefHelpInitialized = true;
@@ -167,7 +179,8 @@ public final class LocaleAction extends jswingshell.action.AbstractJssComboActio
     this(items, shellController, (String[]) null);
   }
 
-  public LocaleAction(ComboBoxModel<Locale> model, IJssController shellController) {
+  public LocaleAction(ComboBoxModel<Locale> model,
+      IJssController shellController) {
     this(model, shellController, (String[]) null);
   }
 
@@ -177,13 +190,15 @@ public final class LocaleAction extends jswingshell.action.AbstractJssComboActio
     localeChanged();
   }
 
-  public LocaleAction(Locale[] items, IJssController shellController, String... args) {
+  public LocaleAction(Locale[] items, IJssController shellController,
+      String... args) {
     super(items, ACTION_LABEL, shellController, args);
     putValue(Action.ACTION_COMMAND_KEY, getDefaultCommandIdentifier());
     localeChanged();
   }
 
-  public LocaleAction(ComboBoxModel<Locale> model, IJssController shellController, String... args) {
+  public LocaleAction(ComboBoxModel<Locale> model,
+      IJssController shellController, String... args) {
     super(model, ACTION_LABEL, shellController, args);
     putValue(Action.ACTION_COMMAND_KEY, getDefaultCommandIdentifier());
     localeChanged();
@@ -191,15 +206,17 @@ public final class LocaleAction extends jswingshell.action.AbstractJssComboActio
 
   // #########################################################################
   @Override
-  protected boolean doSwitch(IJssController shellController, Locale switchValue) {
+  protected boolean doSwitch(IJssController shellController,
+      Locale switchValue) {
     if (switchValue == null) {
       String currentLocale = ResourceUtils.getLocale().getDisplayLanguage();
       String msg;
       try {
-        msg = ResourceUtils.getMessage(COMMAND_RUN_CURRENT_LOCALE_MESSAGE_KEY, currentLocale);
+        msg = ResourceUtils.getMessage(COMMAND_RUN_CURRENT_LOCALE_MESSAGE_KEY,
+            currentLocale);
       } catch (MissingResourceException e1) {
-        LOGGER.log(Level.SEVERE,
-            "Resource not found: \"" + COMMAND_RUN_CURRENT_LOCALE_MESSAGE_KEY + "\"", e1);
+        LOGGER.log(Level.SEVERE, "Resource not found: \""
+            + COMMAND_RUN_CURRENT_LOCALE_MESSAGE_KEY + "\"", e1);
         msg = COMMAND_RUN_CURRENT_LOCALE_MESSAGE + currentLocale;
       }
       shellController.publish(IJssController.PublicationLevel.INFO, msg);
@@ -256,9 +273,11 @@ public final class LocaleAction extends jswingshell.action.AbstractJssComboActio
   public void resetInnerElements() {
     // Remove from Locale change notifiers internal actions
     if (this.hasInnerElementActions()) {
-      for (ComboElementAction<Locale> internalAction : this.getInnerElementActions()) {
+      for (ComboElementAction<Locale> internalAction : this
+          .getInnerElementActions()) {
         if (internalAction instanceof LocaleChangeListener) {
-          ResourceUtils.removeLocaleChangeListener((LocaleChangeListener) internalAction);
+          ResourceUtils.removeLocaleChangeListener(
+              (LocaleChangeListener) internalAction);
         }
       }
     }
@@ -277,11 +296,13 @@ public final class LocaleAction extends jswingshell.action.AbstractJssComboActio
     try {
       ResourceUtils.setTextAndMnemonic(this, ACTION_LABEL_KEY);
     } catch (MissingResourceException e) {
-      LOGGER.log(Level.SEVERE, "Resource not found: \"" + ACTION_LABEL_KEY + "\"", e);
+      LOGGER.log(Level.SEVERE,
+          "Resource not found: \"" + ACTION_LABEL_KEY + "\"", e);
       putValue(Action.NAME, ACTION_LABEL);
     }
     putValue(Action.SHORT_DESCRIPTION, this.getBriefHelp());
-    putValue(Action.LONG_DESCRIPTION, this.getHelp(this.getDefaultShellController()));
+    putValue(Action.LONG_DESCRIPTION,
+        this.getHelp(this.getDefaultShellController()));
   }
 
   // #########################################################################
@@ -304,8 +325,8 @@ public final class LocaleAction extends jswingshell.action.AbstractJssComboActio
      */
     private static final long serialVersionUID = -5748560195280543847L;
 
-    protected LocaleComboElementAction(AbstractJssComboAction<Locale> parentAction,
-        Locale dataItem) {
+    protected LocaleComboElementAction(
+        AbstractJssComboAction<Locale> parentAction, Locale dataItem) {
       super(parentAction, dataItem);
       putValue(Action.ACTION_COMMAND_KEY, getDefaultCommandIdentifier());
       localeChanged();
@@ -316,9 +337,11 @@ public final class LocaleAction extends jswingshell.action.AbstractJssComboActio
       String briefHelp;
       String localeNameToDisplay = getDataItem().getDisplayName(getDataItem());
       try {
-        briefHelp = ResourceUtils.getMessage(INTERNAL_COMMAND_BRIEF_HELP_KEY, localeNameToDisplay);
+        briefHelp = ResourceUtils.getMessage(INTERNAL_COMMAND_BRIEF_HELP_KEY,
+            localeNameToDisplay);
       } catch (MissingResourceException e) {
-        LOGGER.log(Level.SEVERE, "Resource not found: \"" + INTERNAL_COMMAND_BRIEF_HELP_KEY + "\"",
+        LOGGER.log(Level.SEVERE,
+            "Resource not found: \"" + INTERNAL_COMMAND_BRIEF_HELP_KEY + "\"",
             e);
         briefHelp = INTERNAL_COMMAND_BRIEF_HELP + localeNameToDisplay;
       }

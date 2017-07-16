@@ -46,7 +46,8 @@ public final class PasteAction extends jswingshell.action.AbstractJssAction
   /**
    * Logger.
    */
-  private static final Logger LOGGER = Logger.getLogger(PasteAction.class.getName());
+  private static final Logger LOGGER =
+      Logger.getLogger(PasteAction.class.getName());
 
   /**
    * This action default identifier.
@@ -57,15 +58,17 @@ public final class PasteAction extends jswingshell.action.AbstractJssAction
 
   private static final String ACTION_LABEL = "Paste";
 
-  private static final String ACTION_LABEL_KEY = "midi_player.console.action.paste.name";
+  private static final String ACTION_LABEL_KEY =
+      "midiplayer.console.action.paste.name";
 
   private static final String COMMAND_BRIEF_HELP =
       "Paste the content of the clipboard to the current selection.";
 
   private static final String COMMAND_BRIEF_HELP_KEY =
-      "midi_player.console.action.paste.help.short";
+      "midiplayer.console.action.paste.help.short";
 
-  private static final String COMMAND_HELP_KEY = "midi_player.console.action.paste.help.long";
+  private static final String COMMAND_HELP_KEY =
+      "midiplayer.console.action.paste.help.long";
 
   private static final String ICON_KEY = "page_paste.png";
 
@@ -92,10 +95,13 @@ public final class PasteAction extends jswingshell.action.AbstractJssAction
       stringBuilder.append(action.getBriefHelp()).append("\n");
       stringBuilder.append("\n");
       try {
-        stringBuilder.append(ResourceUtils.getMessage(COMMAND_HELP_KEY, commandIdsAsString));
+        stringBuilder.append(
+            ResourceUtils.getMessage(COMMAND_HELP_KEY, commandIdsAsString));
       } catch (MissingResourceException e) {
-        LOGGER.log(Level.SEVERE, "Resource not found: \"" + COMMAND_HELP_KEY + "\"", e);
-        stringBuilder.append("Pastes the content of the clipboard in the shell:");
+        LOGGER.log(Level.SEVERE,
+            "Resource not found: \"" + COMMAND_HELP_KEY + "\"", e);
+        stringBuilder
+            .append("Pastes the content of the clipboard in the shell:");
         stringBuilder.append("\n\t").append(commandIdsAsString);
       }
 
@@ -117,7 +123,8 @@ public final class PasteAction extends jswingshell.action.AbstractJssAction
       try {
         commandBriefHelp = ResourceUtils.getMessage(COMMAND_BRIEF_HELP_KEY);
       } catch (MissingResourceException e) {
-        LOGGER.log(Level.SEVERE, "Resource not found: \"" + COMMAND_BRIEF_HELP_KEY + "\"", e);
+        LOGGER.log(Level.SEVERE,
+            "Resource not found: \"" + COMMAND_BRIEF_HELP_KEY + "\"", e);
         commandBriefHelp = COMMAND_BRIEF_HELP;
       }
       commandBriefHelpInitialized = true;
@@ -142,14 +149,16 @@ public final class PasteAction extends jswingshell.action.AbstractJssAction
 
   public PasteAction(JssTextAreaController textAreaController,
       JssTextAreaController shellController, String... args) {
-    super(ACTION_LABEL, ResourceUtils.createImageIcon(ICON_KEY, ACTION_LABEL), shellController,
-        args);
+    super(ACTION_LABEL, ResourceUtils.createImageIcon(ICON_KEY, ACTION_LABEL),
+        shellController, args);
     if (textAreaController == null) {
       throw new IllegalArgumentException("Text area controller cannot be null");
     }
     this.textAreaController = textAreaController;
-    putValue(Action.LARGE_ICON_KEY, ResourceUtils.createImageIcon(ICON_KEY, ACTION_LABEL, true));
-    putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_V, ActionEvent.CTRL_MASK));
+    putValue(Action.LARGE_ICON_KEY,
+        ResourceUtils.createImageIcon(ICON_KEY, ACTION_LABEL, true));
+    putValue(Action.ACCELERATOR_KEY,
+        KeyStroke.getKeyStroke(KeyEvent.VK_V, ActionEvent.CTRL_MASK));
     putValue(Action.ACTION_COMMAND_KEY, getDefaultCommandIdentifier());
     localeChanged();
   }
@@ -174,7 +183,8 @@ public final class PasteAction extends jswingshell.action.AbstractJssAction
   @Override
   public void setDefaultShellController(IJssController shellController) {
     super.setDefaultShellController(shellController);
-    if (textAreaController == null && shellController instanceof JssTextAreaController) {
+    if (textAreaController == null
+        && shellController instanceof JssTextAreaController) {
       this.textAreaController = (JssTextAreaController) shellController;
     }
   }
@@ -207,7 +217,8 @@ public final class PasteAction extends jswingshell.action.AbstractJssAction
       if (args == null || args.length == 1) {
         view.paste();
       } else if (shellController != null) {
-        shellController.publish(IJssController.PublicationLevel.WARNING, getHelp(shellController));
+        shellController.publish(IJssController.PublicationLevel.WARNING,
+            getHelp(shellController));
       }
     }
 
@@ -231,11 +242,13 @@ public final class PasteAction extends jswingshell.action.AbstractJssAction
     try {
       ResourceUtils.setTextAndMnemonic(this, ACTION_LABEL_KEY);
     } catch (MissingResourceException e) {
-      LOGGER.log(Level.SEVERE, "Resource not found: \"" + ACTION_LABEL_KEY + "\"", e);
+      LOGGER.log(Level.SEVERE,
+          "Resource not found: \"" + ACTION_LABEL_KEY + "\"", e);
       putValue(Action.NAME, ACTION_LABEL);
     }
     putValue(Action.SHORT_DESCRIPTION, this.getBriefHelp());
-    putValue(Action.LONG_DESCRIPTION, this.getHelp(this.getDefaultShellController()));
+    putValue(Action.LONG_DESCRIPTION,
+        this.getHelp(this.getDefaultShellController()));
   }
 
   // #########################################################################

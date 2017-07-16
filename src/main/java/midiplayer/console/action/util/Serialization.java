@@ -39,23 +39,26 @@ public final class Serialization {
   /**
    * Logger.
    */
-  private static final Logger LOGGER = Logger.getLogger(Serialization.class.getName());
+  private static final Logger LOGGER =
+      Logger.getLogger(Serialization.class.getName());
 
   protected static final Path JAR_PATH;
-  protected static final String SERIALIZED_MODEL_RELATIVE_PATH = "midiplayer_actions.data";
+  protected static final String SERIALIZED_MODEL_RELATIVE_PATH =
+      "midiplayer_actions.data";
   protected static final Path SERIALIZED_MODEL_PATH;
 
   static {
     Path tempJarPath = null, tempSerializedModelPath = null;
     try {
-      tempJarPath = Paths.get(LocalizedJssTextAreaController.class.getProtectionDomain()
-          .getCodeSource().getLocation().toURI());
+      tempJarPath = Paths.get(LocalizedJssTextAreaController.class
+          .getProtectionDomain().getCodeSource().getLocation().toURI());
       // If the path is not a directory (current behavior when packaged)
       while (tempJarPath != null && !Files.isDirectory(tempJarPath)) {
         tempJarPath = tempJarPath.getParent();
       }
       if (tempJarPath != null) {
-        tempSerializedModelPath = tempJarPath.resolve(SERIALIZED_MODEL_RELATIVE_PATH);
+        tempSerializedModelPath =
+            tempJarPath.resolve(SERIALIZED_MODEL_RELATIVE_PATH);
       } else {
         LOGGER.log(Level.SEVERE, "Cannot find the JAR path!");
       }
@@ -70,20 +73,23 @@ public final class Serialization {
   public static IJssModel loadSerializedModel() {
     IJssModel serializedModel = null;
 
-    if (SERIALIZED_MODEL_PATH != null && Files.isReadable(SERIALIZED_MODEL_PATH)) {
-      try (ObjectInputStream ois =
-          new ObjectInputStream(new FileInputStream(SERIALIZED_MODEL_PATH.toString()))) {
+    if (SERIALIZED_MODEL_PATH != null
+        && Files.isReadable(SERIALIZED_MODEL_PATH)) {
+      try (ObjectInputStream ois = new ObjectInputStream(
+          new FileInputStream(SERIALIZED_MODEL_PATH.toString()))) {
         Object obj = ois.readObject();
         if (obj != null && obj instanceof IJssModel) {
           serializedModel = (IJssModel) obj;
           LOGGER.log(Level.INFO, "Loaded model successfully!");
         }
       } catch (FileNotFoundException fnfe) {
-        LOGGER.log(Level.SEVERE, "Cannot open a file with the given file name: {0}",
+        LOGGER.log(Level.SEVERE,
+            "Cannot open a file with the given file name: {0}",
             SERIALIZED_MODEL_PATH);
         LOGGER.log(Level.SEVERE, null, fnfe);
       } catch (IOException ioe) {
-        LOGGER.log(Level.SEVERE, "An I/O error occurred while processing the file {0}",
+        LOGGER.log(Level.SEVERE,
+            "An I/O error occurred while processing the file {0}",
             SERIALIZED_MODEL_PATH);
         LOGGER.log(Level.SEVERE, null, ioe);
       } catch (ClassNotFoundException cnfe) {
@@ -106,10 +112,13 @@ public final class Serialization {
             || Files.isWritable(SERIALIZED_MODEL_PATH))) {
 
       // Prevent save of any GUI component listening to actions
-      Map<AbstractAction, PropertyChangeListener[]> propertyChangeListenersByActions = null;
-      Map<AbstractListModel<?>, ListDataListener[]> listDataListenersByModels = null;
+      Map<AbstractAction, PropertyChangeListener[]> propertyChangeListenersByActions =
+          null;
+      Map<AbstractListModel<?>, ListDataListener[]> listDataListenersByModels =
+          null;
       if (serializedModel instanceof LocalizedJssModel) {
-        LocalizedJssModel localizedJssModel = (LocalizedJssModel) serializedModel;
+        LocalizedJssModel localizedJssModel =
+            (LocalizedJssModel) serializedModel;
         Set<IJssAction> actions = localizedJssModel.getActions();
         if (actions != null) {
           propertyChangeListenersByActions = new HashMap<>(actions.size());
@@ -118,7 +127,8 @@ public final class Serialization {
             // Remove AbstractActions property listeners
             if (action instanceof AbstractAction) {
               AbstractAction abstractAction = (AbstractAction) action;
-              PropertyChangeListener[] listeners = abstractAction.getPropertyChangeListeners();
+              PropertyChangeListener[] listeners =
+                  abstractAction.getPropertyChangeListeners();
               for (PropertyChangeListener listener : listeners) {
                 abstractAction.removePropertyChangeListener(listener);
               }
@@ -129,13 +139,16 @@ public final class Serialization {
             if (action instanceof AbstractListModel) {
               abstractListModel = (AbstractListModel<?>) action;
             } else if (action instanceof AbstractJssComboAction
-                && ((AbstractJssComboAction<?>) action).getModel() instanceof AbstractListModel) {
+                && ((AbstractJssComboAction<?>) action)
+                    .getModel() instanceof AbstractListModel) {
               abstractListModel =
-                  (AbstractListModel<?>) ((AbstractJssComboAction<?>) action).getModel();
+                  (AbstractListModel<?>) ((AbstractJssComboAction<?>) action)
+                      .getModel();
             }
 
             if (abstractListModel != null) {
-              ListDataListener[] listeners = abstractListModel.getListDataListeners();
+              ListDataListener[] listeners =
+                  abstractListModel.getListDataListeners();
               for (ListDataListener listener : listeners) {
                 abstractListModel.removeListDataListener(listener);
               }
@@ -145,22 +158,25 @@ public final class Serialization {
         }
       }
 
-      try (ObjectOutputStream ois =
-          new ObjectOutputStream(new FileOutputStream(SERIALIZED_MODEL_PATH.toString()))) {
+      try (ObjectOutputStream ois = new ObjectOutputStream(
+          new FileOutputStream(SERIALIZED_MODEL_PATH.toString()))) {
         ois.writeObject(serializedModel);
         LOGGER.log(Level.INFO, "Saved model successfully!");
       } catch (FileNotFoundException fnfe) {
-        LOGGER.log(Level.SEVERE, "Cannot write a file with the given file name: {0}",
+        LOGGER.log(Level.SEVERE,
+            "Cannot write a file with the given file name: {0}",
             SERIALIZED_MODEL_PATH);
         LOGGER.log(Level.SEVERE, null, fnfe);
       } catch (IOException ioe) {
-        LOGGER.log(Level.SEVERE, "An I/O error occurred while processing the file {0}",
+        LOGGER.log(Level.SEVERE,
+            "An I/O error occurred while processing the file {0}",
             SERIALIZED_MODEL_PATH);
         LOGGER.log(Level.SEVERE, null, ioe);
       }
 
       // Restore AbstractActions property listeners
-      if (propertyChangeListenersByActions != null && !propertyChangeListenersByActions.isEmpty()) {
+      if (propertyChangeListenersByActions != null
+          && !propertyChangeListenersByActions.isEmpty()) {
         for (Map.Entry<AbstractAction, PropertyChangeListener[]> entry : propertyChangeListenersByActions
             .entrySet()) {
           AbstractAction abstractAction = entry.getKey();
@@ -171,7 +187,8 @@ public final class Serialization {
         }
       }
       // Restore AbstractListModels list data listeners
-      if (listDataListenersByModels != null && !listDataListenersByModels.isEmpty()) {
+      if (listDataListenersByModels != null
+          && !listDataListenersByModels.isEmpty()) {
         for (Map.Entry<AbstractListModel<?>, ListDataListener[]> entry : listDataListenersByModels
             .entrySet()) {
           AbstractListModel<?> abstractListModel = entry.getKey();
@@ -190,19 +207,22 @@ public final class Serialization {
     if (JAR_PATH != null) {
       Path serializedActionPath = JAR_PATH.resolve(actionCommandKey);
       if (Files.isReadable(serializedActionPath)) {
-        try (ObjectInputStream ois =
-            new ObjectInputStream(new FileInputStream(serializedActionPath.toString()))) {
+        try (ObjectInputStream ois = new ObjectInputStream(
+            new FileInputStream(serializedActionPath.toString()))) {
           Object obj = ois.readObject();
           if (obj != null && obj instanceof Action) {
             action = (Action) obj;
-            LOGGER.log(Level.INFO, "Action loaded from previous state successfully!");
+            LOGGER.log(Level.INFO,
+                "Action loaded from previous state successfully!");
           }
         } catch (FileNotFoundException fnfe) {
-          LOGGER.log(Level.SEVERE, "Cannot open a file with the given file name: {0}",
+          LOGGER.log(Level.SEVERE,
+              "Cannot open a file with the given file name: {0}",
               serializedActionPath);
           LOGGER.log(Level.SEVERE, null, fnfe);
         } catch (IOException ioe) {
-          LOGGER.log(Level.SEVERE, "An I/O error occurred while processing the file {0}",
+          LOGGER.log(Level.SEVERE,
+              "An I/O error occurred while processing the file {0}",
               serializedActionPath);
           LOGGER.log(Level.SEVERE, null, ioe);
         } catch (ClassNotFoundException cnfe) {
@@ -249,9 +269,11 @@ public final class Serialization {
         if (action instanceof AbstractListModel) {
           abstractListModel = (AbstractListModel<?>) action;
         } else if (action instanceof AbstractJssComboAction
-            && ((AbstractJssComboAction<?>) action).getModel() instanceof AbstractListModel) {
+            && ((AbstractJssComboAction<?>) action)
+                .getModel() instanceof AbstractListModel) {
           abstractListModel =
-              (AbstractListModel<?>) ((AbstractJssComboAction<?>) action).getModel();
+              (AbstractListModel<?>) ((AbstractJssComboAction<?>) action)
+                  .getModel();
         }
 
         if (abstractListModel != null) {
@@ -261,17 +283,19 @@ public final class Serialization {
           }
         }
 
-        try (ObjectOutputStream ois =
-            new ObjectOutputStream(new FileOutputStream(serializedActionPath.toString()))) {
+        try (ObjectOutputStream ois = new ObjectOutputStream(
+            new FileOutputStream(serializedActionPath.toString()))) {
           ois.writeObject(action);
           LOGGER.log(Level.INFO, "Saved action {0} successfully!",
               serializedActionPath.getFileName().toString());
         } catch (FileNotFoundException fnfe) {
-          LOGGER.log(Level.SEVERE, "Cannot write a file with the given file name: {0}",
+          LOGGER.log(Level.SEVERE,
+              "Cannot write a file with the given file name: {0}",
               serializedActionPath);
           LOGGER.log(Level.SEVERE, null, fnfe);
         } catch (IOException ioe) {
-          LOGGER.log(Level.SEVERE, "An I/O error occurred while processing the file {0}",
+          LOGGER.log(Level.SEVERE,
+              "An I/O error occurred while processing the file {0}",
               serializedActionPath);
           LOGGER.log(Level.SEVERE, null, ioe);
         }

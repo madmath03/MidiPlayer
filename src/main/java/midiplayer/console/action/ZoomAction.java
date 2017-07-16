@@ -30,7 +30,8 @@ public final class ZoomAction extends jswingshell.action.AbstractJssAction
   /**
    * Logger.
    */
-  private static final Logger LOGGER = Logger.getLogger(ZoomAction.class.getName());
+  private static final Logger LOGGER =
+      Logger.getLogger(ZoomAction.class.getName());
 
   /**
    * This action default identifier.
@@ -41,16 +42,20 @@ public final class ZoomAction extends jswingshell.action.AbstractJssAction
 
   private static final String ACTION_LABEL = "Zoom";
 
-  private static final String ACTION_LABEL_KEY = "midi_player.console.action.zoom.name";
+  private static final String ACTION_LABEL_KEY =
+      "midiplayer.console.action.zoom.name";
 
-  private static final String COMMAND_BRIEF_HELP = "Change the size of the shell text.";
+  private static final String COMMAND_BRIEF_HELP =
+      "Change the size of the shell text.";
 
-  private static final String COMMAND_BRIEF_HELP_KEY = "midi_player.console.action.zoom.help.short";
+  private static final String COMMAND_BRIEF_HELP_KEY =
+      "midiplayer.console.action.zoom.help.short";
 
-  private static final String COMMAND_HELP_KEY = "midi_player.console.action.zoom.help.long";
+  private static final String COMMAND_HELP_KEY =
+      "midiplayer.console.action.zoom.help.long";
 
   private static final String COMMAND_RUN_INVALID_ARGUMENT_ERROR_KEY =
-      "midi_player.console.action.zoom.run.invalid_argument_error";
+      "midiplayer.console.action.zoom.run.invalid_argument_error";
 
   private static String commandHelp;
 
@@ -71,34 +76,45 @@ public final class ZoomAction extends jswingshell.action.AbstractJssAction
     if (!commandHelpInitialized && action != null) {
       StringBuilder stringBuilder = new StringBuilder();
 
-      String commandIdsAsString = action.getCommandIdentifiersAsString(), zoomInArgument = ZOOM_IN,
-          zoomFitArgument = ZOOM_FIT, zoomOutArgument = ZOOM_OUT,
-          commandIdentifier = action.getDefaultCommandIdentifier(), sampleZoomInArgument = "+42",
-          sampleZoomOutArgument = "-0.5";
+      String commandIdsAsString = action.getCommandIdentifiersAsString(),
+          zoomInArgument = ZOOM_IN, zoomFitArgument = ZOOM_FIT,
+          zoomOutArgument = ZOOM_OUT,
+          commandIdentifier = action.getDefaultCommandIdentifier(),
+          sampleZoomInArgument = "+42", sampleZoomOutArgument = "-0.5";
       stringBuilder.append(action.getBriefHelp()).append("\n");
       stringBuilder.append("\n");
       try {
-        stringBuilder.append(ResourceUtils.getMessage(COMMAND_HELP_KEY, commandIdsAsString,
-            zoomInArgument, zoomFitArgument, zoomOutArgument, commandIdentifier,
-            sampleZoomInArgument, sampleZoomOutArgument));
+        stringBuilder.append(ResourceUtils.getMessage(COMMAND_HELP_KEY,
+            commandIdsAsString, zoomInArgument, zoomFitArgument,
+            zoomOutArgument, commandIdentifier, sampleZoomInArgument,
+            sampleZoomOutArgument));
       } catch (MissingResourceException e) {
-        LOGGER.log(Level.SEVERE, "Resource not found: \"" + COMMAND_HELP_KEY + "\"", e);
-        stringBuilder.append("Shell text size can be increased by one point:").append("\n");
-        stringBuilder.append("\t").append(commandIdsAsString).append(" ").append(zoomInArgument)
+        LOGGER.log(Level.SEVERE,
+            "Resource not found: \"" + COMMAND_HELP_KEY + "\"", e);
+        stringBuilder.append("Shell text size can be increased by one point:")
             .append("\n");
+        stringBuilder.append("\t").append(commandIdsAsString).append(" ")
+            .append(zoomInArgument).append("\n");
         stringBuilder.append("\n");
-        stringBuilder.append("Shell text size can be reset to its default values:").append("\n");
-        stringBuilder.append("\t").append(commandIdsAsString).append(" ").append(zoomFitArgument)
+        stringBuilder
+            .append("Shell text size can be reset to its default values:")
             .append("\n");
+        stringBuilder.append("\t").append(commandIdsAsString).append(" ")
+            .append(zoomFitArgument).append("\n");
         stringBuilder.append("\n");
-        stringBuilder.append("Shell text size can be decreased by one point:").append("\n");
-        stringBuilder.append("\t").append(commandIdsAsString).append(" ").append(zoomOutArgument)
+        stringBuilder.append("Shell text size can be decreased by one point:")
             .append("\n");
+        stringBuilder.append("\t").append(commandIdsAsString).append(" ")
+            .append(zoomOutArgument).append("\n");
         stringBuilder.append("\n");
-        stringBuilder.append("Shell text size can also be derived by a given value:").append("\n");
-        stringBuilder.append("\t").append(commandIdsAsString).append(" number").append("\n");
+        stringBuilder
+            .append("Shell text size can also be derived by a given value:")
+            .append("\n");
+        stringBuilder.append("\t").append(commandIdsAsString).append(" number")
+            .append("\n");
         stringBuilder.append("Example: ").append("\n");
-        stringBuilder.append(commandIdentifier).append(sampleZoomInArgument).append("\n");
+        stringBuilder.append(commandIdentifier).append(sampleZoomInArgument)
+            .append("\n");
         stringBuilder.append("Example: ").append("\n");
         stringBuilder.append(commandIdentifier).append(sampleZoomOutArgument);
       }
@@ -121,7 +137,8 @@ public final class ZoomAction extends jswingshell.action.AbstractJssAction
       try {
         commandBriefHelp = ResourceUtils.getMessage(COMMAND_BRIEF_HELP_KEY);
       } catch (MissingResourceException e) {
-        LOGGER.log(Level.SEVERE, "Resource not found: \"" + COMMAND_BRIEF_HELP_KEY + "\"", e);
+        LOGGER.log(Level.SEVERE,
+            "Resource not found: \"" + COMMAND_BRIEF_HELP_KEY + "\"", e);
         commandBriefHelp = COMMAND_BRIEF_HELP;
       }
       commandBriefHelpInitialized = true;
@@ -197,14 +214,17 @@ public final class ZoomAction extends jswingshell.action.AbstractJssAction
   public int run(IJssController shellController, String... args) {
     int commandReturnStatus = AbstractJssAction.SUCCESS;
 
-    if (shellController == null || !(shellController.getView() instanceof JssTextArea)) {
+    if (shellController == null
+        || !(shellController.getView() instanceof JssTextArea)) {
       commandReturnStatus = AbstractJssAction.ERROR;
     } else {
       JssTextArea view = (JssTextArea) shellController.getView();
       if (args == null || args.length == 1 || args.length > 2) {
-        shellController.publish(IJssController.PublicationLevel.WARNING, getHelp(shellController));
+        shellController.publish(IJssController.PublicationLevel.WARNING,
+            getHelp(shellController));
       } else if (args.length == 0) {
-        shellController.publish(IJssController.PublicationLevel.WARNING, getHelp(shellController));
+        shellController.publish(IJssController.PublicationLevel.WARNING,
+            getHelp(shellController));
       } else {
         float size = -1;
         switch (args[1]) {
@@ -225,13 +245,15 @@ public final class ZoomAction extends jswingshell.action.AbstractJssAction
 
               String msg;
               try {
-                msg = ResourceUtils.getMessage(COMMAND_RUN_INVALID_ARGUMENT_ERROR_KEY, args[1]);
+                msg = ResourceUtils.getMessage(
+                    COMMAND_RUN_INVALID_ARGUMENT_ERROR_KEY, args[1]);
               } catch (MissingResourceException e1) {
-                LOGGER.log(Level.SEVERE,
-                    "Resource not found: \"" + COMMAND_RUN_INVALID_ARGUMENT_ERROR_KEY + "\"", e1);
+                LOGGER.log(Level.SEVERE, "Resource not found: \""
+                    + COMMAND_RUN_INVALID_ARGUMENT_ERROR_KEY + "\"", e1);
                 msg = "Invalid zoom argument: " + args[1];
               }
-              shellController.publish(IJssController.PublicationLevel.WARNING, msg);
+              shellController.publish(IJssController.PublicationLevel.WARNING,
+                  msg);
 
               shellController.publish(IJssController.PublicationLevel.WARNING,
                   getHelp(shellController));
@@ -259,11 +281,13 @@ public final class ZoomAction extends jswingshell.action.AbstractJssAction
     try {
       ResourceUtils.setTextAndMnemonic(this, ACTION_LABEL_KEY);
     } catch (MissingResourceException e) {
-      LOGGER.log(Level.SEVERE, "Resource not found: \"" + ACTION_LABEL_KEY + "\"", e);
+      LOGGER.log(Level.SEVERE,
+          "Resource not found: \"" + ACTION_LABEL_KEY + "\"", e);
       putValue(Action.NAME, ACTION_LABEL);
     }
     putValue(Action.SHORT_DESCRIPTION, this.getBriefHelp());
-    putValue(Action.LONG_DESCRIPTION, this.getHelp(this.getDefaultShellController()));
+    putValue(Action.LONG_DESCRIPTION,
+        this.getHelp(this.getDefaultShellController()));
   }
 
   // #########################################################################

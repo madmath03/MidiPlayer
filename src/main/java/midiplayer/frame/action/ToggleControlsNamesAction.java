@@ -35,8 +35,8 @@ import midiplayer.resources.ResourceUtils;
  *
  * @author Mathieu Brunot
  */
-public final class ToggleControlsNamesAction extends jswingshell.action.AbstractJssSwitchAction
-    implements LocaleChangeListener {
+public final class ToggleControlsNamesAction extends
+    jswingshell.action.AbstractJssSwitchAction implements LocaleChangeListener {
 
   /**
    * The {@code serialVersionUID}.
@@ -46,7 +46,8 @@ public final class ToggleControlsNamesAction extends jswingshell.action.Abstract
   /**
    * Logger.
    */
-  private static final Logger LOGGER = Logger.getLogger(ToggleControlsNamesAction.class.getName());
+  private static final Logger LOGGER =
+      Logger.getLogger(ToggleControlsNamesAction.class.getName());
 
   /**
    * This action default identifier.
@@ -57,15 +58,17 @@ public final class ToggleControlsNamesAction extends jswingshell.action.Abstract
 
   private static final String ACTION_LABEL = "Toggle controls names";
 
-  private static final String ACTION_LABEL_KEY = "midi_player.action.toggle_controls_names.name";
+  private static final String ACTION_LABEL_KEY =
+      "midiplayer.action.toggle_controls_names.name";
 
-  private static final String COMMAND_BRIEF_HELP = "Toggle the frame's controls' names display.";
+  private static final String COMMAND_BRIEF_HELP =
+      "Toggle the frame's controls' names display.";
 
   private static final String COMMAND_BRIEF_HELP_KEY =
-      "midi_player.action.toggle_controls_names.help.short";
+      "midiplayer.action.toggle_controls_names.help.short";
 
   private static final String COMMAND_HELP_KEY =
-      "midi_player.action.toggle_controls_names.help.long";
+      "midiplayer.action.toggle_controls_names.help.long";
 
   private static String commandHelp;
 
@@ -94,11 +97,14 @@ public final class ToggleControlsNamesAction extends jswingshell.action.Abstract
       stringBuilder.append(action.getBriefHelp()).append("\n");
       stringBuilder.append("\n");
       try {
-        stringBuilder.append(ResourceUtils.getMessage(COMMAND_HELP_KEY, commandIdsAsString,
-            action.getOnArgumentsAsString(), action.getOffArgumentsAsString()));
+        stringBuilder.append(ResourceUtils.getMessage(COMMAND_HELP_KEY,
+            commandIdsAsString, action.getOnArgumentsAsString(),
+            action.getOffArgumentsAsString()));
       } catch (MissingResourceException e) {
-        LOGGER.log(Level.SEVERE, "Resource not found: \"" + COMMAND_HELP_KEY + "\"", e);
-        stringBuilder.append("You can switch display mode of controls' names as follow:")
+        LOGGER.log(Level.SEVERE,
+            "Resource not found: \"" + COMMAND_HELP_KEY + "\"", e);
+        stringBuilder
+            .append("You can switch display mode of controls' names as follow:")
             .append("\n");
         stringBuilder.append("\t").append(commandIdsAsString).append(" ")
             .append(action.getOnArgumentsAsString()).append("\n");
@@ -124,7 +130,8 @@ public final class ToggleControlsNamesAction extends jswingshell.action.Abstract
       try {
         commandBriefHelp = ResourceUtils.getMessage(COMMAND_BRIEF_HELP_KEY);
       } catch (MissingResourceException e) {
-        LOGGER.log(Level.SEVERE, "Resource not found: \"" + COMMAND_BRIEF_HELP_KEY + "\"", e);
+        LOGGER.log(Level.SEVERE,
+            "Resource not found: \"" + COMMAND_BRIEF_HELP_KEY + "\"", e);
         commandBriefHelp = COMMAND_BRIEF_HELP;
       }
       commandBriefHelpInitialized = true;
@@ -157,12 +164,13 @@ public final class ToggleControlsNamesAction extends jswingshell.action.Abstract
     localeChanged();
   }
 
-  public ToggleControlsNamesAction(MidiPlayerFrame frame, JssTextAreaController shellController,
-      String... args) {
+  public ToggleControlsNamesAction(MidiPlayerFrame frame,
+      JssTextAreaController shellController, String... args) {
     this(false, frame, shellController, args);
   }
 
-  public ToggleControlsNamesAction(MidiPlayerFrame frame, JssTextAreaController shellController) {
+  public ToggleControlsNamesAction(MidiPlayerFrame frame,
+      JssTextAreaController shellController) {
     this(false, frame, shellController, (String[]) null);
   }
 
@@ -212,7 +220,8 @@ public final class ToggleControlsNamesAction extends jswingshell.action.Abstract
   }
 
   @Override
-  protected boolean doSwitch(IJssController shellController, Boolean switchValue) {
+  protected boolean doSwitch(IJssController shellController,
+      Boolean switchValue) {
     JPanel controls = frame.getPanelControl();
 
     if (controls != null) {
@@ -256,11 +265,13 @@ public final class ToggleControlsNamesAction extends jswingshell.action.Abstract
     try {
       ResourceUtils.setTextAndMnemonic(this, ACTION_LABEL_KEY);
     } catch (MissingResourceException e) {
-      LOGGER.log(Level.SEVERE, "Resource not found: \"" + ACTION_LABEL_KEY + "\"", e);
+      LOGGER.log(Level.SEVERE,
+          "Resource not found: \"" + ACTION_LABEL_KEY + "\"", e);
       putValue(Action.NAME, ACTION_LABEL);
     }
     putValue(Action.SHORT_DESCRIPTION, this.getBriefHelp());
-    putValue(Action.LONG_DESCRIPTION, this.getHelp(this.getDefaultShellController()));
+    putValue(Action.LONG_DESCRIPTION,
+        this.getHelp(this.getDefaultShellController()));
   }
 
 }

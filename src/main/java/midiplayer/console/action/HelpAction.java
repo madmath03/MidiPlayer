@@ -37,7 +37,8 @@ import midiplayer.resources.LocaleChangeListener;
  *
  * @author Mathieu Brunot
  */
-public final class HelpAction extends AbstractJssAction implements LocaleChangeListener {
+public final class HelpAction extends AbstractJssAction
+    implements LocaleChangeListener {
 
   /**
    * The {@code serialVersionUID}.
@@ -47,7 +48,8 @@ public final class HelpAction extends AbstractJssAction implements LocaleChangeL
   /**
    * Logger.
    */
-  private static final Logger LOGGER = Logger.getLogger(HelpAction.class.getName());
+  private static final Logger LOGGER =
+      Logger.getLogger(HelpAction.class.getName());
 
   /**
    * This action default identifier.
@@ -60,18 +62,23 @@ public final class HelpAction extends AbstractJssAction implements LocaleChangeL
 
   private static final String ACTION_LABEL = "Help";
 
-  private static final String ACTION_LABEL_KEY = "midi_player.console.action.help.name";
+  private static final String ACTION_LABEL_KEY =
+      "midiplayer.console.action.help.name";
 
-  private static final String COMMAND_BRIEF_HELP = "Display available commands.";
+  private static final String COMMAND_BRIEF_HELP =
+      "Display available commands.";
 
-  private static final String COMMAND_BRIEF_HELP_KEY = "midi_player.console.action.help.help.short";
+  private static final String COMMAND_BRIEF_HELP_KEY =
+      "midiplayer.console.action.help.help.short";
 
-  private static final String COMMAND_HELP_KEY = "midi_player.console.action.help.help.long";
+  private static final String COMMAND_HELP_KEY =
+      "midiplayer.console.action.help.help.long";
 
-  private static final String COMMAND_RUN_KEY = "midi_player.console.action.help.run";
+  private static final String COMMAND_RUN_KEY =
+      "midiplayer.console.action.help.run";
 
   private static final String COMMAND_RUN_NOT_FOUND_WARNING_KEY =
-      "midi_player.console.action.help.run.command_not_found";
+      "midiplayer.console.action.help.run.command_not_found";
 
   private static final String ICON_KEY = "help.png";
 
@@ -99,13 +106,15 @@ public final class HelpAction extends AbstractJssAction implements LocaleChangeL
       stringBuilder.append(action.getBriefHelp()).append("\n");
       stringBuilder.append("\n");
       try {
-        stringBuilder.append(
-            ResourceUtils.getMessage(COMMAND_HELP_KEY, commandIdsAsString, defaultCommandId));
+        stringBuilder.append(ResourceUtils.getMessage(COMMAND_HELP_KEY,
+            commandIdsAsString, defaultCommandId));
       } catch (MissingResourceException e) {
-        LOGGER.log(Level.SEVERE, "Resource not found: \"" + COMMAND_HELP_KEY + "\"", e);
-        stringBuilder.append("For more information on a command, enter ").append(commandIdsAsString)
-            .append(" followed by the command:");
-        stringBuilder.append("\n\t").append(defaultCommandId).append(" [command] ");
+        LOGGER.log(Level.SEVERE,
+            "Resource not found: \"" + COMMAND_HELP_KEY + "\"", e);
+        stringBuilder.append("For more information on a command, enter ")
+            .append(commandIdsAsString).append(" followed by the command:");
+        stringBuilder.append("\n\t").append(defaultCommandId)
+            .append(" [command] ");
       }
 
       commandHelp = stringBuilder.toString();
@@ -126,7 +135,8 @@ public final class HelpAction extends AbstractJssAction implements LocaleChangeL
       try {
         commandBriefHelp = ResourceUtils.getMessage(COMMAND_BRIEF_HELP_KEY);
       } catch (MissingResourceException e) {
-        LOGGER.log(Level.SEVERE, "Resource not found: \"" + COMMAND_BRIEF_HELP_KEY + "\"", e);
+        LOGGER.log(Level.SEVERE,
+            "Resource not found: \"" + COMMAND_BRIEF_HELP_KEY + "\"", e);
         commandBriefHelp = COMMAND_BRIEF_HELP;
       }
       commandBriefHelpInitialized = true;
@@ -148,9 +158,10 @@ public final class HelpAction extends AbstractJssAction implements LocaleChangeL
 
   // #########################################################################
   public HelpAction(IJssController shellController, String... args) {
-    super(ACTION_LABEL, ResourceUtils.createImageIcon(ICON_KEY, ACTION_LABEL), shellController,
-        args);
-    putValue(Action.LARGE_ICON_KEY, ResourceUtils.createImageIcon(ICON_KEY, ACTION_LABEL, true));
+    super(ACTION_LABEL, ResourceUtils.createImageIcon(ICON_KEY, ACTION_LABEL),
+        shellController, args);
+    putValue(Action.LARGE_ICON_KEY,
+        ResourceUtils.createImageIcon(ICON_KEY, ACTION_LABEL, true));
     putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_F1, 0));
     putValue(Action.ACTION_COMMAND_KEY, getDefaultCommandIdentifier());
     localeChanged();
@@ -198,46 +209,55 @@ public final class HelpAction extends AbstractJssAction implements LocaleChangeL
         String commandIdsAsString = this.getCommandIdentifiersAsString();
 
         try {
-          stringBuilder.append(ResourceUtils.getMessage(COMMAND_RUN_KEY, commandIdsAsString));
+          stringBuilder.append(
+              ResourceUtils.getMessage(COMMAND_RUN_KEY, commandIdsAsString));
         } catch (MissingResourceException e) {
-          LOGGER.log(Level.SEVERE, "Resource not found: \"" + COMMAND_RUN_KEY + "\"", e);
+          LOGGER.log(Level.SEVERE,
+              "Resource not found: \"" + COMMAND_RUN_KEY + "\"", e);
           stringBuilder.append("For more information on a command, enter ")
               .append(commandIdsAsString).append(" followed by the command.");
           stringBuilder.append("\n");
           stringBuilder.append("\n").append("Available commands:");
         }
 
-        Collection<IJssAction> shellAvailableActions = shellController.getAvailableActions();
+        Collection<IJssAction> shellAvailableActions =
+            shellController.getAvailableActions();
         if (shellAvailableActions != null) {
-          List<IJssAction> availableActions = new ArrayList<>(shellAvailableActions);
+          List<IJssAction> availableActions =
+              new ArrayList<>(shellAvailableActions);
           Collections.sort(availableActions);
           for (IJssAction availableAction : availableActions) {
             if (availableAction != null) {
-              stringBuilder.append("\n\t").append(availableAction.getCommandIdentifiersAsString())
+              stringBuilder.append("\n\t")
+                  .append(availableAction.getCommandIdentifiersAsString())
                   .append(" ").append(availableAction.getBriefHelp());
             }
           }
         }
 
-        shellController.publish(IJssController.PublicationLevel.SUCCESS, stringBuilder.toString());
+        shellController.publish(IJssController.PublicationLevel.SUCCESS,
+            stringBuilder.toString());
       } else if (args.length == 2) {
-        IJssAction action = shellController.getActionForCommandIdentifier(args[1]);
+        IJssAction action =
+            shellController.getActionForCommandIdentifier(args[1]);
         if (action != null) {
           shellController.publish(IJssController.PublicationLevel.SUCCESS,
               action.getHelp(shellController));
         } else {
           String msg;
           try {
-            msg = ResourceUtils.getMessage(COMMAND_RUN_NOT_FOUND_WARNING_KEY, args[1]);
+            msg = ResourceUtils.getMessage(COMMAND_RUN_NOT_FOUND_WARNING_KEY,
+                args[1]);
           } catch (MissingResourceException e) {
-            LOGGER.log(Level.SEVERE,
-                "Resource not found: \"" + COMMAND_RUN_NOT_FOUND_WARNING_KEY + "\"", e);
+            LOGGER.log(Level.SEVERE, "Resource not found: \""
+                + COMMAND_RUN_NOT_FOUND_WARNING_KEY + "\"", e);
             msg = "Command not found: " + args[1];
           }
           shellController.publish(IJssController.PublicationLevel.WARNING, msg);
         }
       } else {
-        shellController.publish(IJssController.PublicationLevel.WARNING, getHelp(shellController));
+        shellController.publish(IJssController.PublicationLevel.WARNING,
+            getHelp(shellController));
       }
     }
 
@@ -256,11 +276,13 @@ public final class HelpAction extends AbstractJssAction implements LocaleChangeL
     try {
       ResourceUtils.setTextAndMnemonic(this, ACTION_LABEL_KEY);
     } catch (MissingResourceException e) {
-      LOGGER.log(Level.SEVERE, "Resource not found: \"" + ACTION_LABEL_KEY + "\"", e);
+      LOGGER.log(Level.SEVERE,
+          "Resource not found: \"" + ACTION_LABEL_KEY + "\"", e);
       putValue(Action.NAME, ACTION_LABEL);
     }
     putValue(Action.SHORT_DESCRIPTION, this.getBriefHelp());
-    putValue(Action.LONG_DESCRIPTION, this.getHelp(this.getDefaultShellController()));
+    putValue(Action.LONG_DESCRIPTION,
+        this.getHelp(this.getDefaultShellController()));
   }
 
   // #########################################################################

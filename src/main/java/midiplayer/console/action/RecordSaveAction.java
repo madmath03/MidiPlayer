@@ -34,7 +34,8 @@ import midiplayer.resources.LocaleChangeListener;
  *
  * @author Mathieu Brunot
  */
-public final class RecordSaveAction extends AbstractJssAction implements LocaleChangeListener {
+public final class RecordSaveAction extends AbstractJssAction
+    implements LocaleChangeListener {
 
   /**
    * The {@code serialVersionUID}.
@@ -44,7 +45,8 @@ public final class RecordSaveAction extends AbstractJssAction implements LocaleC
   /**
    * Logger.
    */
-  private static final Logger LOGGER = Logger.getLogger(RecordSaveAction.class.getName());
+  private static final Logger LOGGER =
+      Logger.getLogger(RecordSaveAction.class.getName());
 
   /**
    * This action default identifier.
@@ -55,14 +57,16 @@ public final class RecordSaveAction extends AbstractJssAction implements LocaleC
 
   private static final String ACTION_LABEL = "Save recording";
 
-  private static final String ACTION_LABEL_KEY = "midi_player.console.action.record_save.name";
+  private static final String ACTION_LABEL_KEY =
+      "midiplayer.console.action.record_save.name";
 
   private static final String ICON_KEY = "page_save.png";
 
-  private static final String COMMAND_BRIEF_HELP = "Save to a file a shell recording session.";
+  private static final String COMMAND_BRIEF_HELP =
+      "Save to a file a shell recording session.";
 
   private static final String COMMAND_BRIEF_HELP_KEY =
-      "midi_player.console.action.record_save.help.short";
+      "midiplayer.console.action.record_save.help.short";
 
   private static String commandBriefHelp;
 
@@ -80,7 +84,8 @@ public final class RecordSaveAction extends AbstractJssAction implements LocaleC
       try {
         commandBriefHelp = ResourceUtils.getMessage(COMMAND_BRIEF_HELP_KEY);
       } catch (MissingResourceException e) {
-        LOGGER.log(Level.SEVERE, "Resource not found: \"" + COMMAND_BRIEF_HELP_KEY + "\"", e);
+        LOGGER.log(Level.SEVERE,
+            "Resource not found: \"" + COMMAND_BRIEF_HELP_KEY + "\"", e);
         commandBriefHelp = COMMAND_BRIEF_HELP;
       }
       commandBriefHelpInitialized = true;
@@ -105,9 +110,11 @@ public final class RecordSaveAction extends AbstractJssAction implements LocaleC
 
   private transient Component parent;
 
-  public RecordSaveAction(RecordAction recordAction, JFileChooser fileChooser, Component parent) {
-    super(ACTION_LABEL, ResourceUtils.createImageIcon(ICON_KEY, ACTION_LABEL), null,
-        new String[] {recordAction.getDefaultCommandIdentifier(), RecordAction.RECORD_SAVE});
+  public RecordSaveAction(RecordAction recordAction, JFileChooser fileChooser,
+      Component parent) {
+    super(ACTION_LABEL, ResourceUtils.createImageIcon(ICON_KEY, ACTION_LABEL),
+        null, new String[] {recordAction.getDefaultCommandIdentifier(),
+            RecordAction.RECORD_SAVE});
     this.recordAction = recordAction;
     // Set the file chooser
     if (fileChooser == null) {
@@ -120,7 +127,8 @@ public final class RecordSaveAction extends AbstractJssAction implements LocaleC
     }
     this.parent = parent;
 
-    putValue(Action.LARGE_ICON_KEY, ResourceUtils.createImageIcon(ICON_KEY, ACTION_LABEL, true));
+    putValue(Action.LARGE_ICON_KEY,
+        ResourceUtils.createImageIcon(ICON_KEY, ACTION_LABEL, true));
     putValue(Action.ACTION_COMMAND_KEY, getDefaultCommandIdentifier());
     localeChanged();
   }
@@ -147,12 +155,14 @@ public final class RecordSaveAction extends AbstractJssAction implements LocaleC
     String[] eventArgs = null;
 
     // Open file chooser and select file
-    FileNameExtensionFilter filter = new FileNameExtensionFilter("Shell file", "shell", "shell");
+    FileNameExtensionFilter filter =
+        new FileNameExtensionFilter("Shell file", "shell", "shell");
     fileChooser.setFileFilter(filter);
     fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
     int returnVal = fileChooser.showSaveDialog(parent);
     if (returnVal == JFileChooser.APPROVE_OPTION) {
-      eventArgs = Arrays.copyOf(getDefaultArguments(), getDefaultArguments().length + 1);
+      eventArgs = Arrays.copyOf(getDefaultArguments(),
+          getDefaultArguments().length + 1);
       eventArgs[2] = fileChooser.getSelectedFile().getAbsolutePath();
     }
 
@@ -191,11 +201,13 @@ public final class RecordSaveAction extends AbstractJssAction implements LocaleC
     try {
       ResourceUtils.setTextAndMnemonic(this, ACTION_LABEL_KEY);
     } catch (MissingResourceException e) {
-      LOGGER.log(Level.SEVERE, "Resource not found: \"" + ACTION_LABEL_KEY + "\"", e);
+      LOGGER.log(Level.SEVERE,
+          "Resource not found: \"" + ACTION_LABEL_KEY + "\"", e);
       putValue(Action.NAME, ACTION_LABEL);
     }
     putValue(Action.SHORT_DESCRIPTION, this.getBriefHelp());
-    putValue(Action.LONG_DESCRIPTION, this.getHelp(this.getDefaultShellController()));
+    putValue(Action.LONG_DESCRIPTION,
+        this.getHelp(this.getDefaultShellController()));
   }
 
   // #########################################################################

@@ -44,14 +44,16 @@ public class ActionFactory {
   }
 
   public IJssAction getAction(String actionId) {
-    IJssAction action = frame.getShellModel().getActionForCommandIdentifier(actionId);
+    IJssAction action =
+        frame.getShellModel().getActionForCommandIdentifier(actionId);
     LocalizedJssTextAreaController controller = frame.getShellController();
 
     switch (actionId) {
       case OpenAction.DEFAULT_IDENTIFIER:
         OpenAction openAction;
         if (action == null) {
-          openAction = new OpenAction(frame.getjFileChooser(), frame, controller);
+          openAction =
+              new OpenAction(frame.getjFileChooser(), frame, controller);
           action = openAction;
           addToShell(controller, action);
         } else {
@@ -64,8 +66,8 @@ public class ActionFactory {
       case SaveScreenAction.DEFAULT_IDENTIFIER:
         SaveScreenAction saveScreenAction;
         if (action == null) {
-          saveScreenAction =
-              new SaveScreenAction(frame.getjFileChooser(), frame, frame, controller);
+          saveScreenAction = new SaveScreenAction(frame.getjFileChooser(),
+              frame, frame, controller);
           action = saveScreenAction;
           addToShell(controller, action);
         } else {
@@ -130,8 +132,8 @@ public class ActionFactory {
       case ToggleToolbarAction.DEFAULT_IDENTIFIER:
         ToggleToolbarAction toggleToolbarAction;
         if (action == null) {
-          toggleToolbarAction =
-              new ToggleToolbarAction(frame.isDisplayToolbar(), frame, controller);
+          toggleToolbarAction = new ToggleToolbarAction(
+              frame.isDisplayToolbar(), frame, controller);
           action = toggleToolbarAction;
           addToShell(controller, action);
         } else {
@@ -143,8 +145,8 @@ public class ActionFactory {
       case ToggleToolbarIconsAction.DEFAULT_IDENTIFIER:
         ToggleToolbarIconsAction toggleToolbarIconsAction;
         if (action == null) {
-          toggleToolbarIconsAction =
-              new ToggleToolbarIconsAction(frame.isDisplayToolbarButtonIcons(), frame, controller);
+          toggleToolbarIconsAction = new ToggleToolbarIconsAction(
+              frame.isDisplayToolbarButtonIcons(), frame, controller);
           action = toggleToolbarIconsAction;
           addToShell(controller, action);
         } else {
@@ -156,8 +158,8 @@ public class ActionFactory {
       case ToggleToolbarNamesAction.DEFAULT_IDENTIFIER:
         ToggleToolbarNamesAction toggleToolbarNamesAction;
         if (action == null) {
-          toggleToolbarNamesAction =
-              new ToggleToolbarNamesAction(frame.isDisplayToolbarButtonNames(), frame, controller);
+          toggleToolbarNamesAction = new ToggleToolbarNamesAction(
+              frame.isDisplayToolbarButtonNames(), frame, controller);
           action = toggleToolbarNamesAction;
           addToShell(controller, action);
         } else {
@@ -174,7 +176,8 @@ public class ActionFactory {
           action = toggleToolbarLargeIconsAction;
           addToShell(controller, action);
         } else {
-          toggleToolbarLargeIconsAction = (ToggleToolbarLargeIconsAction) action;
+          toggleToolbarLargeIconsAction =
+              (ToggleToolbarLargeIconsAction) action;
           toggleToolbarLargeIconsAction.setFrame(frame);
           toggleToolbarLargeIconsAction.setDefaultShellController(controller);
         }
@@ -182,8 +185,8 @@ public class ActionFactory {
       case ToggleToolbarLevelCombo.DEFAULT_IDENTIFIER:
         ToggleToolbarLevelCombo toggleToolbarLevelCombo;
         if (action == null) {
-          toggleToolbarLevelCombo =
-              new ToggleToolbarLevelCombo(frame.isDisplayToolbarLevelCombo(), frame, controller);
+          toggleToolbarLevelCombo = new ToggleToolbarLevelCombo(
+              frame.isDisplayToolbarLevelCombo(), frame, controller);
           action = toggleToolbarLevelCombo;
           addToShell(controller, action);
         } else {
@@ -195,8 +198,8 @@ public class ActionFactory {
       case ToggleToolbarLocaleCombo.DEFAULT_IDENTIFIER:
         ToggleToolbarLocaleCombo toggleToolbarLocaleCombo;
         if (action == null) {
-          toggleToolbarLocaleCombo =
-              new ToggleToolbarLocaleCombo(frame.isDisplayToolbarLocaleCombo(), frame, controller);
+          toggleToolbarLocaleCombo = new ToggleToolbarLocaleCombo(
+              frame.isDisplayToolbarLocaleCombo(), frame, controller);
           action = toggleToolbarLocaleCombo;
           addToShell(controller, action);
         } else {
@@ -280,10 +283,11 @@ public class ActionFactory {
       case LevelAction.DEFAULT_IDENTIFIER:
         LevelAction levelComboAction;
         if (action == null) {
-          levelComboAction = (LevelAction) Serialization.loadSerializedAction(actionId);
+          levelComboAction =
+              (LevelAction) Serialization.loadSerializedAction(actionId);
           if (levelComboAction == null) {
-            levelComboAction =
-                new LevelAction(IJssController.PublicationLevel.values(), controller);
+            levelComboAction = new LevelAction(
+                IJssController.PublicationLevel.values(), controller);
             levelComboAction.setSelectedItem(controller.getPublicationLevel());
           }
           action = levelComboAction;
@@ -297,15 +301,16 @@ public class ActionFactory {
         break;
     }
 
-    if (action instanceof LocaleChangeListener
-        && !ResourceUtils.containsLocaleChangeListener((LocaleChangeListener) action)) {
+    if (action instanceof LocaleChangeListener && !ResourceUtils
+        .containsLocaleChangeListener((LocaleChangeListener) action)) {
       ResourceUtils.addLocaleChangeListener((LocaleChangeListener) action);
     }
 
     return action;
   }
 
-  private boolean addToShell(LocalizedJssTextAreaController controller, IJssAction action) {
+  private boolean addToShell(LocalizedJssTextAreaController controller,
+      IJssAction action) {
     // Add action to the shell
     if (action == null) {
       return false;
@@ -317,8 +322,8 @@ public class ActionFactory {
       added = frame.getShellModel().add(action);
     }
     // If the action was not added to the model (already there?)
-    if (!added && action instanceof LocaleChangeListener
-        && !ResourceUtils.containsLocaleChangeListener((LocaleChangeListener) action)) {
+    if (!added && action instanceof LocaleChangeListener && !ResourceUtils
+        .containsLocaleChangeListener((LocaleChangeListener) action)) {
       ResourceUtils.addLocaleChangeListener((LocaleChangeListener) action);
     }
     return added;

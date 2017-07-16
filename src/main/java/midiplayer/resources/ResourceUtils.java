@@ -27,7 +27,8 @@ public final class ResourceUtils {
   /**
    * Logger.
    */
-  private static final Logger LOGGER = Logger.getLogger(ResourceUtils.class.getName());
+  private static final Logger LOGGER =
+      Logger.getLogger(ResourceUtils.class.getName());
 
   private static final String BASE_ICON_PATH = "icons/";
 
@@ -35,7 +36,8 @@ public final class ResourceUtils {
 
   private static final String LARGE_ICON_PATH = "32x32/";
 
-  private static final String FRAME_RESOURCE_BUNDLE = "midi_player.resources.i8n.midiPlayerFrame";
+  private static final String FRAME_RESOURCE_BUNDLE =
+      "midiplayer.resources.i8n.midiPlayerFrame";
 
   // #########################################################################
   /**
@@ -52,7 +54,8 @@ public final class ResourceUtils {
   /**
    * Application's available locales.
    */
-  private static final Locale[] APPLICATION_AVAILABLE_LOCALES = {Locale.US, Locale.FRANCE};
+  private static final Locale[] APPLICATION_AVAILABLE_LOCALES =
+      {Locale.US, Locale.FRANCE};
 
   static {
     Locale defaultLocale = Locale.getDefault();
@@ -83,7 +86,8 @@ public final class ResourceUtils {
    */
   public static Locale[] getAvailableLocales() {
     // If application did not define its available locales
-    if (APPLICATION_AVAILABLE_LOCALES == null || APPLICATION_AVAILABLE_LOCALES.length == 0) {
+    if (APPLICATION_AVAILABLE_LOCALES == null
+        || APPLICATION_AVAILABLE_LOCALES.length == 0) {
       // Use the JVM available locales
       return Locale.getAvailableLocales();
     } else {
@@ -120,7 +124,8 @@ public final class ResourceUtils {
     Locale oldLocale = getLocale();
     Locale.setDefault(newLocale);
     // First alert resource bundle wrappers to reload of resource bundles
-    RESOURCE_BUNDLE_LOCALE_CHANGE_NOTIFIER.fireLocaleChange(oldLocale, newLocale);
+    RESOURCE_BUNDLE_LOCALE_CHANGE_NOTIFIER.fireLocaleChange(oldLocale,
+        newLocale);
     // Then alert beans that support internationalization
     BEANS_LOCALE_CHANGE_NOTIFIER.fireLocaleChange(oldLocale, newLocale);
   }
@@ -144,7 +149,8 @@ public final class ResourceUtils {
    * @return {@code true} if this {@code LocaleChangeNotifier} contained the
    *         {@code LocaleChangeListener}
    */
-  public static boolean removeLocaleChangeListener(LocaleChangeListener listener) {
+  public static boolean removeLocaleChangeListener(
+      LocaleChangeListener listener) {
     return BEANS_LOCALE_CHANGE_NOTIFIER.removeLocaleChangeListener(listener);
   }
 
@@ -156,7 +162,8 @@ public final class ResourceUtils {
    * @return {@code true} if this {@code LocaleChangeNotifier} contains the
    *         {@code LocaleChangeListener}
    */
-  public static boolean containsLocaleChangeListener(LocaleChangeListener listener) {
+  public static boolean containsLocaleChangeListener(
+      LocaleChangeListener listener) {
     return BEANS_LOCALE_CHANGE_NOTIFIER.containsLocaleChangeListener(listener);
   }
 
@@ -165,7 +172,8 @@ public final class ResourceUtils {
 
   protected static LocaleResourceBundleWrapper getLocaleResourceBundle() {
     if (localeResourceBundleManager == null) {
-      localeResourceBundleManager = new LocaleResourceBundleWrapper(FRAME_RESOURCE_BUNDLE);
+      localeResourceBundleManager =
+          new LocaleResourceBundleWrapper(FRAME_RESOURCE_BUNDLE);
       addResourceBundleWrapper(localeResourceBundleManager);
     }
     return localeResourceBundleManager;
@@ -178,8 +186,10 @@ public final class ResourceUtils {
    *
    * @return {@code true} (as specified by {@link Collection#add})
    */
-  public static boolean addResourceBundleWrapper(LocaleResourceBundleWrapper listener) {
-    return RESOURCE_BUNDLE_LOCALE_CHANGE_NOTIFIER.addLocaleChangeListener(listener);
+  public static boolean addResourceBundleWrapper(
+      LocaleResourceBundleWrapper listener) {
+    return RESOURCE_BUNDLE_LOCALE_CHANGE_NOTIFIER
+        .addLocaleChangeListener(listener);
   }
 
   /**
@@ -190,8 +200,10 @@ public final class ResourceUtils {
    * @return {@code true} if this {@code LocaleResourceBundleWrapper} contained the
    *         {@code LocaleResourceBundleWrapper}
    */
-  public static boolean removeResourceBundleWrapper(LocaleResourceBundleWrapper listener) {
-    return RESOURCE_BUNDLE_LOCALE_CHANGE_NOTIFIER.removeLocaleChangeListener(listener);
+  public static boolean removeResourceBundleWrapper(
+      LocaleResourceBundleWrapper listener) {
+    return RESOURCE_BUNDLE_LOCALE_CHANGE_NOTIFIER
+        .removeLocaleChangeListener(listener);
   }
 
   /**
@@ -202,8 +214,10 @@ public final class ResourceUtils {
    * @return {@code true} if this {@code LocaleResourceBundleWrapper} contains the
    *         {@code LocaleChangeListener}
    */
-  public static boolean containsResourceBundleWrapper(LocaleResourceBundleWrapper listener) {
-    return RESOURCE_BUNDLE_LOCALE_CHANGE_NOTIFIER.containsLocaleChangeListener(listener);
+  public static boolean containsResourceBundleWrapper(
+      LocaleResourceBundleWrapper listener) {
+    return RESOURCE_BUNDLE_LOCALE_CHANGE_NOTIFIER
+        .containsLocaleChangeListener(listener);
   }
 
   // #########################################################################
@@ -211,7 +225,8 @@ public final class ResourceUtils {
     return getLocaleResourceBundle().getResourceBundle();
   }
 
-  public static String getMessage(String key, Object... arguments) throws MissingResourceException {
+  public static String getMessage(String key, Object... arguments)
+      throws MissingResourceException {
     return getLocaleResourceBundle().getMessage(key, arguments);
   }
 
@@ -219,17 +234,18 @@ public final class ResourceUtils {
     return getLocaleResourceBundle().getMnemonic(key);
   }
 
-  public static int getDisplayedMnemonicIndex(String key) throws MissingResourceException {
+  public static int getDisplayedMnemonicIndex(String key)
+      throws MissingResourceException {
     return getLocaleResourceBundle().getDisplayedMnemonicIndex(key);
   }
 
-  public static void setTextAndMnemonic(JComponent comp, String key, Object... arguments)
-      throws MissingResourceException {
+  public static void setTextAndMnemonic(JComponent comp, String key,
+      Object... arguments) throws MissingResourceException {
     getLocaleResourceBundle().setTextAndMnemonic(comp, key, arguments);
   }
 
-  public static void setTextAndMnemonic(Action action, String key, Object... arguments)
-      throws MissingResourceException {
+  public static void setTextAndMnemonic(Action action, String key,
+      Object... arguments) throws MissingResourceException {
     getLocaleResourceBundle().setTextAndMnemonic(action, key, arguments);
   }
 
@@ -241,7 +257,8 @@ public final class ResourceUtils {
    * @param relativePath Relative path towards {@code BASE_ICON_PATH}
    * @return an URL.
    */
-  public static java.net.URL getResourceURL(final String fileName, final String relativePath) {
+  public static java.net.URL getResourceURL(final String fileName,
+      final String relativePath) {
     String path = BASE_ICON_PATH + relativePath;
     if (!path.endsWith("/")) {
       path += "/";
@@ -261,8 +278,8 @@ public final class ResourceUtils {
    * @param relativePath Relative path towards {@code BASE_ICON_PATH}
    * @return an ImageIcon, or null if the path was invalid.
    */
-  public static ImageIcon createImageIcon(final String fileName, final String description,
-      final String relativePath) {
+  public static ImageIcon createImageIcon(final String fileName,
+      final String description, final String relativePath) {
     java.net.URL imgURL = getResourceURL(fileName, relativePath);
     if (imgURL != null) {
       return new ImageIcon(imgURL, description);
@@ -285,8 +302,8 @@ public final class ResourceUtils {
    * @param largeSize Use a large size icon?
    * @return an ImageIcon, or null if the path was invalid.
    */
-  public static ImageIcon createImageIcon(final String fileName, final String description,
-      final boolean largeSize) {
+  public static ImageIcon createImageIcon(final String fileName,
+      final String description, final boolean largeSize) {
     return largeSize ? createImageIcon(fileName, description, LARGE_ICON_PATH)
         : createImageIcon(fileName, description, SMALL_ICON_PATH);
   }
@@ -298,7 +315,8 @@ public final class ResourceUtils {
    * @param description the icon image description
    * @return an ImageIcon, or null if the path was invalid.
    */
-  public static ImageIcon createImageIcon(final String fileName, final String description) {
+  public static ImageIcon createImageIcon(final String fileName,
+      final String description) {
     return createImageIcon(fileName, description, false);
   }
 
@@ -310,8 +328,8 @@ public final class ResourceUtils {
    * @param relativePaths the array of relative path where to look for a given icon
    * @return a list of image icons, or null if the path was invalid.
    */
-  public static List<Image> createImages(final String fileName, final String description,
-      final String... relativePaths) {
+  public static List<Image> createImages(final String fileName,
+      final String description, final String... relativePaths) {
     if (relativePaths != null) {
       List<Image> images = new ArrayList<>(relativePaths.length);
       for (String relativePath : relativePaths) {
@@ -333,8 +351,10 @@ public final class ResourceUtils {
    * @param description the images description
    * @return a list of image icons, or null if the path was invalid.
    */
-  public static List<Image> createImages(final String fileName, final String description) {
-    return createImages(fileName, description, SMALL_ICON_PATH, LARGE_ICON_PATH);
+  public static List<Image> createImages(final String fileName,
+      final String description) {
+    return createImages(fileName, description, SMALL_ICON_PATH,
+        LARGE_ICON_PATH);
   }
 
 }

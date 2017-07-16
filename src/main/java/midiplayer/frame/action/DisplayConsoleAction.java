@@ -31,7 +31,8 @@ public final class DisplayConsoleAction extends AbstractJssSwitchAction
   /**
    * Logger.
    */
-  private static final Logger LOGGER = Logger.getLogger(DisplayConsoleAction.class.getName());
+  private static final Logger LOGGER =
+      Logger.getLogger(DisplayConsoleAction.class.getName());
 
   /**
    * This action default identifier.
@@ -44,14 +45,16 @@ public final class DisplayConsoleAction extends AbstractJssSwitchAction
 
   private static final String ACTION_LABEL = "Console";
 
-  private static final String ACTION_LABEL_KEY = "midi_player.action.display_console.name";
+  private static final String ACTION_LABEL_KEY =
+      "midiplayer.action.display_console.name";
 
   private static final String COMMAND_BRIEF_HELP = "Display the console.";
 
   private static final String COMMAND_BRIEF_HELP_KEY =
-      "midi_player.action.display_console.help.short";
+      "midiplayer.action.display_console.help.short";
 
-  private static final String COMMAND_HELP_KEY = "midi_player.action.display_console.help.long";
+  private static final String COMMAND_HELP_KEY =
+      "midiplayer.action.display_console.help.long";
 
   private static final String ICON_KEY = "application_xp_terminal.png";
 
@@ -78,10 +81,12 @@ public final class DisplayConsoleAction extends AbstractJssSwitchAction
       stringBuilder.append(action.getBriefHelp());
       stringBuilder.append("\n");
       try {
-        stringBuilder.append(ResourceUtils.getMessage(COMMAND_HELP_KEY, commandIdsAsString,
-            action.getOnArgumentsAsString(), action.getOffArgumentsAsString()));
+        stringBuilder.append(ResourceUtils.getMessage(COMMAND_HELP_KEY,
+            commandIdsAsString, action.getOnArgumentsAsString(),
+            action.getOffArgumentsAsString()));
       } catch (MissingResourceException e) {
-        LOGGER.log(Level.SEVERE, "Resource not found: \"" + COMMAND_HELP_KEY + "\"", e);
+        LOGGER.log(Level.SEVERE,
+            "Resource not found: \"" + COMMAND_HELP_KEY + "\"", e);
         stringBuilder.append("\n").append("Displays the console screen:");
         stringBuilder.append("\t").append(commandIdsAsString).append(" ")
             .append(action.getOnArgumentsAsString()).append("\n");
@@ -107,7 +112,8 @@ public final class DisplayConsoleAction extends AbstractJssSwitchAction
       try {
         commandBriefHelp = ResourceUtils.getMessage(COMMAND_BRIEF_HELP_KEY);
       } catch (MissingResourceException e) {
-        LOGGER.log(Level.SEVERE, "Resource not found: \"" + COMMAND_BRIEF_HELP_KEY + "\"", e);
+        LOGGER.log(Level.SEVERE,
+            "Resource not found: \"" + COMMAND_BRIEF_HELP_KEY + "\"", e);
         commandBriefHelp = COMMAND_BRIEF_HELP;
       }
       commandBriefHelpInitialized = true;
@@ -128,14 +134,17 @@ public final class DisplayConsoleAction extends AbstractJssSwitchAction
   }
 
   // #########################################################################
-  public DisplayConsoleAction(MidiPlayerController shellController, String... args) {
-    super(ACTION_LABEL, ResourceUtils.createImageIcon(ICON_KEY, ACTION_LABEL), shellController,
-        args);
+  public DisplayConsoleAction(MidiPlayerController shellController,
+      String... args) {
+    super(ACTION_LABEL, ResourceUtils.createImageIcon(ICON_KEY, ACTION_LABEL),
+        shellController, args);
     if (shellController == null) {
       throw new IllegalArgumentException("Midi player controller is null");
     }
-    putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_F12, 0));
-    putValue(Action.LARGE_ICON_KEY, ResourceUtils.createImageIcon(ICON_KEY, ACTION_LABEL, true));
+    putValue(Action.ACCELERATOR_KEY,
+        KeyStroke.getKeyStroke(KeyEvent.VK_F12, 0));
+    putValue(Action.LARGE_ICON_KEY,
+        ResourceUtils.createImageIcon(ICON_KEY, ACTION_LABEL, true));
     putValue(Action.ACTION_COMMAND_KEY, getDefaultCommandIdentifier());
     localeChanged();
   }
@@ -161,11 +170,14 @@ public final class DisplayConsoleAction extends AbstractJssSwitchAction
   }
 
   @Override
-  protected boolean doSwitch(IJssController shellController, Boolean switchValue) {
-    if (switchValue == null || !(shellController instanceof MidiPlayerController)) {
+  protected boolean doSwitch(IJssController shellController,
+      Boolean switchValue) {
+    if (switchValue == null
+        || !(shellController instanceof MidiPlayerController)) {
       return false;
     }
-    MidiPlayerController midiPlayerController = (MidiPlayerController) shellController;
+    MidiPlayerController midiPlayerController =
+        (MidiPlayerController) shellController;
 
     // Toggle console frame display
     midiPlayerController.getFrame().getConsoleFrame().setVisible(switchValue);
@@ -196,11 +208,13 @@ public final class DisplayConsoleAction extends AbstractJssSwitchAction
     try {
       ResourceUtils.setTextAndMnemonic(this, ACTION_LABEL_KEY);
     } catch (MissingResourceException e) {
-      LOGGER.log(Level.SEVERE, "Resource not found: \"" + ACTION_LABEL_KEY + "\"", e);
+      LOGGER.log(Level.SEVERE,
+          "Resource not found: \"" + ACTION_LABEL_KEY + "\"", e);
       putValue(Action.NAME, ACTION_LABEL);
     }
     putValue(Action.SHORT_DESCRIPTION, this.getBriefHelp());
-    putValue(Action.LONG_DESCRIPTION, this.getHelp(this.getDefaultShellController()));
+    putValue(Action.LONG_DESCRIPTION,
+        this.getHelp(this.getDefaultShellController()));
   }
 
   // #########################################################################

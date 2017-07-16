@@ -20,7 +20,8 @@ import midiplayer.resources.ResourceUtils;
  *
  * @author Mathieu Brunot
  */
-public final class DisplayAboutAction extends AbstractJssAction implements LocaleChangeListener {
+public final class DisplayAboutAction extends AbstractJssAction
+    implements LocaleChangeListener {
 
   /**
    * The {@code serialVersionUID}.
@@ -30,7 +31,8 @@ public final class DisplayAboutAction extends AbstractJssAction implements Local
   /**
    * Logger.
    */
-  private static final Logger LOGGER = Logger.getLogger(DisplayAboutAction.class.getName());
+  private static final Logger LOGGER =
+      Logger.getLogger(DisplayAboutAction.class.getName());
 
   /**
    * This action default identifier.
@@ -43,20 +45,22 @@ public final class DisplayAboutAction extends AbstractJssAction implements Local
 
   private static final String ACTION_LABEL = "About";
 
-  private static final String ACTION_LABEL_KEY = "midi_player.action.display_about.name";
+  private static final String ACTION_LABEL_KEY =
+      "midiplayer.action.display_about.name";
 
   private static final String COMMAND_BRIEF_HELP = "About the MIDI Player.";
 
   private static final String COMMAND_BRIEF_HELP_KEY =
-      "midi_player.action.display_about.help.short";
+      "midiplayer.action.display_about.help.short";
 
-  private static final String COMMAND_HELP_KEY = "midi_player.action.display_about.help.long";
+  private static final String COMMAND_HELP_KEY =
+      "midiplayer.action.display_about.help.long";
 
   private static final String ABOUT_SCREEN_TITLE_KEY =
-      "midi_player.action.display_about.screen.title";
+      "midiplayer.action.display_about.screen.title";
 
   private static final String ABOUT_SCREEN_MESSAGE_KEY =
-      "midi_player.action.display_about.screen.message";
+      "midiplayer.action.display_about.screen.message";
 
   private static final String ICON_KEY = "information.png";
 
@@ -83,10 +87,13 @@ public final class DisplayAboutAction extends AbstractJssAction implements Local
       stringBuilder.append(action.getBriefHelp());
       stringBuilder.append("\n");
       try {
-        stringBuilder.append(ResourceUtils.getMessage(COMMAND_HELP_KEY, commandIdsAsString));
+        stringBuilder.append(
+            ResourceUtils.getMessage(COMMAND_HELP_KEY, commandIdsAsString));
       } catch (MissingResourceException e) {
-        LOGGER.log(Level.SEVERE, "Resource not found: \"" + COMMAND_HELP_KEY + "\"", e);
-        stringBuilder.append("\n").append("Displays the information screen about the MIDI Player:");
+        LOGGER.log(Level.SEVERE,
+            "Resource not found: \"" + COMMAND_HELP_KEY + "\"", e);
+        stringBuilder.append("\n")
+            .append("Displays the information screen about the MIDI Player:");
         stringBuilder.append("\t").append(commandIdsAsString);
       }
 
@@ -108,7 +115,8 @@ public final class DisplayAboutAction extends AbstractJssAction implements Local
       try {
         commandBriefHelp = ResourceUtils.getMessage(COMMAND_BRIEF_HELP_KEY);
       } catch (MissingResourceException e) {
-        LOGGER.log(Level.SEVERE, "Resource not found: \"" + COMMAND_BRIEF_HELP_KEY + "\"", e);
+        LOGGER.log(Level.SEVERE,
+            "Resource not found: \"" + COMMAND_BRIEF_HELP_KEY + "\"", e);
         commandBriefHelp = COMMAND_BRIEF_HELP;
       }
       commandBriefHelpInitialized = true;
@@ -129,13 +137,15 @@ public final class DisplayAboutAction extends AbstractJssAction implements Local
   }
 
   // #########################################################################
-  public DisplayAboutAction(MidiPlayerController shellController, String... args) {
-    super(ACTION_LABEL, ResourceUtils.createImageIcon(ICON_KEY, ACTION_LABEL), shellController,
-        args);
+  public DisplayAboutAction(MidiPlayerController shellController,
+      String... args) {
+    super(ACTION_LABEL, ResourceUtils.createImageIcon(ICON_KEY, ACTION_LABEL),
+        shellController, args);
     if (shellController == null) {
       throw new IllegalArgumentException("Midi player controller is null");
     }
-    putValue(Action.LARGE_ICON_KEY, ResourceUtils.createImageIcon(ICON_KEY, ACTION_LABEL, true));
+    putValue(Action.LARGE_ICON_KEY,
+        ResourceUtils.createImageIcon(ICON_KEY, ACTION_LABEL, true));
     putValue(Action.ACTION_COMMAND_KEY, getDefaultCommandIdentifier());
     localeChanged();
   }
@@ -165,13 +175,15 @@ public final class DisplayAboutAction extends AbstractJssAction implements Local
     if (!(shellController instanceof MidiPlayerController)) {
       return AbstractJssAction.ERROR;
     }
-    MidiPlayerController midiPlayerController = (MidiPlayerController) shellController;
+    MidiPlayerController midiPlayerController =
+        (MidiPlayerController) shellController;
 
     JOptionPane.showMessageDialog(midiPlayerController.getFrame(),
-        "<html><body>" + ResourceUtils.getMessage(ABOUT_SCREEN_MESSAGE_KEY) + "</body></html>",
-        ResourceUtils.getMessage(ABOUT_SCREEN_TITLE_KEY), JOptionPane.INFORMATION_MESSAGE,
-        ResourceUtils.createImageIcon(MidiPlayerFrame.ICON_KEY, MidiPlayerFrame.ICON_LABEL,
-            "128x128"));
+        "<html><body>" + ResourceUtils.getMessage(ABOUT_SCREEN_MESSAGE_KEY)
+            + "</body></html>",
+        ResourceUtils.getMessage(ABOUT_SCREEN_TITLE_KEY),
+        JOptionPane.INFORMATION_MESSAGE, ResourceUtils.createImageIcon(
+            MidiPlayerFrame.ICON_KEY, MidiPlayerFrame.ICON_LABEL, "128x128"));
 
     return AbstractJssAction.SUCCESS;
   }
@@ -193,11 +205,13 @@ public final class DisplayAboutAction extends AbstractJssAction implements Local
     try {
       ResourceUtils.setTextAndMnemonic(this, ACTION_LABEL_KEY);
     } catch (MissingResourceException e) {
-      LOGGER.log(Level.SEVERE, "Resource not found: \"" + ACTION_LABEL_KEY + "\"", e);
+      LOGGER.log(Level.SEVERE,
+          "Resource not found: \"" + ACTION_LABEL_KEY + "\"", e);
       putValue(Action.NAME, ACTION_LABEL);
     }
     putValue(Action.SHORT_DESCRIPTION, this.getBriefHelp());
-    putValue(Action.LONG_DESCRIPTION, this.getHelp(this.getDefaultShellController()));
+    putValue(Action.LONG_DESCRIPTION,
+        this.getHelp(this.getDefaultShellController()));
   }
 
   // #########################################################################

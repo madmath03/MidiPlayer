@@ -33,7 +33,8 @@ import midiplayer.resources.LocaleChangeListener;
  *
  * @author Mathieu Brunot
  */
-public class PrintScreenAction extends jswingshell.action.AbstractThreadedJssAction
+public class PrintScreenAction
+    extends jswingshell.action.AbstractThreadedJssAction
     implements LocaleChangeListener {
 
   /**
@@ -44,7 +45,8 @@ public class PrintScreenAction extends jswingshell.action.AbstractThreadedJssAct
   /**
    * Logger.
    */
-  private static final Logger LOGGER = Logger.getLogger(PrintScreenAction.class.getName());
+  private static final Logger LOGGER =
+      Logger.getLogger(PrintScreenAction.class.getName());
 
   /**
    * This action default identifier.
@@ -53,25 +55,26 @@ public class PrintScreenAction extends jswingshell.action.AbstractThreadedJssAct
 
   private static final String[] IDENTIFIERS = {DEFAULT_IDENTIFIER};
 
-  private static final String COMMAND_BRIEF_HELP = "Print the shell screen and save it to a file.";
+  private static final String COMMAND_BRIEF_HELP =
+      "Print the shell screen and save it to a file.";
 
   private static final String COMMAND_BRIEF_HELP_KEY =
-      "midi_player.console.action.print_screen.help.short";
+      "midiplayer.console.action.print_screen.help.short";
 
   private static final String COMMAND_HELP_KEY =
-      "midi_player.console.action.print_screen.help.long";
+      "midiplayer.console.action.print_screen.help.long";
 
   private static final String COMMAND_RUN_FILE_MANDATORY_WARNING_KEY =
-      "midi_player.console.action.print_screen.run.file_mandatory";
+      "midiplayer.console.action.print_screen.run.file_mandatory";
 
   private static final String COMMAND_RUN_FILE_PATH_INVALID_KEY =
-      "midi_player.console.action.print_screen.run.file_path_invalid";
+      "midiplayer.console.action.print_screen.run.file_path_invalid";
 
   private static final String COMMAND_RUN_FILE_WRITING_ERROR_KEY =
-      "midi_player.console.action.print_screen.run.file_writing_error";
+      "midiplayer.console.action.print_screen.run.file_writing_error";
 
   private static final String COMMAND_RUN_FILE_CLOSING_ERROR_KEY =
-      "midi_player.console.action.print_screen.run.file_closing_error";
+      "midiplayer.console.action.print_screen.run.file_closing_error";
 
   private static String commandHelp;
 
@@ -97,12 +100,15 @@ public class PrintScreenAction extends jswingshell.action.AbstractThreadedJssAct
       stringBuilder.append(action.getBriefHelp()).append("\n");
       stringBuilder.append("\n");
       try {
-        stringBuilder.append(
-            ResourceUtils.getMessage(COMMAND_HELP_KEY, commandIdsAsString, defaultCommandId));
+        stringBuilder.append(ResourceUtils.getMessage(COMMAND_HELP_KEY,
+            commandIdsAsString, defaultCommandId));
       } catch (MissingResourceException e) {
-        LOGGER.log(Level.SEVERE, "Resource not found: \"" + COMMAND_HELP_KEY + "\"", e);
-        stringBuilder.append("\n").append("Print the shell screen and save it to a file:");
-        stringBuilder.append("\n\t").append(defaultCommandId).append(" file_path ");
+        LOGGER.log(Level.SEVERE,
+            "Resource not found: \"" + COMMAND_HELP_KEY + "\"", e);
+        stringBuilder.append("\n")
+            .append("Print the shell screen and save it to a file:");
+        stringBuilder.append("\n\t").append(defaultCommandId)
+            .append(" file_path ");
       }
 
       commandHelp = stringBuilder.toString();
@@ -123,7 +129,8 @@ public class PrintScreenAction extends jswingshell.action.AbstractThreadedJssAct
       try {
         commandBriefHelp = ResourceUtils.getMessage(COMMAND_BRIEF_HELP_KEY);
       } catch (MissingResourceException e) {
-        LOGGER.log(Level.SEVERE, "Resource not found: \"" + COMMAND_BRIEF_HELP_KEY + "\"", e);
+        LOGGER.log(Level.SEVERE,
+            "Resource not found: \"" + COMMAND_BRIEF_HELP_KEY + "\"", e);
         commandBriefHelp = COMMAND_BRIEF_HELP;
       }
       commandBriefHelpInitialized = true;
@@ -146,8 +153,8 @@ public class PrintScreenAction extends jswingshell.action.AbstractThreadedJssAct
   // #########################################################################
   private transient Component printComponent;
 
-  public PrintScreenAction(Component comp, String name, Icon icon, IJssController shellController,
-      String... args) {
+  public PrintScreenAction(Component comp, String name, Icon icon,
+      IJssController shellController, String... args) {
     super(name, icon, shellController, args);
     if (comp == null) {
       throw new IllegalArgumentException("Component is null");
@@ -155,8 +162,8 @@ public class PrintScreenAction extends jswingshell.action.AbstractThreadedJssAct
     this.printComponent = comp;
   }
 
-  public PrintScreenAction(Component comp, String name, IJssController shellController,
-      String... args) {
+  public PrintScreenAction(Component comp, String name,
+      IJssController shellController, String... args) {
     super(name, shellController, args);
     if (comp == null) {
       throw new IllegalArgumentException("Component is null");
@@ -164,7 +171,8 @@ public class PrintScreenAction extends jswingshell.action.AbstractThreadedJssAct
     this.printComponent = comp;
   }
 
-  public PrintScreenAction(Component comp, JssTextAreaController shellController, String... args) {
+  public PrintScreenAction(Component comp,
+      JssTextAreaController shellController, String... args) {
     super(shellController, args);
     if (comp == null) {
       throw new IllegalArgumentException("Component is null");
@@ -172,7 +180,8 @@ public class PrintScreenAction extends jswingshell.action.AbstractThreadedJssAct
     this.printComponent = comp;
   }
 
-  public PrintScreenAction(Component comp, JssTextAreaController shellController) {
+  public PrintScreenAction(Component comp,
+      JssTextAreaController shellController) {
     this(comp, shellController, (String[]) null);
   }
 
@@ -205,7 +214,8 @@ public class PrintScreenAction extends jswingshell.action.AbstractThreadedJssAct
   }
 
   @Override
-  protected AbstractJssActionWorker prepareWorker(IJssController shellController, String... args) {
+  protected AbstractJssActionWorker prepareWorker(
+      IJssController shellController, String... args) {
     PrintScreenWorker worker = null;
 
     if (shellController != null) {
@@ -215,9 +225,10 @@ public class PrintScreenAction extends jswingshell.action.AbstractThreadedJssAct
           String filePath = args[1];
 
           // Create a BufferedImage and create its Graphics
-          BufferedImage image = GraphicsEnvironment.getLocalGraphicsEnvironment()
-              .getDefaultScreenDevice().getDefaultConfiguration()
-              .createCompatibleImage(printComponent.getWidth(), printComponent.getHeight());
+          BufferedImage image = GraphicsEnvironment
+              .getLocalGraphicsEnvironment().getDefaultScreenDevice()
+              .getDefaultConfiguration().createCompatibleImage(
+                  printComponent.getWidth(), printComponent.getHeight());
           Graphics graphics = image.createGraphics();
 
           // Print to BufferedImage
@@ -233,10 +244,11 @@ public class PrintScreenAction extends jswingshell.action.AbstractThreadedJssAct
         LOGGER.log(Level.WARNING, "File path is mandatory!");
         String msg;
         try {
-          msg = ResourceUtils.getMessage(COMMAND_RUN_FILE_MANDATORY_WARNING_KEY);
+          msg =
+              ResourceUtils.getMessage(COMMAND_RUN_FILE_MANDATORY_WARNING_KEY);
         } catch (MissingResourceException e) {
-          LOGGER.log(Level.SEVERE,
-              "Resource not found: \"" + COMMAND_RUN_FILE_MANDATORY_WARNING_KEY + "\"", e);
+          LOGGER.log(Level.SEVERE, "Resource not found: \""
+              + COMMAND_RUN_FILE_MANDATORY_WARNING_KEY + "\"", e);
           msg = "File path is mandatory!";
         }
         shellController.publish(IJssController.PublicationLevel.ERROR, msg);
@@ -253,7 +265,8 @@ public class PrintScreenAction extends jswingshell.action.AbstractThreadedJssAct
 
     final BufferedImage image;
 
-    public PrintScreenWorker(IJssController shellController, String filePath, BufferedImage image) {
+    public PrintScreenWorker(IJssController shellController, String filePath,
+        BufferedImage image) {
       super(shellController);
       this.filePath = filePath;
       this.image = image;
@@ -270,47 +283,53 @@ public class PrintScreenAction extends jswingshell.action.AbstractThreadedJssAct
         fos = new FileOutputStream(f);
         ImageIO.write(image, "png", fos);
       } catch (FileNotFoundException e) {
-        LOGGER.log(Level.WARNING, "File path was not found or is not writable: " + filePath, e);
+        LOGGER.log(Level.WARNING,
+            "File path was not found or is not writable: " + filePath, e);
         String msg;
         try {
-          msg = ResourceUtils.getMessage(COMMAND_RUN_FILE_PATH_INVALID_KEY, filePath);
+          msg = ResourceUtils.getMessage(COMMAND_RUN_FILE_PATH_INVALID_KEY,
+              filePath);
         } catch (MissingResourceException e1) {
-          LOGGER.log(Level.SEVERE,
-              "Resource not found: \"" + COMMAND_RUN_FILE_PATH_INVALID_KEY + "\"", e1);
+          LOGGER.log(Level.SEVERE, "Resource not found: \""
+              + COMMAND_RUN_FILE_PATH_INVALID_KEY + "\"", e1);
           msg = "File path was not found or is not writable: " + filePath;
         }
-        this.publish(new JssActionWorkerChunk(IJssController.PublicationLevel.ERROR, msg));
+        this.publish(new JssActionWorkerChunk(
+            IJssController.PublicationLevel.ERROR, msg));
         workerCommandReturnStatus = AbstractThreadedJssAction.ERROR;
       } catch (IOException e) {
         LOGGER.log(Level.SEVERE, "Error occured while writing image file.", e);
         String msg;
         try {
-          msg =
-              ResourceUtils.getMessage(COMMAND_RUN_FILE_WRITING_ERROR_KEY, e.getLocalizedMessage());
+          msg = ResourceUtils.getMessage(COMMAND_RUN_FILE_WRITING_ERROR_KEY,
+              e.getLocalizedMessage());
         } catch (MissingResourceException e1) {
-          LOGGER.log(Level.SEVERE,
-              "Resource not found: \"" + COMMAND_RUN_FILE_WRITING_ERROR_KEY + "\"", e1);
+          LOGGER.log(Level.SEVERE, "Resource not found: \""
+              + COMMAND_RUN_FILE_WRITING_ERROR_KEY + "\"", e1);
           msg = "Error occured while writing image file: " + e.getMessage();
         }
-        this.publish(new JssActionWorkerChunk(IJssController.PublicationLevel.FATAL_ERROR, msg));
+        this.publish(new JssActionWorkerChunk(
+            IJssController.PublicationLevel.FATAL_ERROR, msg));
         workerCommandReturnStatus = AbstractThreadedJssAction.ERROR;
       } finally {
         if (fos != null) {
           try {
             fos.close();
           } catch (IOException ex) {
-            LOGGER.log(Level.SEVERE, "Error occured while closing file output stream.", ex);
+            LOGGER.log(Level.SEVERE,
+                "Error occured while closing file output stream.", ex);
             String msg;
             try {
               msg = ResourceUtils.getMessage(COMMAND_RUN_FILE_CLOSING_ERROR_KEY,
                   ex.getLocalizedMessage());
             } catch (MissingResourceException e1) {
-              LOGGER.log(Level.SEVERE,
-                  "Resource not found: \"" + COMMAND_RUN_FILE_CLOSING_ERROR_KEY + "\"", e1);
-              msg = "Error occured while closing file output stream: " + ex.getMessage();
+              LOGGER.log(Level.SEVERE, "Resource not found: \""
+                  + COMMAND_RUN_FILE_CLOSING_ERROR_KEY + "\"", e1);
+              msg = "Error occured while closing file output stream: "
+                  + ex.getMessage();
             }
-            this.publish(
-                new JssActionWorkerChunk(IJssController.PublicationLevel.FATAL_ERROR, msg));
+            this.publish(new JssActionWorkerChunk(
+                IJssController.PublicationLevel.FATAL_ERROR, msg));
             workerCommandReturnStatus = AbstractThreadedJssAction.ERROR;
           }
         }

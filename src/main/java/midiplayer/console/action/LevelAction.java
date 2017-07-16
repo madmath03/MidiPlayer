@@ -22,8 +22,8 @@ import midiplayer.resources.LocaleChangeListener;
  *
  * @author Mathieu Brunot
  */
-public final class LevelAction
-    extends jswingshell.action.AbstractJssComboAction<IJssController.PublicationLevel>
+public final class LevelAction extends
+    jswingshell.action.AbstractJssComboAction<IJssController.PublicationLevel>
     implements LocaleChangeListener {
 
   /**
@@ -34,7 +34,8 @@ public final class LevelAction
   /**
    * Logger.
    */
-  private static final Logger LOGGER = Logger.getLogger(LevelAction.class.getName());
+  private static final Logger LOGGER =
+      Logger.getLogger(LevelAction.class.getName());
 
   /**
    * This action default identifier.
@@ -45,24 +46,29 @@ public final class LevelAction
 
   private static final String ACTION_LABEL = "Level";
 
-  private static final String ACTION_LABEL_KEY = "midi_player.console.action.level.name";
+  private static final String ACTION_LABEL_KEY =
+      "midiplayer.console.action.level.name";
 
-  private static final String COMMAND_BRIEF_HELP = "Define the shell's log level.";
+  private static final String COMMAND_BRIEF_HELP =
+      "Define the shell's log level.";
 
   private static final String COMMAND_BRIEF_HELP_KEY =
-      "midi_player.console.action.level.help.short";
+      "midiplayer.console.action.level.help.short";
 
-  private static final String COMMAND_HELP_KEY = "midi_player.console.action.level.help.long";
+  private static final String COMMAND_HELP_KEY =
+      "midiplayer.console.action.level.help.long";
 
-  private static final String COMMAND_RUN_NEW_LEVEL_MESSAGE = "Shell level set to ";
+  private static final String COMMAND_RUN_NEW_LEVEL_MESSAGE =
+      "Shell level set to ";
 
   private static final String COMMAND_RUN_NEW_LEVEL_MESSAGE_KEY =
-      "midi_player.console.action.level.run.new_level";
+      "midiplayer.console.action.level.run.new_level";
 
-  private static final String INTERNAL_COMMAND_BRIEF_HELP = "Sets the shell's log level to ";
+  private static final String INTERNAL_COMMAND_BRIEF_HELP =
+      "Sets the shell's log level to ";
 
   private static final String INTERNAL_COMMAND_BRIEF_HELP_KEY =
-      "midi_player.console.action.level.internal_command.help.short";
+      "midiplayer.console.action.level.internal_command.help.short";
 
   private static String commandHelp;
 
@@ -90,10 +96,11 @@ public final class LevelAction
       stringBuilder.append("\n");
 
       try {
-        stringBuilder.append(
-            ResourceUtils.getMessage(COMMAND_HELP_KEY, commandIdsAsString, commandIdentifier));
+        stringBuilder.append(ResourceUtils.getMessage(COMMAND_HELP_KEY,
+            commandIdsAsString, commandIdentifier));
       } catch (MissingResourceException e) {
-        LOGGER.log(Level.SEVERE, "Resource not found: \"" + COMMAND_HELP_KEY + "\"", e);
+        LOGGER.log(Level.SEVERE,
+            "Resource not found: \"" + COMMAND_HELP_KEY + "\"", e);
 
         stringBuilder.append("You can set the value as follow:");
       }
@@ -104,7 +111,8 @@ public final class LevelAction
         for (Map.Entry<IJssController.PublicationLevel, Collection<String>> entry : argumentsByValue
             .entrySet()) {
           stringBuilder.append("\n");
-          stringBuilder.append("\t").append(commandIdentifier).append(" ").append(entry.getValue());
+          stringBuilder.append("\t").append(commandIdentifier).append(" ")
+              .append(entry.getValue());
         }
       }
 
@@ -126,7 +134,8 @@ public final class LevelAction
       try {
         commandBriefHelp = ResourceUtils.getMessage(COMMAND_BRIEF_HELP_KEY);
       } catch (MissingResourceException e) {
-        LOGGER.log(Level.SEVERE, "Resource not found: \"" + COMMAND_BRIEF_HELP_KEY + "\"", e);
+        LOGGER.log(Level.SEVERE,
+            "Resource not found: \"" + COMMAND_BRIEF_HELP_KEY + "\"", e);
         commandBriefHelp = COMMAND_BRIEF_HELP;
       }
       commandBriefHelpInitialized = true;
@@ -165,7 +174,8 @@ public final class LevelAction
     this(shellController, (String[]) null);
   }
 
-  public LevelAction(IJssController.PublicationLevel[] items, IJssController shellController) {
+  public LevelAction(IJssController.PublicationLevel[] items,
+      IJssController shellController) {
     this(items, shellController, (String[]) null);
   }
 
@@ -180,8 +190,8 @@ public final class LevelAction
     localeChanged();
   }
 
-  public LevelAction(IJssController.PublicationLevel[] items, IJssController shellController,
-      String... args) {
+  public LevelAction(IJssController.PublicationLevel[] items,
+      IJssController shellController, String... args) {
     super(items, ACTION_LABEL, shellController, args);
     putValue(Action.ACTION_COMMAND_KEY, getDefaultCommandIdentifier());
     localeChanged();
@@ -203,10 +213,11 @@ public final class LevelAction
         shellController.setPublicationLevel(switchValue);
         String msg;
         try {
-          msg = ResourceUtils.getMessage(COMMAND_RUN_NEW_LEVEL_MESSAGE_KEY, switchValue);
+          msg = ResourceUtils.getMessage(COMMAND_RUN_NEW_LEVEL_MESSAGE_KEY,
+              switchValue);
         } catch (MissingResourceException e1) {
-          LOGGER.log(Level.SEVERE,
-              "Resource not found: \"" + COMMAND_RUN_NEW_LEVEL_MESSAGE_KEY + "\"", e1);
+          LOGGER.log(Level.SEVERE, "Resource not found: \""
+              + COMMAND_RUN_NEW_LEVEL_MESSAGE_KEY + "\"", e1);
           msg = COMMAND_RUN_NEW_LEVEL_MESSAGE + switchValue;
         }
         shellController.publish(IJssController.PublicationLevel.INFO, msg);
@@ -240,7 +251,8 @@ public final class LevelAction
   public void setDefaultShellController(IJssController shellController) {
     super.setDefaultShellController(shellController);
     // Apply selected level to new shell controller
-    doSwitch(shellController, (IJssController.PublicationLevel) this.getSelectedItem());
+    doSwitch(shellController,
+        (IJssController.PublicationLevel) this.getSelectedItem());
   }
 
   @Override
@@ -269,7 +281,8 @@ public final class LevelAction
       for (ComboElementAction<IJssController.PublicationLevel> internalAction : this
           .getInnerElementActions()) {
         if (internalAction instanceof LocaleChangeListener) {
-          ResourceUtils.removeLocaleChangeListener((LocaleChangeListener) internalAction);
+          ResourceUtils.removeLocaleChangeListener(
+              (LocaleChangeListener) internalAction);
         }
       }
     }
@@ -288,16 +301,19 @@ public final class LevelAction
     try {
       ResourceUtils.setTextAndMnemonic(this, ACTION_LABEL_KEY);
     } catch (MissingResourceException e) {
-      LOGGER.log(Level.SEVERE, "Resource not found: \"" + ACTION_LABEL_KEY + "\"", e);
+      LOGGER.log(Level.SEVERE,
+          "Resource not found: \"" + ACTION_LABEL_KEY + "\"", e);
       putValue(Action.NAME, ACTION_LABEL);
     }
     putValue(Action.SHORT_DESCRIPTION, this.getBriefHelp());
-    putValue(Action.LONG_DESCRIPTION, this.getHelp(this.getDefaultShellController()));
+    putValue(Action.LONG_DESCRIPTION,
+        this.getHelp(this.getDefaultShellController()));
   }
 
   // #########################################################################
   public final class LevelComboElementAction
-      extends ComboElementAction<IJssController.PublicationLevel> implements LocaleChangeListener {
+      extends ComboElementAction<IJssController.PublicationLevel>
+      implements LocaleChangeListener {
 
     /**
      * The {@code serialVersionUID}.
@@ -316,10 +332,11 @@ public final class LevelAction
     protected String initBriefHelp() {
       String briefHelp;
       try {
-        briefHelp =
-            ResourceUtils.getMessage(INTERNAL_COMMAND_BRIEF_HELP_KEY, getDataItem().toString());
+        briefHelp = ResourceUtils.getMessage(INTERNAL_COMMAND_BRIEF_HELP_KEY,
+            getDataItem().toString());
       } catch (MissingResourceException e) {
-        LOGGER.log(Level.SEVERE, "Resource not found: \"" + INTERNAL_COMMAND_BRIEF_HELP_KEY + "\"",
+        LOGGER.log(Level.SEVERE,
+            "Resource not found: \"" + INTERNAL_COMMAND_BRIEF_HELP_KEY + "\"",
             e);
         briefHelp = INTERNAL_COMMAND_BRIEF_HELP + getDataItem().toString();
       }

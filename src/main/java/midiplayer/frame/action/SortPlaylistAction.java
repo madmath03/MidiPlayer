@@ -31,7 +31,8 @@ public final class SortPlaylistAction extends AbstractJssAction
   /**
    * Logger.
    */
-  private static final Logger LOGGER = Logger.getLogger(SortPlaylistAction.class.getName());
+  private static final Logger LOGGER =
+      Logger.getLogger(SortPlaylistAction.class.getName());
 
   /**
    * This action default identifier.
@@ -44,13 +45,15 @@ public final class SortPlaylistAction extends AbstractJssAction
 
   private static final String ACTION_LABEL = "Sort";
 
-  private static final String ACTION_LABEL_KEY = "midi_player.action.sort.name";
+  private static final String ACTION_LABEL_KEY = "midiplayer.action.sort.name";
 
   private static final String COMMAND_BRIEF_HELP = "Sort playlist.";
 
-  private static final String COMMAND_BRIEF_HELP_KEY = "midi_player.action.sort.help.short";
+  private static final String COMMAND_BRIEF_HELP_KEY =
+      "midiplayer.action.sort.help.short";
 
-  private static final String COMMAND_HELP_KEY = "midi_player.action.sort.help.long";
+  private static final String COMMAND_HELP_KEY =
+      "midiplayer.action.sort.help.long";
 
   private static final String ICON_KEY = "sort_ascending(2).png";
 
@@ -77,9 +80,11 @@ public final class SortPlaylistAction extends AbstractJssAction
       stringBuilder.append(action.getBriefHelp());
       stringBuilder.append("\n");
       try {
-        stringBuilder.append(ResourceUtils.getMessage(COMMAND_HELP_KEY, commandIdsAsString));
+        stringBuilder.append(
+            ResourceUtils.getMessage(COMMAND_HELP_KEY, commandIdsAsString));
       } catch (MissingResourceException e) {
-        LOGGER.log(Level.SEVERE, "Resource not found: \"" + COMMAND_HELP_KEY + "\"", e);
+        LOGGER.log(Level.SEVERE,
+            "Resource not found: \"" + COMMAND_HELP_KEY + "\"", e);
         stringBuilder.append("\n").append("Sorts the songs in the playlist:");
         stringBuilder.append("\n\t").append(commandIdsAsString);
       }
@@ -102,7 +107,8 @@ public final class SortPlaylistAction extends AbstractJssAction
       try {
         commandBriefHelp = ResourceUtils.getMessage(COMMAND_BRIEF_HELP_KEY);
       } catch (MissingResourceException e) {
-        LOGGER.log(Level.SEVERE, "Resource not found: \"" + COMMAND_BRIEF_HELP_KEY + "\"", e);
+        LOGGER.log(Level.SEVERE,
+            "Resource not found: \"" + COMMAND_BRIEF_HELP_KEY + "\"", e);
         commandBriefHelp = COMMAND_BRIEF_HELP;
       }
       commandBriefHelpInitialized = true;
@@ -125,19 +131,22 @@ public final class SortPlaylistAction extends AbstractJssAction
   // #########################################################################
   private transient MidiPlayer midiPlayer;
 
-  public SortPlaylistAction(MidiPlayer midiPlayer, IJssController shellController, String... args) {
-    super(ACTION_LABEL, ResourceUtils.createImageIcon(ICON_KEY, ACTION_LABEL), shellController,
-        args);
+  public SortPlaylistAction(MidiPlayer midiPlayer,
+      IJssController shellController, String... args) {
+    super(ACTION_LABEL, ResourceUtils.createImageIcon(ICON_KEY, ACTION_LABEL),
+        shellController, args);
     if (midiPlayer == null) {
       throw new IllegalArgumentException("Midi player is null");
     }
     this.midiPlayer = midiPlayer;
-    putValue(Action.LARGE_ICON_KEY, ResourceUtils.createImageIcon(ICON_KEY, ACTION_LABEL, true));
+    putValue(Action.LARGE_ICON_KEY,
+        ResourceUtils.createImageIcon(ICON_KEY, ACTION_LABEL, true));
     putValue(Action.ACTION_COMMAND_KEY, getDefaultCommandIdentifier());
     localeChanged();
   }
 
-  public SortPlaylistAction(MidiPlayer midiPlayer, IJssController shellController) {
+  public SortPlaylistAction(MidiPlayer midiPlayer,
+      IJssController shellController) {
     this(midiPlayer, shellController, (String[]) null);
   }
 
@@ -171,7 +180,8 @@ public final class SortPlaylistAction extends AbstractJssAction
 
   @Override
   public int run(IJssController shellController, String... args) {
-    return midiPlayer.sortPlaylist() ? AbstractJssAction.SUCCESS : AbstractJssAction.ERROR;
+    return midiPlayer.sortPlaylist() ? AbstractJssAction.SUCCESS
+        : AbstractJssAction.ERROR;
   }
 
   // #########################################################################
@@ -186,11 +196,13 @@ public final class SortPlaylistAction extends AbstractJssAction
     try {
       ResourceUtils.setTextAndMnemonic(this, ACTION_LABEL_KEY);
     } catch (MissingResourceException e) {
-      LOGGER.log(Level.SEVERE, "Resource not found: \"" + ACTION_LABEL_KEY + "\"", e);
+      LOGGER.log(Level.SEVERE,
+          "Resource not found: \"" + ACTION_LABEL_KEY + "\"", e);
       putValue(Action.NAME, ACTION_LABEL);
     }
     putValue(Action.SHORT_DESCRIPTION, this.getBriefHelp());
-    putValue(Action.LONG_DESCRIPTION, this.getHelp(this.getDefaultShellController()));
+    putValue(Action.LONG_DESCRIPTION,
+        this.getHelp(this.getDefaultShellController()));
   }
 
   // #########################################################################

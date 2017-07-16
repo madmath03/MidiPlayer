@@ -40,8 +40,8 @@ import midiplayer.resources.LocaleChangeListener;
  *
  * @author Mathieu Brunot
  */
-public final class FullScreenAction extends jswingshell.action.AbstractJssSwitchAction
-    implements LocaleChangeListener {
+public final class FullScreenAction extends
+    jswingshell.action.AbstractJssSwitchAction implements LocaleChangeListener {
 
   /**
    * The {@code serialVersionUID}.
@@ -51,7 +51,8 @@ public final class FullScreenAction extends jswingshell.action.AbstractJssSwitch
   /**
    * Logger.
    */
-  private static final Logger LOGGER = Logger.getLogger(FullScreenAction.class.getName());
+  private static final Logger LOGGER =
+      Logger.getLogger(FullScreenAction.class.getName());
 
   /**
    * This action default identifier.
@@ -62,17 +63,20 @@ public final class FullScreenAction extends jswingshell.action.AbstractJssSwitch
 
   private static final String ACTION_LABEL = "Full Screen";
 
-  private static final String ACTION_LABEL_KEY = "midi_player.console.action.fullscreen.name";
+  private static final String ACTION_LABEL_KEY =
+      "midiplayer.console.action.fullscreen.name";
 
-  private static final String COMMAND_BRIEF_HELP = "Toggle the frame's full screen mode.";
+  private static final String COMMAND_BRIEF_HELP =
+      "Toggle the frame's full screen mode.";
 
   private static final String COMMAND_BRIEF_HELP_KEY =
-      "midi_player.console.action.fullscreen.help.short";
+      "midiplayer.console.action.fullscreen.help.short";
 
-  private static final String COMMAND_HELP_KEY = "midi_player.console.action.fullscreen.help.long";
+  private static final String COMMAND_HELP_KEY =
+      "midiplayer.console.action.fullscreen.help.long";
 
   private static final String COMMAND_RUN_NOT_SUPPORTED_WARNING_KEY =
-      "midi_player.console.action.fullscreen.run.not_supported";
+      "midiplayer.console.action.fullscreen.run.not_supported";
 
   private static final String ICON_KEY = "slideshow_full_screen.png";
 
@@ -94,7 +98,8 @@ public final class FullScreenAction extends jswingshell.action.AbstractJssSwitch
    *
    * @return the action's command help.
    */
-  public static final String getHelp(FullScreenAction action, IJssController shellController) {
+  public static final String getHelp(FullScreenAction action,
+      IJssController shellController) {
     if (!commandHelpInitialized && action != null) {
       StringBuilder stringBuilder = new StringBuilder();
 
@@ -102,11 +107,14 @@ public final class FullScreenAction extends jswingshell.action.AbstractJssSwitch
       stringBuilder.append(action.getBriefHelp()).append("\n");
       stringBuilder.append("\n");
       try {
-        stringBuilder.append(ResourceUtils.getMessage(COMMAND_HELP_KEY, commandIdsAsString,
-            action.getOnArgumentsAsString(), action.getOffArgumentsAsString()));
+        stringBuilder.append(ResourceUtils.getMessage(COMMAND_HELP_KEY,
+            commandIdsAsString, action.getOnArgumentsAsString(),
+            action.getOffArgumentsAsString()));
       } catch (MissingResourceException e) {
-        LOGGER.log(Level.SEVERE, "Resource not found: \"" + COMMAND_HELP_KEY + "\"", e);
-        stringBuilder.append("You can switch full screen mode as follow:").append("\n");
+        LOGGER.log(Level.SEVERE,
+            "Resource not found: \"" + COMMAND_HELP_KEY + "\"", e);
+        stringBuilder.append("You can switch full screen mode as follow:")
+            .append("\n");
         stringBuilder.append("\t").append(commandIdsAsString).append(" ")
             .append(action.getOnArgumentsAsString()).append("\n");
         stringBuilder.append("\t").append(commandIdsAsString).append(" ")
@@ -131,7 +139,8 @@ public final class FullScreenAction extends jswingshell.action.AbstractJssSwitch
       try {
         commandBriefHelp = ResourceUtils.getMessage(COMMAND_BRIEF_HELP_KEY);
       } catch (MissingResourceException e) {
-        LOGGER.log(Level.SEVERE, "Resource not found: \"" + COMMAND_BRIEF_HELP_KEY + "\"", e);
+        LOGGER.log(Level.SEVERE,
+            "Resource not found: \"" + COMMAND_BRIEF_HELP_KEY + "\"", e);
         commandBriefHelp = COMMAND_BRIEF_HELP;
       }
       commandBriefHelpInitialized = true;
@@ -154,21 +163,25 @@ public final class FullScreenAction extends jswingshell.action.AbstractJssSwitch
   // #########################################################################
   private transient JFrame frame;
 
-  public FullScreenAction(Boolean selected, JFrame frame, JssTextAreaController shellController,
-      String... args) {
-    super(selected, ACTION_LABEL, ResourceUtils.createImageIcon(ICON_KEY, ACTION_LABEL),
-        shellController, args);
+  public FullScreenAction(Boolean selected, JFrame frame,
+      JssTextAreaController shellController, String... args) {
+    super(selected, ACTION_LABEL,
+        ResourceUtils.createImageIcon(ICON_KEY, ACTION_LABEL), shellController,
+        args);
     if (frame == null) {
       throw new IllegalArgumentException("Frame is null");
     }
     this.frame = frame;
-    putValue(Action.LARGE_ICON_KEY, ResourceUtils.createImageIcon(ICON_KEY, ACTION_LABEL, true));
-    putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_F11, 0));
+    putValue(Action.LARGE_ICON_KEY,
+        ResourceUtils.createImageIcon(ICON_KEY, ACTION_LABEL, true));
+    putValue(Action.ACCELERATOR_KEY,
+        KeyStroke.getKeyStroke(KeyEvent.VK_F11, 0));
     putValue(Action.ACTION_COMMAND_KEY, getDefaultCommandIdentifier());
     localeChanged();
   }
 
-  public FullScreenAction(JFrame frame, JssTextAreaController shellController, String... args) {
+  public FullScreenAction(JFrame frame, JssTextAreaController shellController,
+      String... args) {
     this(false, frame, shellController, args);
   }
 
@@ -223,7 +236,8 @@ public final class FullScreenAction extends jswingshell.action.AbstractJssSwitch
   }
 
   @Override
-  protected boolean doSwitch(IJssController shellController, Boolean switchValue) {
+  protected boolean doSwitch(IJssController shellController,
+      Boolean switchValue) {
     // Get the screen device based on the frame's location
     GraphicsDevice gd = getGraphicsDeviceForFrame();
 
@@ -236,7 +250,8 @@ public final class FullScreenAction extends jswingshell.action.AbstractJssSwitch
     // Can a display, keyboard, and mouse can be supported in this graphics environment
     if (!GraphicsEnvironment.isHeadless() || frame == null) {
       // Get all the screen devices available
-      GraphicsDevice[] gds = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices();
+      GraphicsDevice[] gds =
+          GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices();
       if (gds.length == 0) {
         return null;
       }
@@ -257,7 +272,8 @@ public final class FullScreenAction extends jswingshell.action.AbstractJssSwitch
       // If no device contains the frame
       if (gd == null) {
         // Use the default screen device
-        gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
+        gd = GraphicsEnvironment.getLocalGraphicsEnvironment()
+            .getDefaultScreenDevice();
       }
 
     }
@@ -265,8 +281,8 @@ public final class FullScreenAction extends jswingshell.action.AbstractJssSwitch
     return gd;
   }
 
-  private boolean switchToFullscreen(IJssController shellController, Boolean switchValue,
-      GraphicsDevice gd) {
+  private boolean switchToFullscreen(IJssController shellController,
+      Boolean switchValue, GraphicsDevice gd) {
     boolean switchDone = false;
 
     // If there is a screen device and it supports fullscreen
@@ -285,10 +301,11 @@ public final class FullScreenAction extends jswingshell.action.AbstractJssSwitch
           LOGGER.log(Level.WARNING, "Full screen not supported");
           String msg;
           try {
-            msg = ResourceUtils.getMessage(COMMAND_RUN_NOT_SUPPORTED_WARNING_KEY);
+            msg =
+                ResourceUtils.getMessage(COMMAND_RUN_NOT_SUPPORTED_WARNING_KEY);
           } catch (MissingResourceException e) {
-            LOGGER.log(Level.SEVERE,
-                "Resource not found: \"" + COMMAND_RUN_NOT_SUPPORTED_WARNING_KEY + "\"", e);
+            LOGGER.log(Level.SEVERE, "Resource not found: \""
+                + COMMAND_RUN_NOT_SUPPORTED_WARNING_KEY + "\"", e);
             msg = "Full screen not supported";
           }
           shellController.publish(IJssController.PublicationLevel.WARNING, msg);
@@ -326,11 +343,13 @@ public final class FullScreenAction extends jswingshell.action.AbstractJssSwitch
     try {
       ResourceUtils.setTextAndMnemonic(this, ACTION_LABEL_KEY);
     } catch (MissingResourceException e) {
-      LOGGER.log(Level.SEVERE, "Resource not found: \"" + ACTION_LABEL_KEY + "\"", e);
+      LOGGER.log(Level.SEVERE,
+          "Resource not found: \"" + ACTION_LABEL_KEY + "\"", e);
       putValue(Action.NAME, ACTION_LABEL);
     }
     putValue(Action.SHORT_DESCRIPTION, this.getBriefHelp());
-    putValue(Action.LONG_DESCRIPTION, this.getHelp(this.getDefaultShellController()));
+    putValue(Action.LONG_DESCRIPTION,
+        this.getHelp(this.getDefaultShellController()));
   }
 
   // #########################################################################

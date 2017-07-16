@@ -34,8 +34,8 @@ import midiplayer.resources.ResourceUtils;
  *
  * @author Mathieu Brunot
  */
-public final class ToggleControlsLargeIconsAction extends jswingshell.action.AbstractJssSwitchAction
-    implements LocaleChangeListener {
+public final class ToggleControlsLargeIconsAction extends
+    jswingshell.action.AbstractJssSwitchAction implements LocaleChangeListener {
 
   /**
    * The {@code serialVersionUID}.
@@ -58,16 +58,16 @@ public final class ToggleControlsLargeIconsAction extends jswingshell.action.Abs
   private static final String ACTION_LABEL = "Toggle controls large icons";
 
   private static final String ACTION_LABEL_KEY =
-      "midi_player.action.toggle_controls_large_icons.name";
+      "midiplayer.action.toggle_controls_large_icons.name";
 
   private static final String COMMAND_BRIEF_HELP =
       "Toggle the frame's controls's large icons display.";
 
   private static final String COMMAND_BRIEF_HELP_KEY =
-      "midi_player.action.toggle_controls_large_icons.help.short";
+      "midiplayer.action.toggle_controls_large_icons.help.short";
 
   private static final String COMMAND_HELP_KEY =
-      "midi_player.action.toggle_controls_large_icons.help.long";
+      "midiplayer.action.toggle_controls_large_icons.help.long";
 
   private static String commandHelp;
 
@@ -96,11 +96,15 @@ public final class ToggleControlsLargeIconsAction extends jswingshell.action.Abs
       stringBuilder.append(action.getBriefHelp()).append("\n");
       stringBuilder.append("\n");
       try {
-        stringBuilder.append(ResourceUtils.getMessage(COMMAND_HELP_KEY, commandIdsAsString,
-            action.getOnArgumentsAsString(), action.getOffArgumentsAsString()));
+        stringBuilder.append(ResourceUtils.getMessage(COMMAND_HELP_KEY,
+            commandIdsAsString, action.getOnArgumentsAsString(),
+            action.getOffArgumentsAsString()));
       } catch (MissingResourceException e) {
-        LOGGER.log(Level.SEVERE, "Resource not found: \"" + COMMAND_HELP_KEY + "\"", e);
-        stringBuilder.append("You can switch display mode of controls large icons as follow:")
+        LOGGER.log(Level.SEVERE,
+            "Resource not found: \"" + COMMAND_HELP_KEY + "\"", e);
+        stringBuilder
+            .append(
+                "You can switch display mode of controls large icons as follow:")
             .append("\n");
         stringBuilder.append("\t").append(commandIdsAsString).append(" ")
             .append(action.getOnArgumentsAsString()).append("\n");
@@ -121,12 +125,14 @@ public final class ToggleControlsLargeIconsAction extends jswingshell.action.Abs
    *
    * @return the static command brief help.
    */
-  public static final String getBriefHelp(ToggleControlsLargeIconsAction action) {
+  public static final String getBriefHelp(
+      ToggleControlsLargeIconsAction action) {
     if (!commandBriefHelpInitialized && action != null) {
       try {
         commandBriefHelp = ResourceUtils.getMessage(COMMAND_BRIEF_HELP_KEY);
       } catch (MissingResourceException e) {
-        LOGGER.log(Level.SEVERE, "Resource not found: \"" + COMMAND_BRIEF_HELP_KEY + "\"", e);
+        LOGGER.log(Level.SEVERE,
+            "Resource not found: \"" + COMMAND_BRIEF_HELP_KEY + "\"", e);
         commandBriefHelp = COMMAND_BRIEF_HELP;
       }
       commandBriefHelpInitialized = true;
@@ -215,7 +221,8 @@ public final class ToggleControlsLargeIconsAction extends jswingshell.action.Abs
   }
 
   @Override
-  protected boolean doSwitch(IJssController shellController, Boolean switchValue) {
+  protected boolean doSwitch(IJssController shellController,
+      Boolean switchValue) {
     JPanel controls = frame.getPanelControl();
 
     if (controls != null) {
@@ -259,11 +266,13 @@ public final class ToggleControlsLargeIconsAction extends jswingshell.action.Abs
     try {
       ResourceUtils.setTextAndMnemonic(this, ACTION_LABEL_KEY);
     } catch (MissingResourceException e) {
-      LOGGER.log(Level.SEVERE, "Resource not found: \"" + ACTION_LABEL_KEY + "\"", e);
+      LOGGER.log(Level.SEVERE,
+          "Resource not found: \"" + ACTION_LABEL_KEY + "\"", e);
       putValue(Action.NAME, ACTION_LABEL);
     }
     putValue(Action.SHORT_DESCRIPTION, this.getBriefHelp());
-    putValue(Action.LONG_DESCRIPTION, this.getHelp(this.getDefaultShellController()));
+    putValue(Action.LONG_DESCRIPTION,
+        this.getHelp(this.getDefaultShellController()));
   }
 
 }

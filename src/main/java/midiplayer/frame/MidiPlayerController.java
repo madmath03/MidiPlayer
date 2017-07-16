@@ -28,7 +28,8 @@ public class MidiPlayerController extends LocalizedJssTextAreaController {
     this(null, null, null);
   }
 
-  public MidiPlayerController(JssTextArea view, MidiPlayerFrame frame, MidiPlayer player) {
+  public MidiPlayerController(JssTextArea view, MidiPlayerFrame frame,
+      MidiPlayer player) {
     super(view);
     this.frame = frame;
     this.player = player;
@@ -54,7 +55,8 @@ public class MidiPlayerController extends LocalizedJssTextAreaController {
   // #########################################################################
   public boolean addAction(IJssAction action) {
     boolean added = getModel().add(action);
-    if (player instanceof MidiPlayerWithListener && action instanceof PropertyChangeListener) {
+    if (player instanceof MidiPlayerWithListener
+        && action instanceof PropertyChangeListener) {
       added &= ((MidiPlayerWithListener) player)
           .addPropertyChangeListener((PropertyChangeListener) action);
     }
@@ -65,9 +67,11 @@ public class MidiPlayerController extends LocalizedJssTextAreaController {
     boolean added = getModel().addAll(actions);
     if (player instanceof MidiPlayerWithListener) {
       MidiPlayerWithListener midiPlayer = (MidiPlayerWithListener) player;
-      actions.parallelStream().filter((action) -> (action instanceof PropertyChangeListener))
+      actions.parallelStream()
+          .filter((action) -> (action instanceof PropertyChangeListener))
           .forEach((action) -> {
-            midiPlayer.addPropertyChangeListener((PropertyChangeListener) action);
+            midiPlayer
+                .addPropertyChangeListener((PropertyChangeListener) action);
           });
     }
     return added;
@@ -75,7 +79,8 @@ public class MidiPlayerController extends LocalizedJssTextAreaController {
 
   public boolean removeAction(IJssAction action) {
     boolean removed = getModel().remove(action);
-    if (player instanceof MidiPlayerWithListener && action instanceof PropertyChangeListener) {
+    if (player instanceof MidiPlayerWithListener
+        && action instanceof PropertyChangeListener) {
       ((MidiPlayerWithListener) player)
           .removePropertyChangeListener((PropertyChangeListener) action);
     }
@@ -86,9 +91,11 @@ public class MidiPlayerController extends LocalizedJssTextAreaController {
     boolean removed = getModel().removeAll(actions);
     if (player instanceof MidiPlayerWithListener) {
       MidiPlayerWithListener midiPlayer = (MidiPlayerWithListener) player;
-      actions.parallelStream().filter((action) -> (action instanceof PropertyChangeListener))
+      actions.parallelStream()
+          .filter((action) -> (action instanceof PropertyChangeListener))
           .forEach((action) -> {
-            midiPlayer.removePropertyChangeListener((PropertyChangeListener) action);
+            midiPlayer
+                .removePropertyChangeListener((PropertyChangeListener) action);
           });
     }
     return removed;
@@ -104,7 +111,8 @@ public class MidiPlayerController extends LocalizedJssTextAreaController {
 
   // #########################################################################
   @Override
-  public synchronized void addPropertyChangeListener(PropertyChangeListener listener) {
+  public synchronized void addPropertyChangeListener(
+      PropertyChangeListener listener) {
     super.addPropertyChangeListener(listener);
     if (player instanceof MidiPlayerWithListener) {
       ((MidiPlayerWithListener) player).addPropertyChangeListener(listener);
@@ -112,7 +120,8 @@ public class MidiPlayerController extends LocalizedJssTextAreaController {
   }
 
   @Override
-  public synchronized void removePropertyChangeListener(PropertyChangeListener listener) {
+  public synchronized void removePropertyChangeListener(
+      PropertyChangeListener listener) {
     super.removePropertyChangeListener(listener);
     if (player instanceof MidiPlayerWithListener) {
       ((MidiPlayerWithListener) player).removePropertyChangeListener(listener);

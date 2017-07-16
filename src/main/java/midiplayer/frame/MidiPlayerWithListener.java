@@ -25,7 +25,8 @@ public class MidiPlayerWithListener extends MidiPlayer
   /**
    * Logger.
    */
-  private static final Logger LOGGER = Logger.getLogger(MidiPlayerWithListener.class.getName());
+  private static final Logger LOGGER =
+      Logger.getLogger(MidiPlayerWithListener.class.getName());
 
   private static MidiPlayerWithListener instance = null;
 
@@ -38,27 +39,31 @@ public class MidiPlayerWithListener extends MidiPlayer
 
   // #########################################################################
 
-  public static final String LOOP_CHANGE = "midi_player.loop";
+  public static final String LOOP_CHANGE = "midiplayer.loop";
 
-  public static final String PLAYING_START_CHANGE = "midi_player.playing.start";
+  public static final String PLAYING_START_CHANGE = "midiplayer.playing.start";
 
-  public static final String PLAYING_PAUSE_CHANGE = "midi_player.playing.pause";
+  public static final String PLAYING_PAUSE_CHANGE = "midiplayer.playing.pause";
 
-  public static final String PLAYING_STOP_CHANGE = "midi_player.playing.stop";
+  public static final String PLAYING_STOP_CHANGE = "midiplayer.playing.stop";
 
-  public static final String CURRENT_SONG_CHANGE = "midi_player.current_song.change";
+  public static final String CURRENT_SONG_CHANGE =
+      "midiplayer.current_song.change";
 
-  public static final String PLAYLIST_LOOP_CHANGE = "midi_player.playlist.loop";
+  public static final String PLAYLIST_LOOP_CHANGE = "midiplayer.playlist.loop";
 
-  public static final String PLAYLIST_SIZE_CHANGE = "midi_player.playlist.size";
+  public static final String PLAYLIST_SIZE_CHANGE = "midiplayer.playlist.size";
 
-  public static final String PLAYLIST_CONTENT_CHANGE = "midi_player.playlist.content.change";
+  public static final String PLAYLIST_CONTENT_CHANGE =
+      "midiplayer.playlist.content.change";
 
   // #########################################################################
 
-  private final List<PropertyChangeListener> propertyChangeListeners = new ArrayList<>();
+  private final List<PropertyChangeListener> propertyChangeListeners =
+      new ArrayList<>();
 
-  private final List<TableModelListener> tableModelListeners = new ArrayList<>();
+  private final List<TableModelListener> tableModelListeners =
+      new ArrayList<>();
 
   private final List<ThrowableListener> midiPlayerListeners = new ArrayList<>();
 
@@ -129,7 +134,8 @@ public class MidiPlayerWithListener extends MidiPlayer
     int originalSongIndex = this.getCurrentSongIndex();
     boolean moved = super.moveToPreviousSong();
     if (moved) {
-      fireChange(CURRENT_SONG_CHANGE, originalSongIndex, this.getCurrentSongIndex());
+      fireChange(CURRENT_SONG_CHANGE, originalSongIndex,
+          this.getCurrentSongIndex());
     }
     return moved;
   }
@@ -139,7 +145,8 @@ public class MidiPlayerWithListener extends MidiPlayer
     int originalSongIndex = this.getCurrentSongIndex();
     boolean moved = super.moveToNextSong(force);
     if (moved) {
-      fireChange(CURRENT_SONG_CHANGE, originalSongIndex, this.getCurrentSongIndex());
+      fireChange(CURRENT_SONG_CHANGE, originalSongIndex,
+          this.getCurrentSongIndex());
     }
     return moved;
   }
@@ -149,7 +156,8 @@ public class MidiPlayerWithListener extends MidiPlayer
     int originalSongIndex = this.getCurrentSongIndex();
     boolean moved = super.moveToSong(index);
     if (moved) {
-      fireChange(CURRENT_SONG_CHANGE, originalSongIndex, this.getCurrentSongIndex());
+      fireChange(CURRENT_SONG_CHANGE, originalSongIndex,
+          this.getCurrentSongIndex());
     }
     return moved;
   }
@@ -175,7 +183,8 @@ public class MidiPlayerWithListener extends MidiPlayer
     if (added) {
       int newSize = this.size();
       fireChange(PLAYLIST_SIZE_CHANGE, originalSize, newSize);
-      fireChange(CURRENT_SONG_CHANGE, originalSongIndex, this.getCurrentSongIndex());
+      fireChange(CURRENT_SONG_CHANGE, originalSongIndex,
+          this.getCurrentSongIndex());
       fireChange();
     }
     return added;
@@ -201,7 +210,8 @@ public class MidiPlayerWithListener extends MidiPlayer
     if (added) {
       int newSize = this.size();
       fireChange(PLAYLIST_SIZE_CHANGE, originalSize, newSize);
-      fireChange(CURRENT_SONG_CHANGE, originalSongIndex, this.getCurrentSongIndex());
+      fireChange(CURRENT_SONG_CHANGE, originalSongIndex,
+          this.getCurrentSongIndex());
       fireChange();
     }
     return added;
@@ -291,7 +301,8 @@ public class MidiPlayerWithListener extends MidiPlayer
     String columnName;
     switch (columnIndex) {
       case 0:
-        columnName = ResourceUtils.getMessage("midi_player.playlist.column.title.name");
+        columnName =
+            ResourceUtils.getMessage("midiplayer.playlist.column.title.name");
         break;
       default:
         columnName = null;
@@ -320,7 +331,8 @@ public class MidiPlayerWithListener extends MidiPlayer
   @Override
   public Object getValueAt(int rowIndex, int columnIndex) {
     if (columnIndex == 0) {
-      return (rowIndex + 1) + ". " + getSongInfo(getPlaylist().get(rowIndex), null);
+      return (rowIndex + 1) + ". "
+          + getSongInfo(getPlaylist().get(rowIndex), null);
     } else {
       return null;
     }
@@ -458,7 +470,8 @@ public class MidiPlayerWithListener extends MidiPlayer
    *
    * @see List#contains(java.lang.Object)
    */
-  public synchronized boolean containsExceptionListener(ThrowableListener listener) {
+  public synchronized boolean containsExceptionListener(
+      ThrowableListener listener) {
     return midiPlayerListeners.contains(listener);
   }
 
@@ -532,7 +545,8 @@ public class MidiPlayerWithListener extends MidiPlayer
     }
   }
 
-  private static void fireExceptionReceived(List<ThrowableListener> listeners, String msg) {
+  private static void fireExceptionReceived(List<ThrowableListener> listeners,
+      String msg) {
     if (listeners != null) {
       listeners.stream().forEach((listener) -> {
         listener.throwableReceived(msg);
@@ -540,7 +554,8 @@ public class MidiPlayerWithListener extends MidiPlayer
     }
   }
 
-  private static void fireExceptionReceived(List<ThrowableListener> listeners, Throwable thrown) {
+  private static void fireExceptionReceived(List<ThrowableListener> listeners,
+      Throwable thrown) {
     if (listeners != null) {
       listeners.stream().forEach((listener) -> {
         listener.throwableReceived(thrown);
@@ -548,8 +563,8 @@ public class MidiPlayerWithListener extends MidiPlayer
     }
   }
 
-  private static void fireExceptionReceived(List<ThrowableListener> listeners, String msg,
-      Throwable thrown) {
+  private static void fireExceptionReceived(List<ThrowableListener> listeners,
+      String msg, Throwable thrown) {
     if (listeners != null) {
       listeners.stream().forEach((listener) -> {
         listener.throwableReceived(msg, thrown);
@@ -632,7 +647,8 @@ public class MidiPlayerWithListener extends MidiPlayer
    *
    * @see List#contains(java.lang.Object)
    */
-  public synchronized boolean containsTableModelListener(TableModelListener listener) {
+  public synchronized boolean containsTableModelListener(
+      TableModelListener listener) {
     return tableModelListeners.contains(listener);
   }
 
@@ -787,7 +803,8 @@ public class MidiPlayerWithListener extends MidiPlayer
    *
    * @return {@code true} (as specified by {@link Collection#add})
    */
-  public synchronized boolean addPropertyChangeListener(PropertyChangeListener listener) {
+  public synchronized boolean addPropertyChangeListener(
+      PropertyChangeListener listener) {
     return propertyChangeListeners.add(listener);
   }
 
@@ -808,7 +825,8 @@ public class MidiPlayerWithListener extends MidiPlayer
    *
    * @return {@code true} if this {@code MidiPlayer} contained the {@code PropertyChangeListener}
    */
-  public synchronized boolean removePropertyChangeListener(PropertyChangeListener listener) {
+  public synchronized boolean removePropertyChangeListener(
+      PropertyChangeListener listener) {
     return propertyChangeListeners.remove(listener);
   }
 
@@ -846,7 +864,8 @@ public class MidiPlayerWithListener extends MidiPlayer
    *
    * @see List#contains(java.lang.Object)
    */
-  public synchronized boolean containsPropertyChangeListener(PropertyChangeListener listener) {
+  public synchronized boolean containsPropertyChangeListener(
+      PropertyChangeListener listener) {
     return propertyChangeListeners.contains(listener);
   }
 
@@ -867,7 +886,8 @@ public class MidiPlayerWithListener extends MidiPlayer
    * @param oldValue the old value of the property
    * @param newValue the new value of the property
    */
-  public void fireChange(String propertyName, Object oldValue, Object newValue) {
+  public void fireChange(String propertyName, Object oldValue,
+      Object newValue) {
     if (oldValue != null && newValue != null && oldValue.equals(newValue)) {
       return;
     }
@@ -943,7 +963,8 @@ public class MidiPlayerWithListener extends MidiPlayer
     }
   }
 
-  private static void firePropertyChange(List<PropertyChangeListener> listeners) {
+  private static void firePropertyChange(
+      List<PropertyChangeListener> listeners) {
     if (listeners != null) {
       listeners.stream().forEach((listener) -> {
         listener.propertyChange(null);

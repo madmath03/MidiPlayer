@@ -35,7 +35,8 @@ public final class RemoveAction extends AbstractJssAction
   /**
    * Logger.
    */
-  private static final Logger LOGGER = Logger.getLogger(RemoveAction.class.getName());
+  private static final Logger LOGGER =
+      Logger.getLogger(RemoveAction.class.getName());
 
   /**
    * This action default identifier.
@@ -48,13 +49,17 @@ public final class RemoveAction extends AbstractJssAction
 
   private static final String ACTION_LABEL = "Remove";
 
-  private static final String ACTION_LABEL_KEY = "midi_player.action.remove.name";
+  private static final String ACTION_LABEL_KEY =
+      "midiplayer.action.remove.name";
 
-  private static final String COMMAND_BRIEF_HELP = "Remove the MIDI song from playlist.";
+  private static final String COMMAND_BRIEF_HELP =
+      "Remove the MIDI song from playlist.";
 
-  private static final String COMMAND_BRIEF_HELP_KEY = "midi_player.action.remove.help.short";
+  private static final String COMMAND_BRIEF_HELP_KEY =
+      "midiplayer.action.remove.help.short";
 
-  private static final String COMMAND_HELP_KEY = "midi_player.action.remove.help.long";
+  private static final String COMMAND_HELP_KEY =
+      "midiplayer.action.remove.help.long";
 
   private static final String ICON_KEY = "delete.png";
 
@@ -81,12 +86,17 @@ public final class RemoveAction extends AbstractJssAction
       stringBuilder.append(action.getBriefHelp());
       stringBuilder.append("\n");
       try {
-        stringBuilder.append(ResourceUtils.getMessage(COMMAND_HELP_KEY, commandIdsAsString));
+        stringBuilder.append(
+            ResourceUtils.getMessage(COMMAND_HELP_KEY, commandIdsAsString));
       } catch (MissingResourceException e) {
-        LOGGER.log(Level.SEVERE, "Resource not found: \"" + COMMAND_HELP_KEY + "\"", e);
-        stringBuilder.append("\n").append("Remove the song at given index from the playlist:");
-        stringBuilder.append("\n\t").append(commandIdsAsString).append(" [integer] ");
-        stringBuilder.append("\n").append("You can also specify several songs to remove:");
+        LOGGER.log(Level.SEVERE,
+            "Resource not found: \"" + COMMAND_HELP_KEY + "\"", e);
+        stringBuilder.append("\n")
+            .append("Remove the song at given index from the playlist:");
+        stringBuilder.append("\n\t").append(commandIdsAsString)
+            .append(" [integer] ");
+        stringBuilder.append("\n")
+            .append("You can also specify several songs to remove:");
         stringBuilder.append("\n\t").append(commandIdsAsString)
             .append(" [integer1] [integer2] [integer3] [integer4] ... ");
       }
@@ -109,7 +119,8 @@ public final class RemoveAction extends AbstractJssAction
       try {
         commandBriefHelp = ResourceUtils.getMessage(COMMAND_BRIEF_HELP_KEY);
       } catch (MissingResourceException e) {
-        LOGGER.log(Level.SEVERE, "Resource not found: \"" + COMMAND_BRIEF_HELP_KEY + "\"", e);
+        LOGGER.log(Level.SEVERE,
+            "Resource not found: \"" + COMMAND_BRIEF_HELP_KEY + "\"", e);
         commandBriefHelp = COMMAND_BRIEF_HELP;
       }
       commandBriefHelpInitialized = true;
@@ -134,14 +145,16 @@ public final class RemoveAction extends AbstractJssAction
 
   private transient MidiPlayerFrame midiPlayerFrame;
 
-  public RemoveAction(MidiPlayer midiPlayer, IJssController shellController, String... args) {
-    super(ACTION_LABEL, ResourceUtils.createImageIcon(ICON_KEY, ACTION_LABEL), shellController,
-        args);
+  public RemoveAction(MidiPlayer midiPlayer, IJssController shellController,
+      String... args) {
+    super(ACTION_LABEL, ResourceUtils.createImageIcon(ICON_KEY, ACTION_LABEL),
+        shellController, args);
     if (midiPlayer == null) {
       throw new IllegalArgumentException("Midi player is null");
     }
     this.midiPlayer = midiPlayer;
-    putValue(Action.LARGE_ICON_KEY, ResourceUtils.createImageIcon(ICON_KEY, ACTION_LABEL, true));
+    putValue(Action.LARGE_ICON_KEY,
+        ResourceUtils.createImageIcon(ICON_KEY, ACTION_LABEL, true));
     putValue(Action.ACTION_COMMAND_KEY, getDefaultCommandIdentifier());
     localeChanged();
   }
@@ -192,7 +205,8 @@ public final class RemoveAction extends AbstractJssAction
 
     if (args == null || args.length <= 1) {
       if (shellController != null) {
-        shellController.publish(IJssController.PublicationLevel.WARNING, getHelp(shellController));
+        shellController.publish(IJssController.PublicationLevel.WARNING,
+            getHelp(shellController));
       }
     } else {
       String[] songIndexes = Arrays.copyOfRange(args, 1, args.length);
@@ -202,7 +216,8 @@ public final class RemoveAction extends AbstractJssAction
         try {
           indexes[i] = Integer.parseInt(indexStr);
         } catch (NumberFormatException nfex) {
-          LOGGER.log(Level.SEVERE, "Not a valid integer: \"" + indexStr + "\"", nfex);
+          LOGGER.log(Level.SEVERE, "Not a valid integer: \"" + indexStr + "\"",
+              nfex);
         }
       }
 
@@ -256,11 +271,13 @@ public final class RemoveAction extends AbstractJssAction
     try {
       ResourceUtils.setTextAndMnemonic(this, ACTION_LABEL_KEY);
     } catch (MissingResourceException e) {
-      LOGGER.log(Level.SEVERE, "Resource not found: \"" + ACTION_LABEL_KEY + "\"", e);
+      LOGGER.log(Level.SEVERE,
+          "Resource not found: \"" + ACTION_LABEL_KEY + "\"", e);
       putValue(Action.NAME, ACTION_LABEL);
     }
     putValue(Action.SHORT_DESCRIPTION, this.getBriefHelp());
-    putValue(Action.LONG_DESCRIPTION, this.getHelp(this.getDefaultShellController()));
+    putValue(Action.LONG_DESCRIPTION,
+        this.getHelp(this.getDefaultShellController()));
   }
 
   // #########################################################################

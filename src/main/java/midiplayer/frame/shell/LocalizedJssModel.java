@@ -62,7 +62,8 @@ public class LocalizedJssModel extends JssSimpleModel implements Serializable {
     super(controller, initialCapacity);
   }
 
-  public LocalizedJssModel(IJssController controller, Collection<IJssAction> actions) {
+  public LocalizedJssModel(IJssController controller,
+      Collection<IJssAction> actions) {
     super(controller, actions);
   }
 
@@ -70,7 +71,8 @@ public class LocalizedJssModel extends JssSimpleModel implements Serializable {
     super(anotherModel);
   }
 
-  public LocalizedJssModel(IJssController anotherController, JssSimpleModel anotherModel) {
+  public LocalizedJssModel(IJssController anotherController,
+      JssSimpleModel anotherModel) {
     super(anotherController, anotherModel);
   }
 
@@ -80,8 +82,10 @@ public class LocalizedJssModel extends JssSimpleModel implements Serializable {
   @Override
   public void clear() {
     super.getAvailableActions().parallelStream()
-        .filter((action) -> (action instanceof LocaleChangeListener)).forEach((action) -> {
-          ResourceUtils.removeLocaleChangeListener((LocaleChangeListener) action);
+        .filter((action) -> (action instanceof LocaleChangeListener))
+        .forEach((action) -> {
+          ResourceUtils
+              .removeLocaleChangeListener((LocaleChangeListener) action);
         });
     // Maintain list of identifiers
     this.getActionIdentifiers().clear();
@@ -100,7 +104,8 @@ public class LocalizedJssModel extends JssSimpleModel implements Serializable {
     }
     boolean added = super.add(action);
     if (added && action instanceof LocaleChangeListener) {
-      added &= ResourceUtils.addLocaleChangeListener((LocaleChangeListener) action);
+      added &=
+          ResourceUtils.addLocaleChangeListener((LocaleChangeListener) action);
     }
     // Maintain list of identifiers
     if (added && action != null) {
@@ -120,16 +125,19 @@ public class LocalizedJssModel extends JssSimpleModel implements Serializable {
     }
     // If there already is an action with the same id, do not add!
     List<IJssAction> newActions = new ArrayList<>(actions.size());
-    actions.parallelStream().filter((action) -> (action != null)).forEach((action) -> {
-      for (String id : action.getCommandIdentifiers()) {
-        if (this.getActionForCommandIdentifier(id) == null) {
-          newActions.add(action);
-        }
-      }
-    });
+    actions.parallelStream().filter((action) -> (action != null))
+        .forEach((action) -> {
+          for (String id : action.getCommandIdentifiers()) {
+            if (this.getActionForCommandIdentifier(id) == null) {
+              newActions.add(action);
+            }
+          }
+        });
     boolean added = false;
-    added = newActions.parallelStream().filter((action) -> (action instanceof LocaleChangeListener))
-        .map((action) -> ResourceUtils.addLocaleChangeListener((LocaleChangeListener) action))
+    added = newActions.parallelStream()
+        .filter((action) -> (action instanceof LocaleChangeListener))
+        .map((action) -> ResourceUtils
+            .addLocaleChangeListener((LocaleChangeListener) action))
         .reduce(added, (accumulator, item) -> accumulator | item);
     added |= super.addAll(newActions);
     if (added) {
@@ -149,7 +157,8 @@ public class LocalizedJssModel extends JssSimpleModel implements Serializable {
   public boolean remove(IJssAction action) {
     boolean removed = super.remove(action);
     if (removed && action instanceof LocaleChangeListener) {
-      removed &= ResourceUtils.removeLocaleChangeListener((LocaleChangeListener) action);
+      removed &= ResourceUtils
+          .removeLocaleChangeListener((LocaleChangeListener) action);
     }
     // Maintain list of identifiers
     if (removed && action != null) {
@@ -168,8 +177,10 @@ public class LocalizedJssModel extends JssSimpleModel implements Serializable {
       return false;
     }
     boolean removed = false;
-    removed = actions.parallelStream().filter((action) -> (action instanceof LocaleChangeListener))
-        .map((action) -> ResourceUtils.removeLocaleChangeListener((LocaleChangeListener) action))
+    removed = actions.parallelStream()
+        .filter((action) -> (action instanceof LocaleChangeListener))
+        .map((action) -> ResourceUtils
+            .removeLocaleChangeListener((LocaleChangeListener) action))
         .reduce(removed, (accumulator, item) -> accumulator | item);
     removed |= super.removeAll(actions);
     if (removed) {
@@ -194,7 +205,8 @@ public class LocalizedJssModel extends JssSimpleModel implements Serializable {
     retained = super.getAvailableActions().parallelStream()
         .filter((action) -> (action instanceof LocaleChangeListener
             && !getAvailableActions().contains(action)))
-        .map((action) -> ResourceUtils.removeLocaleChangeListener((LocaleChangeListener) action))
+        .map((action) -> ResourceUtils
+            .removeLocaleChangeListener((LocaleChangeListener) action))
         .reduce(retained, (accumulator, item) -> accumulator | item);
     retained |= super.retainAll(actions);
     if (retained) {
@@ -231,9 +243,10 @@ public class LocalizedJssModel extends JssSimpleModel implements Serializable {
     // Update from actions ids
     Set<IJssAction> actions = super.getAvailableActions();
     if (actions != null && !actions.isEmpty()) {
-      actions.parallelStream().filter((action) -> (action != null)).forEach((action) -> {
-        ids.addAll(Arrays.asList(action.getCommandIdentifiers()));
-      });
+      actions.parallelStream().filter((action) -> (action != null))
+          .forEach((action) -> {
+            ids.addAll(Arrays.asList(action.getCommandIdentifiers()));
+          });
       if (this.isSorted() && ids instanceof List) {
         Collections.sort((List<String>) ids);
       }

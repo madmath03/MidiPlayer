@@ -54,8 +54,8 @@ public class ActionFactory {
       case AddAction.DEFAULT_IDENTIFIER:
         AddAction addAction;
         if (action == null) {
-          addAction = new AddAction(midiPlayerFrame.getFileChooser(), midiPlayerFrame, midiPlayer,
-              midiPlayerController);
+          addAction = new AddAction(midiPlayerFrame.getFileChooser(),
+              midiPlayerFrame, midiPlayer, midiPlayerController);
           action = addAction;
           addToShell(midiPlayerController, action);
         } else {
@@ -101,7 +101,8 @@ public class ActionFactory {
           exitAction = (ExitAction) action;
           exitAction.setDefaultShellController(midiPlayerController);
         }
-        exitAction.setClosableResources(Collections.singletonList(midiPlayerFrame));
+        exitAction
+            .setClosableResources(Collections.singletonList(midiPlayerFrame));
         break;
       case PreviousAction.DEFAULT_IDENTIFIER:
         PreviousAction previousAction;
@@ -117,7 +118,8 @@ public class ActionFactory {
         // Make all controls enabled on startup
         previousAction.setEnabled(midiPlayer.size() > 1);
         if (midiPlayer instanceof MidiPlayerWithListener) {
-          ((MidiPlayerWithListener) midiPlayer).addPropertyChangeListener(previousAction);
+          ((MidiPlayerWithListener) midiPlayer)
+              .addPropertyChangeListener(previousAction);
         }
         break;
       case PlayAction.DEFAULT_IDENTIFIER:
@@ -134,7 +136,8 @@ public class ActionFactory {
         // Make all controls enabled on startup
         playAction.setEnabled(!midiPlayer.isEmpty() && !midiPlayer.isPlaying());
         if (midiPlayer instanceof MidiPlayerWithListener) {
-          ((MidiPlayerWithListener) midiPlayer).addPropertyChangeListener(playAction);
+          ((MidiPlayerWithListener) midiPlayer)
+              .addPropertyChangeListener(playAction);
         }
         break;
       case PauseAction.DEFAULT_IDENTIFIER:
@@ -151,7 +154,8 @@ public class ActionFactory {
         // Make all controls enabled on startup
         pauseAction.setEnabled(!midiPlayer.isEmpty() && midiPlayer.isPlaying());
         if (midiPlayer instanceof MidiPlayerWithListener) {
-          ((MidiPlayerWithListener) midiPlayer).addPropertyChangeListener(pauseAction);
+          ((MidiPlayerWithListener) midiPlayer)
+              .addPropertyChangeListener(pauseAction);
         }
         break;
       case StopAction.DEFAULT_IDENTIFIER:
@@ -168,7 +172,8 @@ public class ActionFactory {
         // Make all controls enabled on startup
         stopAction.setEnabled(!midiPlayer.isEmpty() && !midiPlayer.isStopped());
         if (midiPlayer instanceof MidiPlayerWithListener) {
-          ((MidiPlayerWithListener) midiPlayer).addPropertyChangeListener(stopAction);
+          ((MidiPlayerWithListener) midiPlayer)
+              .addPropertyChangeListener(stopAction);
         }
         break;
       case NextAction.DEFAULT_IDENTIFIER:
@@ -185,13 +190,15 @@ public class ActionFactory {
         // Make all controls enabled on startup
         nextAction.setEnabled(midiPlayer.size() > 1);
         if (midiPlayer instanceof MidiPlayerWithListener) {
-          ((MidiPlayerWithListener) midiPlayer).addPropertyChangeListener(nextAction);
+          ((MidiPlayerWithListener) midiPlayer)
+              .addPropertyChangeListener(nextAction);
         }
         break;
       case LoopAction.DEFAULT_IDENTIFIER:
         LoopAction loopAction;
         if (action == null) {
-          loopAction = new LoopAction(midiPlayer, midiPlayer.isLooping(), midiPlayerController);
+          loopAction = new LoopAction(midiPlayer, midiPlayer.isLooping(),
+              midiPlayerController);
           action = loopAction;
           addToShell(midiPlayerController, action);
         } else {
@@ -203,7 +210,8 @@ public class ActionFactory {
       case ShufflePlaylistAction.DEFAULT_IDENTIFIER:
         ShufflePlaylistAction shufflePlaylistAction;
         if (action == null) {
-          shufflePlaylistAction = new ShufflePlaylistAction(midiPlayer, midiPlayerController);
+          shufflePlaylistAction =
+              new ShufflePlaylistAction(midiPlayer, midiPlayerController);
           action = shufflePlaylistAction;
           addToShell(midiPlayerController, action);
         } else {
@@ -214,13 +222,15 @@ public class ActionFactory {
         // Make all controls enabled on startup
         shufflePlaylistAction.setEnabled(midiPlayer.size() > 1);
         if (midiPlayer instanceof MidiPlayerWithListener) {
-          ((MidiPlayerWithListener) midiPlayer).addPropertyChangeListener(shufflePlaylistAction);
+          ((MidiPlayerWithListener) midiPlayer)
+              .addPropertyChangeListener(shufflePlaylistAction);
         }
         break;
       case SortPlaylistAction.DEFAULT_IDENTIFIER:
         SortPlaylistAction sortPlaylistAction;
         if (action == null) {
-          sortPlaylistAction = new SortPlaylistAction(midiPlayer, midiPlayerController);
+          sortPlaylistAction =
+              new SortPlaylistAction(midiPlayer, midiPlayerController);
           action = sortPlaylistAction;
           addToShell(midiPlayerController, action);
         } else {
@@ -231,7 +241,8 @@ public class ActionFactory {
         // Make all controls enabled on startup
         sortPlaylistAction.setEnabled(midiPlayer.size() > 1);
         if (midiPlayer instanceof MidiPlayerWithListener) {
-          ((MidiPlayerWithListener) midiPlayer).addPropertyChangeListener(sortPlaylistAction);
+          ((MidiPlayerWithListener) midiPlayer)
+              .addPropertyChangeListener(sortPlaylistAction);
         }
         break;
       case DisplayConsoleAction.DEFAULT_IDENTIFIER:
@@ -249,50 +260,54 @@ public class ActionFactory {
       case ToggleControlsNamesAction.DEFAULT_IDENTIFIER:
         ToggleControlsNamesAction toggleControlsNamesAction;
         if (action == null) {
-          toggleControlsNamesAction =
-              new ToggleControlsNamesAction(midiPlayerFrame.isDisplayControlsButtonNames(),
-                  midiPlayerFrame, midiPlayerController);
+          toggleControlsNamesAction = new ToggleControlsNamesAction(
+              midiPlayerFrame.isDisplayControlsButtonNames(), midiPlayerFrame,
+              midiPlayerController);
           action = toggleControlsNamesAction;
           addToShell(midiPlayerController, action);
         } else {
           toggleControlsNamesAction = (ToggleControlsNamesAction) action;
           toggleControlsNamesAction.setFrame(midiPlayerFrame);
-          toggleControlsNamesAction.setDefaultShellController(midiPlayerController);
+          toggleControlsNamesAction
+              .setDefaultShellController(midiPlayerController);
         }
         break;
       case ToggleControlsIconsAction.DEFAULT_IDENTIFIER:
         ToggleControlsIconsAction toggleControlsIconsAction;
         if (action == null) {
-          toggleControlsIconsAction =
-              new ToggleControlsIconsAction(midiPlayerFrame.isDisplayControlsButtonIcons(),
-                  midiPlayerFrame, midiPlayerController);
+          toggleControlsIconsAction = new ToggleControlsIconsAction(
+              midiPlayerFrame.isDisplayControlsButtonIcons(), midiPlayerFrame,
+              midiPlayerController);
           action = toggleControlsIconsAction;
           addToShell(midiPlayerController, action);
         } else {
           toggleControlsIconsAction = (ToggleControlsIconsAction) action;
           toggleControlsIconsAction.setFrame(midiPlayerFrame);
-          toggleControlsIconsAction.setDefaultShellController(midiPlayerController);
+          toggleControlsIconsAction
+              .setDefaultShellController(midiPlayerController);
         }
         break;
       case ToggleControlsLargeIconsAction.DEFAULT_IDENTIFIER:
         ToggleControlsLargeIconsAction toggleControlsLargeIconsAction;
         if (action == null) {
           toggleControlsLargeIconsAction = new ToggleControlsLargeIconsAction(
-              midiPlayerFrame.isDisplayControlsButtonLargeIcons(), midiPlayerFrame,
-              midiPlayerController);
+              midiPlayerFrame.isDisplayControlsButtonLargeIcons(),
+              midiPlayerFrame, midiPlayerController);
           action = toggleControlsLargeIconsAction;
           addToShell(midiPlayerController, action);
         } else {
-          toggleControlsLargeIconsAction = (ToggleControlsLargeIconsAction) action;
+          toggleControlsLargeIconsAction =
+              (ToggleControlsLargeIconsAction) action;
           toggleControlsLargeIconsAction.setFrame(midiPlayerFrame);
-          toggleControlsLargeIconsAction.setDefaultShellController(midiPlayerController);
+          toggleControlsLargeIconsAction
+              .setDefaultShellController(midiPlayerController);
         }
         break;
       case LocaleAction.DEFAULT_IDENTIFIER:
         LocaleAction localeAction;
         if (action == null) {
-          localeAction =
-              new LocaleAction(ResourceUtils.getAvailableLocales(), midiPlayerController);
+          localeAction = new LocaleAction(ResourceUtils.getAvailableLocales(),
+              midiPlayerController);
           action = localeAction;
           addToShell(midiPlayerController, action);
           localeAction.setSelectedItem(ResourceUtils.getLocale());
@@ -319,15 +334,16 @@ public class ActionFactory {
     return action;
   }
 
-  private boolean addToShell(MidiPlayerController midiPlayerController, IJssAction action) {
+  private boolean addToShell(MidiPlayerController midiPlayerController,
+      IJssAction action) {
     // Add action to the shell
     if (action == null) {
       return false;
     }
     boolean added = midiPlayerController.addAction(action);
     // If the action was not added to the model (already there?)
-    if (!added && action instanceof LocaleChangeListener
-        && !ResourceUtils.containsLocaleChangeListener((LocaleChangeListener) action)) {
+    if (!added && action instanceof LocaleChangeListener && !ResourceUtils
+        .containsLocaleChangeListener((LocaleChangeListener) action)) {
       ResourceUtils.addLocaleChangeListener((LocaleChangeListener) action);
     }
     return added;

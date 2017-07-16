@@ -19,7 +19,8 @@ import midiplayer.resources.LocaleChangeListener;
  *
  * @author Mathieu Brunot
  */
-public final class EchoAction extends AbstractJssAction implements LocaleChangeListener {
+public final class EchoAction extends AbstractJssAction
+    implements LocaleChangeListener {
 
   /**
    * The {@code serialVersionUID}.
@@ -29,7 +30,8 @@ public final class EchoAction extends AbstractJssAction implements LocaleChangeL
   /**
    * Logger.
    */
-  private static final Logger LOGGER = Logger.getLogger(EchoAction.class.getName());
+  private static final Logger LOGGER =
+      Logger.getLogger(EchoAction.class.getName());
 
   /**
    * This action default identifier.
@@ -40,11 +42,14 @@ public final class EchoAction extends AbstractJssAction implements LocaleChangeL
 
   private static final String[] IDENTIFIERS = {DEFAULT_IDENTIFIER};
 
-  private static final String COMMAND_BRIEF_HELP = "Display a message in the shell.";
+  private static final String COMMAND_BRIEF_HELP =
+      "Display a message in the shell.";
 
-  private static final String COMMAND_BRIEF_HELP_KEY = "midi_player.console.action.echo.help.short";
+  private static final String COMMAND_BRIEF_HELP_KEY =
+      "midiplayer.console.action.echo.help.short";
 
-  private static final String COMMAND_HELP_KEY = "midi_player.console.action.echo.help.long";
+  private static final String COMMAND_HELP_KEY =
+      "midiplayer.console.action.echo.help.long";
 
   private static String commandHelp;
 
@@ -70,22 +75,27 @@ public final class EchoAction extends AbstractJssAction implements LocaleChangeL
       stringBuilder.append(action.getBriefHelp()).append("\n");
       stringBuilder.append("\n");
       try {
-        stringBuilder.append(
-            ResourceUtils.getMessage(COMMAND_HELP_KEY, commandIdsAsString, defaultCommandId));
+        stringBuilder.append(ResourceUtils.getMessage(COMMAND_HELP_KEY,
+            commandIdsAsString, defaultCommandId));
       } catch (MissingResourceException e) {
-        LOGGER.log(Level.SEVERE, "Resource not found: \"" + COMMAND_HELP_KEY + "\"", e);
-        stringBuilder.append("\n").append("Displays everything after the command on a new line:");
-        stringBuilder.append("\n\t").append(commandIdsAsString).append(" [message] ");
+        LOGGER.log(Level.SEVERE,
+            "Resource not found: \"" + COMMAND_HELP_KEY + "\"", e);
+        stringBuilder.append("\n")
+            .append("Displays everything after the command on a new line:");
+        stringBuilder.append("\n\t").append(commandIdsAsString)
+            .append(" [message] ");
 
         if (defaultCommandId != null) {
           stringBuilder.append("\n");
           stringBuilder.append("\n").append("Example: ");
-          stringBuilder.append("\n").append(defaultCommandId).append(" Hello world!");
+          stringBuilder.append("\n").append(defaultCommandId)
+              .append(" Hello world!");
           stringBuilder.append("\n").append("Hello world!");
 
           stringBuilder.append("\n");
           stringBuilder.append("\n").append("Example: ");
-          stringBuilder.append("\n").append(defaultCommandId).append("             Hello world!");
+          stringBuilder.append("\n").append(defaultCommandId)
+              .append("             Hello world!");
           stringBuilder.append("\n").append("Hello world!");
 
           stringBuilder.append("\n");
@@ -96,8 +106,8 @@ public final class EchoAction extends AbstractJssAction implements LocaleChangeL
         }
 
         stringBuilder.append("\n");
-        stringBuilder.append("\n")
-            .append("If no message is provided, an empty line will be displayed.");
+        stringBuilder.append("\n").append(
+            "If no message is provided, an empty line will be displayed.");
       }
 
       commandHelp = stringBuilder.toString();
@@ -118,7 +128,8 @@ public final class EchoAction extends AbstractJssAction implements LocaleChangeL
       try {
         commandBriefHelp = ResourceUtils.getMessage(COMMAND_BRIEF_HELP_KEY);
       } catch (MissingResourceException e) {
-        LOGGER.log(Level.SEVERE, "Resource not found: \"" + COMMAND_BRIEF_HELP_KEY + "\"", e);
+        LOGGER.log(Level.SEVERE,
+            "Resource not found: \"" + COMMAND_BRIEF_HELP_KEY + "\"", e);
         commandBriefHelp = COMMAND_BRIEF_HELP;
       }
       commandBriefHelpInitialized = true;
@@ -139,13 +150,15 @@ public final class EchoAction extends AbstractJssAction implements LocaleChangeL
   }
 
   // #########################################################################
-  public EchoAction(String name, Icon icon, IJssController shellController, String... args) {
+  public EchoAction(String name, Icon icon, IJssController shellController,
+      String... args) {
     super(name, icon, shellController, args);
     putValue(Action.ACTION_COMMAND_KEY, getDefaultCommandIdentifier());
     localeChanged();
   }
 
-  public EchoAction(String name, IJssController shellController, String... args) {
+  public EchoAction(String name, IJssController shellController,
+      String... args) {
     super(name, shellController, args);
     putValue(Action.ACTION_COMMAND_KEY, getDefaultCommandIdentifier());
     localeChanged();
@@ -192,10 +205,12 @@ public final class EchoAction extends AbstractJssAction implements LocaleChangeL
         StringBuilder stringBuilder = new StringBuilder();
 
         for (int i = 1, n = args.length; i < n; i++) {
-          stringBuilder.append(args[i]).append(JssTextAreaController.COMMAND_PARAMETER_SEPARATOR);
+          stringBuilder.append(args[i])
+              .append(JssTextAreaController.COMMAND_PARAMETER_SEPARATOR);
         }
 
-        shellController.publish(IJssController.PublicationLevel.SUCCESS, stringBuilder.toString());
+        shellController.publish(IJssController.PublicationLevel.SUCCESS,
+            stringBuilder.toString());
       }
     }
 

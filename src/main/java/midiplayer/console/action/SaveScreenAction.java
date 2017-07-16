@@ -43,14 +43,16 @@ public final class SaveScreenAction extends PrintScreenAction {
   /**
    * Logger.
    */
-  private static final Logger LOGGER = Logger.getLogger(SaveScreenAction.class.getName());
+  private static final Logger LOGGER =
+      Logger.getLogger(SaveScreenAction.class.getName());
 
   private static final String ACTION_LABEL = "Print screen";
 
-  private static final String ACTION_LABEL_KEY = "midi_player.console.action.save_screen.name";
+  private static final String ACTION_LABEL_KEY =
+      "midiplayer.console.action.save_screen.name";
 
   private static final String COMMAND_RUN_FILE_FILTER_DESCRIPTION_KEY =
-      "midi_player.console.action.save_screen.run.file_filter_description";
+      "midiplayer.console.action.save_screen.run.file_filter_description";
 
   private static final String ICON_KEY = "snapshot.png";
 
@@ -59,10 +61,11 @@ public final class SaveScreenAction extends PrintScreenAction {
   private transient Component parent;
 
   // #########################################################################
-  public SaveScreenAction(JFileChooser fileChooser, Component parent, Component comp,
-      IJssController shellController, String... args) {
-    super(comp, ACTION_LABEL, ResourceUtils.createImageIcon(ICON_KEY, ACTION_LABEL),
-        shellController, args);
+  public SaveScreenAction(JFileChooser fileChooser, Component parent,
+      Component comp, IJssController shellController, String... args) {
+    super(comp, ACTION_LABEL,
+        ResourceUtils.createImageIcon(ICON_KEY, ACTION_LABEL), shellController,
+        args);
     if (shellController == null) {
       throw new IllegalArgumentException("Shell controller is null");
     }
@@ -76,18 +79,21 @@ public final class SaveScreenAction extends PrintScreenAction {
       throw new IllegalArgumentException("Parent is null");
     }
     this.parent = parent;
-    putValue(Action.LARGE_ICON_KEY, ResourceUtils.createImageIcon(ICON_KEY, ACTION_LABEL, true));
-    putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_P, ActionEvent.CTRL_MASK));
+    putValue(Action.LARGE_ICON_KEY,
+        ResourceUtils.createImageIcon(ICON_KEY, ACTION_LABEL, true));
+    putValue(Action.ACCELERATOR_KEY,
+        KeyStroke.getKeyStroke(KeyEvent.VK_P, ActionEvent.CTRL_MASK));
     putValue(Action.ACTION_COMMAND_KEY, getDefaultCommandIdentifier());
     localeChanged();
   }
 
-  public SaveScreenAction(JFileChooser fileChooser, Component parent, Component comp,
-      IJssController shellController) {
+  public SaveScreenAction(JFileChooser fileChooser, Component parent,
+      Component comp, IJssController shellController) {
     this(fileChooser, parent, comp, shellController, (String[]) null);
   }
 
-  public SaveScreenAction(JFileChooser fileChooser, Component parent, Component comp) {
+  public SaveScreenAction(JFileChooser fileChooser, Component parent,
+      Component comp) {
     this(fileChooser, parent, comp, null, (String[]) null);
   }
 
@@ -117,21 +123,23 @@ public final class SaveScreenAction extends PrintScreenAction {
       // Construct file extension filter
       String description;
       try {
-        description = ResourceUtils.getMessage(COMMAND_RUN_FILE_FILTER_DESCRIPTION_KEY);
+        description =
+            ResourceUtils.getMessage(COMMAND_RUN_FILE_FILTER_DESCRIPTION_KEY);
       } catch (MissingResourceException e1) {
-        LOGGER.log(Level.SEVERE,
-            "Resource not found: \"" + COMMAND_RUN_FILE_FILTER_DESCRIPTION_KEY + "\"", e1);
+        LOGGER.log(Level.SEVERE, "Resource not found: \""
+            + COMMAND_RUN_FILE_FILTER_DESCRIPTION_KEY + "\"", e1);
         description = "Image file";
       }
-      FileNameExtensionFilter filter = new FileNameExtensionFilter(description, "shell", "png");
+      FileNameExtensionFilter filter =
+          new FileNameExtensionFilter(description, "shell", "png");
 
       // Open file chooser and select file
       fileChooser.setFileFilter(filter);
       fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
       int returnVal = fileChooser.showSaveDialog(parent);
       if (returnVal == JFileChooser.APPROVE_OPTION) {
-        eventArgs =
-            new String[] {commandIdentifiers[0], fileChooser.getSelectedFile().getAbsolutePath()};
+        eventArgs = new String[] {commandIdentifiers[0],
+            fileChooser.getSelectedFile().getAbsolutePath()};
       }
     }
 
@@ -150,11 +158,13 @@ public final class SaveScreenAction extends PrintScreenAction {
     try {
       ResourceUtils.setTextAndMnemonic(this, ACTION_LABEL_KEY);
     } catch (MissingResourceException e) {
-      LOGGER.log(Level.SEVERE, "Resource not found: \"" + ACTION_LABEL_KEY + "\"", e);
+      LOGGER.log(Level.SEVERE,
+          "Resource not found: \"" + ACTION_LABEL_KEY + "\"", e);
       putValue(Action.NAME, ACTION_LABEL);
     }
     putValue(Action.SHORT_DESCRIPTION, this.getBriefHelp());
-    putValue(Action.LONG_DESCRIPTION, this.getHelp(this.getDefaultShellController()));
+    putValue(Action.LONG_DESCRIPTION,
+        this.getHelp(this.getDefaultShellController()));
   }
 
   // #########################################################################

@@ -39,7 +39,8 @@ public final class PlayAction extends AbstractJssAction
   /**
    * Logger.
    */
-  private static final Logger LOGGER = Logger.getLogger(PlayAction.class.getName());
+  private static final Logger LOGGER =
+      Logger.getLogger(PlayAction.class.getName());
 
   /**
    * This action default identifier.
@@ -52,16 +53,19 @@ public final class PlayAction extends AbstractJssAction
 
   private static final String ACTION_LABEL = "Play";
 
-  private static final String ACTION_LABEL_KEY = "midi_player.action.play.name";
+  private static final String ACTION_LABEL_KEY = "midiplayer.action.play.name";
 
-  private static final String COMMAND_BRIEF_HELP = "Play the current MIDI song.";
+  private static final String COMMAND_BRIEF_HELP =
+      "Play the current MIDI song.";
 
-  private static final String COMMAND_BRIEF_HELP_KEY = "midi_player.action.play.help.short";
+  private static final String COMMAND_BRIEF_HELP_KEY =
+      "midiplayer.action.play.help.short";
 
-  private static final String COMMAND_HELP_KEY = "midi_player.action.play.help.long";
+  private static final String COMMAND_HELP_KEY =
+      "midiplayer.action.play.help.long";
 
   private static final String COMMAND_RUN_FILE_PATH_INVALID_KEY =
-      "midi_player.action.play.run.file_path_invalid";
+      "midiplayer.action.play.run.file_path_invalid";
 
   private static final String ICON_KEY = "control_play_blue.png";
 
@@ -88,17 +92,22 @@ public final class PlayAction extends AbstractJssAction
       stringBuilder.append(action.getBriefHelp());
       stringBuilder.append("\n");
       try {
-        stringBuilder.append(ResourceUtils.getMessage(COMMAND_HELP_KEY, commandIdsAsString));
+        stringBuilder.append(
+            ResourceUtils.getMessage(COMMAND_HELP_KEY, commandIdsAsString));
       } catch (MissingResourceException e) {
-        LOGGER.log(Level.SEVERE, "Resource not found: \"" + COMMAND_HELP_KEY + "\"", e);
-        stringBuilder.append("\n").append("Plays the current song in the playlist:");
+        LOGGER.log(Level.SEVERE,
+            "Resource not found: \"" + COMMAND_HELP_KEY + "\"", e);
+        stringBuilder.append("\n")
+            .append("Plays the current song in the playlist:");
         stringBuilder.append("\n\t").append(commandIdsAsString);
         stringBuilder.append("\n").append(
             "You can specify the song to play by giving the song index in playlist as follow:");
-        stringBuilder.append("\n\t").append(commandIdsAsString).append(" [integer] ");
-        stringBuilder.append("\n")
-            .append("You can also specify the song to play by giving its path as follow:");
-        stringBuilder.append("\n\t").append(commandIdsAsString).append(" [path] ");
+        stringBuilder.append("\n\t").append(commandIdsAsString)
+            .append(" [integer] ");
+        stringBuilder.append("\n").append(
+            "You can also specify the song to play by giving its path as follow:");
+        stringBuilder.append("\n\t").append(commandIdsAsString)
+            .append(" [path] ");
       }
 
       commandHelp = stringBuilder.toString();
@@ -119,7 +128,8 @@ public final class PlayAction extends AbstractJssAction
       try {
         commandBriefHelp = ResourceUtils.getMessage(COMMAND_BRIEF_HELP_KEY);
       } catch (MissingResourceException e) {
-        LOGGER.log(Level.SEVERE, "Resource not found: \"" + COMMAND_BRIEF_HELP_KEY + "\"", e);
+        LOGGER.log(Level.SEVERE,
+            "Resource not found: \"" + COMMAND_BRIEF_HELP_KEY + "\"", e);
         commandBriefHelp = COMMAND_BRIEF_HELP;
       }
       commandBriefHelpInitialized = true;
@@ -142,15 +152,18 @@ public final class PlayAction extends AbstractJssAction
   // #########################################################################
   private transient MidiPlayer midiPlayer;
 
-  public PlayAction(MidiPlayer midiPlayer, IJssController shellController, String... args) {
-    super(ACTION_LABEL, ResourceUtils.createImageIcon(ICON_KEY, ACTION_LABEL), shellController,
-        args);
+  public PlayAction(MidiPlayer midiPlayer, IJssController shellController,
+      String... args) {
+    super(ACTION_LABEL, ResourceUtils.createImageIcon(ICON_KEY, ACTION_LABEL),
+        shellController, args);
     if (midiPlayer == null) {
       throw new IllegalArgumentException("Midi player is null");
     }
     this.midiPlayer = midiPlayer;
-    putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_NUMPAD5, 0));
-    putValue(Action.LARGE_ICON_KEY, ResourceUtils.createImageIcon(ICON_KEY, ACTION_LABEL, true));
+    putValue(Action.ACCELERATOR_KEY,
+        KeyStroke.getKeyStroke(KeyEvent.VK_NUMPAD5, 0));
+    putValue(Action.LARGE_ICON_KEY,
+        ResourceUtils.createImageIcon(ICON_KEY, ACTION_LABEL, true));
     putValue(Action.ACTION_COMMAND_KEY, getDefaultCommandIdentifier());
     localeChanged();
   }
@@ -213,20 +226,23 @@ public final class PlayAction extends AbstractJssAction
             commandReturnStatus = AbstractJssAction.SUCCESS;
           }
         } else {
-          LOGGER.log(Level.WARNING, "No file was found at path: " + songPath, e);
+          LOGGER.log(Level.WARNING, "No file was found at path: " + songPath,
+              e);
           String msg;
           try {
-            msg = ResourceUtils.getMessage(COMMAND_RUN_FILE_PATH_INVALID_KEY, songPath);
+            msg = ResourceUtils.getMessage(COMMAND_RUN_FILE_PATH_INVALID_KEY,
+                songPath);
           } catch (MissingResourceException e1) {
-            LOGGER.log(Level.SEVERE,
-                "Resource not found: \"" + COMMAND_RUN_FILE_PATH_INVALID_KEY + "\"", e1);
+            LOGGER.log(Level.SEVERE, "Resource not found: \""
+                + COMMAND_RUN_FILE_PATH_INVALID_KEY + "\"", e1);
             msg = "No file was found at path: " + songPath;
           }
           shellController.publish(IJssController.PublicationLevel.ERROR, msg);
         }
       }
     } else if (args.length > 2 && shellController != null) {
-      shellController.publish(IJssController.PublicationLevel.WARNING, getHelp(shellController));
+      shellController.publish(IJssController.PublicationLevel.WARNING,
+          getHelp(shellController));
     }
 
     return commandReturnStatus;
@@ -244,7 +260,8 @@ public final class PlayAction extends AbstractJssAction
           Integer row = Integer.parseInt(command);
           eventArgs = new String[] {commandIdentifier, row.toString()};
         } catch (NumberFormatException nfex) {
-          LOGGER.log(Level.SEVERE, "Not a valid integer: \"" + command + "\"", nfex);
+          LOGGER.log(Level.SEVERE, "Not a valid integer: \"" + command + "\"",
+              nfex);
         }
       }
     }
@@ -264,11 +281,13 @@ public final class PlayAction extends AbstractJssAction
     try {
       ResourceUtils.setTextAndMnemonic(this, ACTION_LABEL_KEY);
     } catch (MissingResourceException e) {
-      LOGGER.log(Level.SEVERE, "Resource not found: \"" + ACTION_LABEL_KEY + "\"", e);
+      LOGGER.log(Level.SEVERE,
+          "Resource not found: \"" + ACTION_LABEL_KEY + "\"", e);
       putValue(Action.NAME, ACTION_LABEL);
     }
     putValue(Action.SHORT_DESCRIPTION, this.getBriefHelp());
-    putValue(Action.LONG_DESCRIPTION, this.getHelp(this.getDefaultShellController()));
+    putValue(Action.LONG_DESCRIPTION,
+        this.getHelp(this.getDefaultShellController()));
   }
 
   // #########################################################################

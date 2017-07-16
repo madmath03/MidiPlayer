@@ -31,7 +31,8 @@ import midiplayer.resources.LocaleChangeListener;
  *
  * @author Mathieu Brunot
  */
-public final class CloseAction extends AbstractAction implements LocaleChangeListener {
+public final class CloseAction extends AbstractAction
+    implements LocaleChangeListener {
 
   /**
    * The {@code serialVersionUID}.
@@ -41,18 +42,20 @@ public final class CloseAction extends AbstractAction implements LocaleChangeLis
   /**
    * Logger.
    */
-  private static final Logger LOGGER = Logger.getLogger(CloseAction.class.getName());
+  private static final Logger LOGGER =
+      Logger.getLogger(CloseAction.class.getName());
 
   private static final String ACTION_LABEL = "Close";
 
-  private static final String ACTION_LABEL_KEY = "midi_player.console.action.close.name";
+  private static final String ACTION_LABEL_KEY =
+      "midiplayer.console.action.close.name";
 
   private static final String ICON_KEY = "door_in.png";
 
   private static final String COMMAND_BRIEF_HELP = "Closes the console.";
 
   private static final String COMMAND_BRIEF_HELP_KEY =
-      "midi_player.console.action.close.help.short";
+      "midiplayer.console.action.close.help.short";
 
   private static String commandBriefHelp;
 
@@ -70,7 +73,8 @@ public final class CloseAction extends AbstractAction implements LocaleChangeLis
       try {
         commandBriefHelp = ResourceUtils.getMessage(COMMAND_BRIEF_HELP_KEY);
       } catch (MissingResourceException e) {
-        LOGGER.log(Level.SEVERE, "Resource not found: \"" + COMMAND_BRIEF_HELP_KEY + "\"", e);
+        LOGGER.log(Level.SEVERE,
+            "Resource not found: \"" + COMMAND_BRIEF_HELP_KEY + "\"", e);
         commandBriefHelp = COMMAND_BRIEF_HELP;
       }
       commandBriefHelpInitialized = true;
@@ -98,8 +102,10 @@ public final class CloseAction extends AbstractAction implements LocaleChangeLis
     }
     this.displayConsoleAction = displayConsoleAction;
 
-    putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_F12, 0));
-    putValue(Action.LARGE_ICON_KEY, ResourceUtils.createImageIcon(ICON_KEY, ACTION_LABEL, true));
+    putValue(Action.ACCELERATOR_KEY,
+        KeyStroke.getKeyStroke(KeyEvent.VK_F12, 0));
+    putValue(Action.LARGE_ICON_KEY,
+        ResourceUtils.createImageIcon(ICON_KEY, ACTION_LABEL, true));
     localeChanged();
   }
 
@@ -121,7 +127,8 @@ public final class CloseAction extends AbstractAction implements LocaleChangeLis
     try {
       ResourceUtils.setTextAndMnemonic(this, ACTION_LABEL_KEY);
     } catch (MissingResourceException e) {
-      LOGGER.log(Level.SEVERE, "Resource not found: \"" + ACTION_LABEL_KEY + "\"", e);
+      LOGGER.log(Level.SEVERE,
+          "Resource not found: \"" + ACTION_LABEL_KEY + "\"", e);
       putValue(Action.NAME, ACTION_LABEL);
     }
     putValue(Action.SHORT_DESCRIPTION, getBriefHelp(this));

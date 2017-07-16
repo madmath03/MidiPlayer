@@ -47,14 +47,16 @@ public final class AddAction extends LoadMIDIFile {
   /**
    * Logger.
    */
-  private static final Logger LOGGER = Logger.getLogger(AddAction.class.getName());
+  private static final Logger LOGGER =
+      Logger.getLogger(AddAction.class.getName());
 
   private static final String ACTION_LABEL = "Add";
 
-  private static final String ACTION_LABEL_KEY = "midi_player.action.add_midi_file.name";
+  private static final String ACTION_LABEL_KEY =
+      "midiplayer.action.add_midi_file.name";
 
   private static final String COMMAND_RUN_FILE_FILTER_DESCRIPTION_KEY =
-      "midi_player.action.add_midi_file.run.file_filter_description";
+      "midiplayer.action.add_midi_file.run.file_filter_description";
 
   private static final String ICON_KEY = "file_extension_mid.png";
 
@@ -63,27 +65,31 @@ public final class AddAction extends LoadMIDIFile {
 
   private transient Component parent;
 
-  public AddAction(JFileChooser fileChooser, Component parent, MidiPlayer midiPlayer,
-      IJssController shellController, String... args) {
-    super(midiPlayer, ACTION_LABEL, ResourceUtils.createImageIcon(ICON_KEY, ACTION_LABEL),
-        shellController, args);
+  public AddAction(JFileChooser fileChooser, Component parent,
+      MidiPlayer midiPlayer, IJssController shellController, String... args) {
+    super(midiPlayer, ACTION_LABEL,
+        ResourceUtils.createImageIcon(ICON_KEY, ACTION_LABEL), shellController,
+        args);
     // if (shellController == null) {
     // throw new IllegalArgumentException("Shell controller is null");
     // }
     this.setFileChooser(fileChooser);
     this.setParent(parent);
-    putValue(Action.LARGE_ICON_KEY, ResourceUtils.createImageIcon(ICON_KEY, ACTION_LABEL, true));
-    putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_O, ActionEvent.CTRL_MASK));
+    putValue(Action.LARGE_ICON_KEY,
+        ResourceUtils.createImageIcon(ICON_KEY, ACTION_LABEL, true));
+    putValue(Action.ACCELERATOR_KEY,
+        KeyStroke.getKeyStroke(KeyEvent.VK_O, ActionEvent.CTRL_MASK));
     putValue(Action.ACTION_COMMAND_KEY, getDefaultCommandIdentifier());
     localeChanged();
   }
 
-  public AddAction(JFileChooser fileChooser, Component parent, MidiPlayer midiPlayer,
-      IJssController shellController) {
+  public AddAction(JFileChooser fileChooser, Component parent,
+      MidiPlayer midiPlayer, IJssController shellController) {
     this(fileChooser, parent, midiPlayer, shellController, (String[]) null);
   }
 
-  public AddAction(JFileChooser fileChooser, Component parent, MidiPlayer midiPlayer) {
+  public AddAction(JFileChooser fileChooser, Component parent,
+      MidiPlayer midiPlayer) {
     this(fileChooser, parent, midiPlayer, null, (String[]) null);
   }
 
@@ -121,13 +127,15 @@ public final class AddAction extends LoadMIDIFile {
       // Construct file extension filter
       String description;
       try {
-        description = ResourceUtils.getMessage(COMMAND_RUN_FILE_FILTER_DESCRIPTION_KEY);
+        description =
+            ResourceUtils.getMessage(COMMAND_RUN_FILE_FILTER_DESCRIPTION_KEY);
       } catch (MissingResourceException e1) {
-        LOGGER.log(Level.SEVERE,
-            "Resource not found: \"" + COMMAND_RUN_FILE_FILTER_DESCRIPTION_KEY + "\"", e1);
+        LOGGER.log(Level.SEVERE, "Resource not found: \""
+            + COMMAND_RUN_FILE_FILTER_DESCRIPTION_KEY + "\"", e1);
         description = "MIDI file";
       }
-      FileNameExtensionFilter filter = new FileNameExtensionFilter(description, "midi", "mid");
+      FileNameExtensionFilter filter =
+          new FileNameExtensionFilter(description, "midi", "mid");
 
       // Open file chooser and select file
       fileChooser.setFileFilter(filter);
@@ -160,11 +168,13 @@ public final class AddAction extends LoadMIDIFile {
     try {
       ResourceUtils.setTextAndMnemonic(this, ACTION_LABEL_KEY);
     } catch (MissingResourceException e) {
-      LOGGER.log(Level.SEVERE, "Resource not found: \"" + ACTION_LABEL_KEY + "\"", e);
+      LOGGER.log(Level.SEVERE,
+          "Resource not found: \"" + ACTION_LABEL_KEY + "\"", e);
       putValue(Action.NAME, ACTION_LABEL);
     }
     putValue(Action.SHORT_DESCRIPTION, this.getBriefHelp());
-    putValue(Action.LONG_DESCRIPTION, this.getHelp(this.getDefaultShellController()));
+    putValue(Action.LONG_DESCRIPTION,
+        this.getHelp(this.getDefaultShellController()));
   }
 
 }

@@ -18,7 +18,8 @@ import midiplayer.resources.ResourceUtils;
  *
  * @author Mathieu Brunot
  */
-public final class LoopAction extends AbstractJssSwitchAction implements LocaleChangeListener {
+public final class LoopAction extends AbstractJssSwitchAction
+    implements LocaleChangeListener {
 
   /**
    * The {@code serialVersionUID}.
@@ -28,7 +29,8 @@ public final class LoopAction extends AbstractJssSwitchAction implements LocaleC
   /**
    * Logger.
    */
-  private static final Logger LOGGER = Logger.getLogger(LoopAction.class.getName());
+  private static final Logger LOGGER =
+      Logger.getLogger(LoopAction.class.getName());
 
   /**
    * This action default identifier.
@@ -41,13 +43,16 @@ public final class LoopAction extends AbstractJssSwitchAction implements LocaleC
 
   private static final String ACTION_LABEL = "Repeat";
 
-  private static final String ACTION_LABEL_KEY = "midi_player.action.loop.name";
+  private static final String ACTION_LABEL_KEY = "midiplayer.action.loop.name";
 
-  private static final String COMMAND_BRIEF_HELP = "Repeat the current MIDI song.";
+  private static final String COMMAND_BRIEF_HELP =
+      "Repeat the current MIDI song.";
 
-  private static final String COMMAND_BRIEF_HELP_KEY = "midi_player.action.loop.help.short";
+  private static final String COMMAND_BRIEF_HELP_KEY =
+      "midiplayer.action.loop.help.short";
 
-  private static final String COMMAND_HELP_KEY = "midi_player.action.loop.help.long";
+  private static final String COMMAND_HELP_KEY =
+      "midiplayer.action.loop.help.long";
 
   private static final String ICON_KEY = "control_repeat_blue.png";
 
@@ -74,11 +79,14 @@ public final class LoopAction extends AbstractJssSwitchAction implements LocaleC
       stringBuilder.append(action.getBriefHelp());
       stringBuilder.append("\n");
       try {
-        stringBuilder.append(ResourceUtils.getMessage(COMMAND_HELP_KEY, commandIdsAsString,
-            action.getOnArgumentsAsString(), action.getOffArgumentsAsString()));
+        stringBuilder.append(ResourceUtils.getMessage(COMMAND_HELP_KEY,
+            commandIdsAsString, action.getOnArgumentsAsString(),
+            action.getOffArgumentsAsString()));
       } catch (MissingResourceException e) {
-        LOGGER.log(Level.SEVERE, "Resource not found: \"" + COMMAND_HELP_KEY + "\"", e);
-        stringBuilder.append("\n").append("Repeats the current song in the playlist:");
+        LOGGER.log(Level.SEVERE,
+            "Resource not found: \"" + COMMAND_HELP_KEY + "\"", e);
+        stringBuilder.append("\n")
+            .append("Repeats the current song in the playlist:");
         stringBuilder.append("\t").append(commandIdsAsString).append(" ")
             .append(action.getOnArgumentsAsString()).append("\n");
         stringBuilder.append("\t").append(commandIdsAsString).append(" ")
@@ -103,7 +111,8 @@ public final class LoopAction extends AbstractJssSwitchAction implements LocaleC
       try {
         commandBriefHelp = ResourceUtils.getMessage(COMMAND_BRIEF_HELP_KEY);
       } catch (MissingResourceException e) {
-        LOGGER.log(Level.SEVERE, "Resource not found: \"" + COMMAND_BRIEF_HELP_KEY + "\"", e);
+        LOGGER.log(Level.SEVERE,
+            "Resource not found: \"" + COMMAND_BRIEF_HELP_KEY + "\"", e);
         commandBriefHelp = COMMAND_BRIEF_HELP;
       }
       commandBriefHelpInitialized = true;
@@ -126,15 +135,17 @@ public final class LoopAction extends AbstractJssSwitchAction implements LocaleC
   // #########################################################################
   private transient MidiPlayer midiPlayer;
 
-  public LoopAction(MidiPlayer midiPlayer, Boolean isSelected, IJssController shellController,
-      String... args) {
-    super(isSelected, ACTION_LABEL, ResourceUtils.createImageIcon(ICON_KEY, ACTION_LABEL),
-        shellController, args);
+  public LoopAction(MidiPlayer midiPlayer, Boolean isSelected,
+      IJssController shellController, String... args) {
+    super(isSelected, ACTION_LABEL,
+        ResourceUtils.createImageIcon(ICON_KEY, ACTION_LABEL), shellController,
+        args);
     if (midiPlayer == null) {
       throw new IllegalArgumentException("Midi player is null");
     }
     this.midiPlayer = midiPlayer;
-    putValue(Action.LARGE_ICON_KEY, ResourceUtils.createImageIcon(ICON_KEY, ACTION_LABEL, true));
+    putValue(Action.LARGE_ICON_KEY,
+        ResourceUtils.createImageIcon(ICON_KEY, ACTION_LABEL, true));
     putValue(Action.ACTION_COMMAND_KEY, getDefaultCommandIdentifier());
     localeChanged();
   }
@@ -172,7 +183,8 @@ public final class LoopAction extends AbstractJssSwitchAction implements LocaleC
   }
 
   @Override
-  protected boolean doSwitch(IJssController shellController, Boolean switchValue) {
+  protected boolean doSwitch(IJssController shellController,
+      Boolean switchValue) {
     if (switchValue == null || MidiPlayer.getInstance() == null) {
       return false;
     }
@@ -199,11 +211,13 @@ public final class LoopAction extends AbstractJssSwitchAction implements LocaleC
     try {
       ResourceUtils.setTextAndMnemonic(this, ACTION_LABEL_KEY);
     } catch (MissingResourceException e) {
-      LOGGER.log(Level.SEVERE, "Resource not found: \"" + ACTION_LABEL_KEY + "\"", e);
+      LOGGER.log(Level.SEVERE,
+          "Resource not found: \"" + ACTION_LABEL_KEY + "\"", e);
       putValue(Action.NAME, ACTION_LABEL);
     }
     putValue(Action.SHORT_DESCRIPTION, this.getBriefHelp());
-    putValue(Action.LONG_DESCRIPTION, this.getHelp(this.getDefaultShellController()));
+    putValue(Action.LONG_DESCRIPTION,
+        this.getHelp(this.getDefaultShellController()));
   }
 
   // #########################################################################

@@ -23,7 +23,8 @@ import midiplayer.resources.ResourceUtils;
  *
  * @author Mathieu Brunot
  */
-public class LoadMIDIFile extends AbstractJssAction implements LocaleChangeListener {
+public class LoadMIDIFile extends AbstractJssAction
+    implements LocaleChangeListener {
 
   /**
    * The {@code serialVersionUID}.
@@ -33,7 +34,8 @@ public class LoadMIDIFile extends AbstractJssAction implements LocaleChangeListe
   /**
    * Logger.
    */
-  private static final Logger LOGGER = Logger.getLogger(LoadMIDIFile.class.getName());
+  private static final Logger LOGGER =
+      Logger.getLogger(LoadMIDIFile.class.getName());
 
   /**
    * This action default identifier.
@@ -47,18 +49,19 @@ public class LoadMIDIFile extends AbstractJssAction implements LocaleChangeListe
   private static final String COMMAND_BRIEF_HELP = "Load a MIDI file.";
 
   private static final String COMMAND_BRIEF_HELP_KEY =
-      "midi_player.action.load_midi_file.help.short";
+      "midiplayer.action.load_midi_file.help.short";
 
-  private static final String COMMAND_HELP_KEY = "midi_player.action.load_midi_file.help.long";
+  private static final String COMMAND_HELP_KEY =
+      "midiplayer.action.load_midi_file.help.long";
 
   private static final String COMMAND_RUN_FILE_MANDATORY_WARNING_KEY =
-      "midi_player.action.load_midi_file.run.file_mandatory";
+      "midiplayer.action.load_midi_file.run.file_mandatory";
 
   private static final String COMMAND_RUN_FILE_NOT_READABLE_KEY =
-      "midi_player.action.load_midi_file.run.file_not_readable";
+      "midiplayer.action.load_midi_file.run.file_not_readable";
 
   private static final String COMMAND_RUN_FILE_PATH_INVALID_KEY =
-      "midi_player.action.load_midi_file.run.file_path_invalid";
+      "midiplayer.action.load_midi_file.run.file_path_invalid";
 
   private static String commandHelp;
 
@@ -83,12 +86,15 @@ public class LoadMIDIFile extends AbstractJssAction implements LocaleChangeListe
       stringBuilder.append(action.getBriefHelp());
       stringBuilder.append("\n");
       try {
-        stringBuilder.append(ResourceUtils.getMessage(COMMAND_HELP_KEY, commandIdsAsString));
+        stringBuilder.append(
+            ResourceUtils.getMessage(COMMAND_HELP_KEY, commandIdsAsString));
       } catch (MissingResourceException e) {
-        LOGGER.log(Level.SEVERE, "Resource not found: \"" + COMMAND_HELP_KEY + "\"", e);
-        stringBuilder.append("\n")
-            .append("Loads and adds the file at the given path to the playlist:");
-        stringBuilder.append("\n\t").append(commandIdsAsString).append(" file_path ");
+        LOGGER.log(Level.SEVERE,
+            "Resource not found: \"" + COMMAND_HELP_KEY + "\"", e);
+        stringBuilder.append("\n").append(
+            "Loads and adds the file at the given path to the playlist:");
+        stringBuilder.append("\n\t").append(commandIdsAsString)
+            .append(" file_path ");
       }
 
       commandHelp = stringBuilder.toString();
@@ -109,7 +115,8 @@ public class LoadMIDIFile extends AbstractJssAction implements LocaleChangeListe
       try {
         commandBriefHelp = ResourceUtils.getMessage(COMMAND_BRIEF_HELP_KEY);
       } catch (MissingResourceException e) {
-        LOGGER.log(Level.SEVERE, "Resource not found: \"" + COMMAND_BRIEF_HELP_KEY + "\"", e);
+        LOGGER.log(Level.SEVERE,
+            "Resource not found: \"" + COMMAND_BRIEF_HELP_KEY + "\"", e);
         commandBriefHelp = COMMAND_BRIEF_HELP;
       }
       commandBriefHelpInitialized = true;
@@ -132,8 +139,8 @@ public class LoadMIDIFile extends AbstractJssAction implements LocaleChangeListe
   // #########################################################################
   private transient MidiPlayer midiPlayer;
 
-  public LoadMIDIFile(MidiPlayer midiPlayer, String name, Icon icon, IJssController shellController,
-      String... args) {
+  public LoadMIDIFile(MidiPlayer midiPlayer, String name, Icon icon,
+      IJssController shellController, String... args) {
     super(name, icon, shellController, args);
     if (midiPlayer == null) {
       throw new IllegalArgumentException("Midi player is null");
@@ -141,8 +148,8 @@ public class LoadMIDIFile extends AbstractJssAction implements LocaleChangeListe
     this.midiPlayer = midiPlayer;
   }
 
-  public LoadMIDIFile(MidiPlayer midiPlayer, String name, IJssController shellController,
-      String... args) {
+  public LoadMIDIFile(MidiPlayer midiPlayer, String name,
+      IJssController shellController, String... args) {
     super(name, shellController, args);
     if (midiPlayer == null) {
       throw new IllegalArgumentException("Midi player is null");
@@ -150,7 +157,8 @@ public class LoadMIDIFile extends AbstractJssAction implements LocaleChangeListe
     this.midiPlayer = midiPlayer;
   }
 
-  public LoadMIDIFile(MidiPlayer midiPlayer, IJssController shellController, String... args) {
+  public LoadMIDIFile(MidiPlayer midiPlayer, IJssController shellController,
+      String... args) {
     super(shellController, args);
     if (midiPlayer == null) {
       throw new IllegalArgumentException("Midi player is null");
@@ -204,7 +212,8 @@ public class LoadMIDIFile extends AbstractJssAction implements LocaleChangeListe
           commandReturnStatus = AbstractJssAction.SUCCESS;
         }
       } else if (shellController != null) {
-        shellController.publish(IJssController.PublicationLevel.WARNING, getHelp(shellController));
+        shellController.publish(IJssController.PublicationLevel.WARNING,
+            getHelp(shellController));
       }
     } else if (shellController != null) {
       LOGGER.log(Level.WARNING, "File path is mandatory!");
@@ -212,8 +221,8 @@ public class LoadMIDIFile extends AbstractJssAction implements LocaleChangeListe
       try {
         msg = ResourceUtils.getMessage(COMMAND_RUN_FILE_MANDATORY_WARNING_KEY);
       } catch (MissingResourceException e) {
-        LOGGER.log(Level.SEVERE,
-            "Resource not found: \"" + COMMAND_RUN_FILE_MANDATORY_WARNING_KEY + "\"", e);
+        LOGGER.log(Level.SEVERE, "Resource not found: \""
+            + COMMAND_RUN_FILE_MANDATORY_WARNING_KEY + "\"", e);
         msg = "File path is mandatory!";
       }
       shellController.publish(IJssController.PublicationLevel.ERROR, msg);
@@ -222,7 +231,8 @@ public class LoadMIDIFile extends AbstractJssAction implements LocaleChangeListe
     return commandReturnStatus;
   }
 
-  private List<Path> getFilesToLoad(IJssController shellController, String... args) {
+  private List<Path> getFilesToLoad(IJssController shellController,
+      String... args) {
     List<Path> filesToLoad = new ArrayList<>(args.length);
 
     for (int i = 1, n = args.length; i < n; i++) {
@@ -233,20 +243,22 @@ public class LoadMIDIFile extends AbstractJssAction implements LocaleChangeListe
         if (Files.exists(path)) {
           // File is not readable
           try {
-            msg = ResourceUtils.getMessage(COMMAND_RUN_FILE_NOT_READABLE_KEY, path);
+            msg = ResourceUtils.getMessage(COMMAND_RUN_FILE_NOT_READABLE_KEY,
+                path);
           } catch (MissingResourceException e) {
-            LOGGER.log(Level.SEVERE,
-                "Resource not found: \"" + COMMAND_RUN_FILE_NOT_READABLE_KEY + "\"", e);
+            LOGGER.log(Level.SEVERE, "Resource not found: \""
+                + COMMAND_RUN_FILE_NOT_READABLE_KEY + "\"", e);
             msg = "File is not readable: " + path;
           }
           LOGGER.log(Level.WARNING, msg);
         } else {
           // File does not exists
           try {
-            msg = ResourceUtils.getMessage(COMMAND_RUN_FILE_PATH_INVALID_KEY, path);
+            msg = ResourceUtils.getMessage(COMMAND_RUN_FILE_PATH_INVALID_KEY,
+                path);
           } catch (MissingResourceException e) {
-            LOGGER.log(Level.SEVERE,
-                "Resource not found: \"" + COMMAND_RUN_FILE_PATH_INVALID_KEY + "\"", e);
+            LOGGER.log(Level.SEVERE, "Resource not found: \""
+                + COMMAND_RUN_FILE_PATH_INVALID_KEY + "\"", e);
             msg = "No file found at path " + path;
           }
         }

@@ -44,15 +44,16 @@ public final class OpenAction extends LoadCommandFile {
   /**
    * Logger.
    */
-  private static final Logger LOGGER = Logger.getLogger(OpenAction.class.getName());
+  private static final Logger LOGGER =
+      Logger.getLogger(OpenAction.class.getName());
 
   private static final String ACTION_LABEL = "Open";
 
   private static final String ACTION_LABEL_KEY =
-      "midi_player.console.action.open_command_file.name";
+      "midiplayer.console.action.open_command_file.name";
 
   private static final String COMMAND_RUN_FILE_FILTER_DESCRIPTION_KEY =
-      "midi_player.console.action.open_command_file.run.file_filter_description";
+      "midiplayer.console.action.open_command_file.run.file_filter_description";
 
   private static final String ICON_KEY = "page.png";
 
@@ -61,22 +62,25 @@ public final class OpenAction extends LoadCommandFile {
 
   private transient Component parent;
 
-  public OpenAction(JFileChooser fileChooser, Component parent, IJssController shellController,
-      String... args) {
-    super(ACTION_LABEL, ResourceUtils.createImageIcon(ICON_KEY, ACTION_LABEL), shellController,
-        args);
+  public OpenAction(JFileChooser fileChooser, Component parent,
+      IJssController shellController, String... args) {
+    super(ACTION_LABEL, ResourceUtils.createImageIcon(ICON_KEY, ACTION_LABEL),
+        shellController, args);
     if (shellController == null) {
       throw new IllegalArgumentException("Shell controller is null");
     }
     this.setFileChooser(fileChooser);
     this.setParent(parent);
-    putValue(Action.LARGE_ICON_KEY, ResourceUtils.createImageIcon(ICON_KEY, ACTION_LABEL, true));
-    putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_O, ActionEvent.CTRL_MASK));
+    putValue(Action.LARGE_ICON_KEY,
+        ResourceUtils.createImageIcon(ICON_KEY, ACTION_LABEL, true));
+    putValue(Action.ACCELERATOR_KEY,
+        KeyStroke.getKeyStroke(KeyEvent.VK_O, ActionEvent.CTRL_MASK));
     putValue(Action.ACTION_COMMAND_KEY, getDefaultCommandIdentifier());
     localeChanged();
   }
 
-  public OpenAction(JFileChooser fileChooser, Component parent, IJssController shellController) {
+  public OpenAction(JFileChooser fileChooser, Component parent,
+      IJssController shellController) {
     this(fileChooser, parent, shellController, (String[]) null);
   }
 
@@ -118,21 +122,23 @@ public final class OpenAction extends LoadCommandFile {
       // Construct file extension filter
       String description;
       try {
-        description = ResourceUtils.getMessage(COMMAND_RUN_FILE_FILTER_DESCRIPTION_KEY);
+        description =
+            ResourceUtils.getMessage(COMMAND_RUN_FILE_FILTER_DESCRIPTION_KEY);
       } catch (MissingResourceException e1) {
-        LOGGER.log(Level.SEVERE,
-            "Resource not found: \"" + COMMAND_RUN_FILE_FILTER_DESCRIPTION_KEY + "\"", e1);
+        LOGGER.log(Level.SEVERE, "Resource not found: \""
+            + COMMAND_RUN_FILE_FILTER_DESCRIPTION_KEY + "\"", e1);
         description = "Shell file";
       }
-      FileNameExtensionFilter filter = new FileNameExtensionFilter(description, "shell", "txt");
+      FileNameExtensionFilter filter =
+          new FileNameExtensionFilter(description, "shell", "txt");
 
       // Open file chooser and select file
       fileChooser.setFileFilter(filter);
       fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
       int returnVal = fileChooser.showOpenDialog(parent);
       if (returnVal == JFileChooser.APPROVE_OPTION) {
-        eventArgs =
-            new String[] {commandIdentifier, fileChooser.getSelectedFile().getAbsolutePath()};
+        eventArgs = new String[] {commandIdentifier,
+            fileChooser.getSelectedFile().getAbsolutePath()};
       }
     }
 
@@ -151,11 +157,13 @@ public final class OpenAction extends LoadCommandFile {
     try {
       ResourceUtils.setTextAndMnemonic(this, ACTION_LABEL_KEY);
     } catch (MissingResourceException e) {
-      LOGGER.log(Level.SEVERE, "Resource not found: \"" + ACTION_LABEL_KEY + "\"", e);
+      LOGGER.log(Level.SEVERE,
+          "Resource not found: \"" + ACTION_LABEL_KEY + "\"", e);
       putValue(Action.NAME, ACTION_LABEL);
     }
     putValue(Action.SHORT_DESCRIPTION, this.getBriefHelp());
-    putValue(Action.LONG_DESCRIPTION, this.getHelp(this.getDefaultShellController()));
+    putValue(Action.LONG_DESCRIPTION,
+        this.getHelp(this.getDefaultShellController()));
   }
 
   // #########################################################################
